@@ -37,7 +37,7 @@ router.route('/weights').get(function(req, res) {
     res.json({ message: 'weights go here'});   
 });
 
-router.route('/submit-training').post(function(req, res){
+router.route('/submit-training-data').post(function(req, res){
   var data = req.body.data;
   var postsRef = firebase.database().ref().child("data");
   postsRef.push().set({

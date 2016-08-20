@@ -8,10 +8,9 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var firebase = require('firebase');
-var counter = 0;
 
 // configure app to use bodyParser()
-// this will let us get the data from a POST
+// this will let us get the data from a POS
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -38,19 +37,13 @@ router.route('/weights').get(function(req, res) {
     res.json({ message: 'weights go here'});   
 });
 
-router.route('/submit-training').get(function(req, res) {
-   	var valueToPush = req.param('value');
-   	var postsRef = firebase.database().ref().child("data");
-	postsRef.push().set({
-	  value: valueToPush
-	});
-
-	res.json({ message: valueToPush + ' pushed successfully'});   
-});
-
-router.route('/add').get(function(req,res){
-	counter = counter + 1;
-	res.json({ message: counter});
+router.route('/submit-training').post(function(req, res){
+  var data = req.body.data;
+  var postsRef = firebase.database().ref().child("data");
+  postsRef.push().set({
+    value: data
+  });
+  res.json({message: "the data was " + data});
 });
 
 // REGISTER OUR ROUTES -------------------------------

@@ -38,12 +38,14 @@ router.route('/weights').get(function(req, res) {
 });
 
 router.route('/submit-training-data').post(function(req, res){
+  var userID = req.body.userID;
+  var datasetID = req.body.datasetID;
   var data = req.body.data;
-  var postsRef = firebase.database().ref().child("data");
+  var postsRef = firebase.database().ref().child("data/"+userID+"/"+datasetID);
   postsRef.push().set({
     value: data
   });
-  res.json({message: "the data was " + data});
+  res.json({message: "the data was " + data +" and pushed to data/users/"+userID+"/"+datasetID});
 });
 
 // REGISTER OUR ROUTES -------------------------------

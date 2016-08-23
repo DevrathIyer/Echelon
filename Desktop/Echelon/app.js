@@ -8,6 +8,7 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var firebase = require('firebase');
+var spawn = require('child_process').spawn;
 
 // configure app to use bodyParser()
 // this will let us get the data from a POS
@@ -46,6 +47,11 @@ router.route('/submit-training-data').post(function(req, res){
     value: data
   });
   res.json({message: "the data was " + data +" and pushed to data/users/"+userID+"/"+datasetID});
+});
+
+router.route('/train').get(function(req,res)
+{
+	var train  = spawn('java', ['-jar', 'helloworld.jar']);
 });
 
 // REGISTER OUR ROUTES -------------------------------

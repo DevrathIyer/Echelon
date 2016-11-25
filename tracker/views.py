@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.db import models
-from .models import  EchelonUser
+#from .models import  EchelonUser
 from random import randint
 import requests
 

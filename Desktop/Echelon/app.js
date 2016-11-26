@@ -5,180 +5,194 @@
 
 // call the packages we need
 var express    = require('express');        // call express
-var app        = express();                 // define our app using express
+var app        = express(); 
+var http = require('http');               // define our app using express
 var bodyParser = require('body-parser');
-var firebase = require('firebase');
-var spawn = require('child_process').spawn;
-var events = require('events');
-// configure app to use bodyParser()
-// this will let us get the data from a POS
+const Aerospike = require('aerospike');
+var bcrypt = require('bcrypt-nodejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//Echelon Costs
-var trainCost = 50;
-var submitSampleCost = 1;
-var eventEmitter = new events.EventEmitter();
-
 var port = process.env.PORT || 8080;        // set our port
 
-//Firebase config
-//==============================================================================
-
-var config = 
-{
-    apiKey: "AIzaSyDdk3MF-lbJE-syCHGrprOqRWac2zoJ9hI",
-    authDomain: "echelondb.firebaseapp.com",
-    databaseURL: "https://echelondb.firebaseio.com",
-    storageBucket: "",
- };
-
-firebase.initializeApp(config);
 
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
-//MISC Functions
+var client = Aerospike.client({
+  hosts: [{addr: "104.196.232.255", port: 3000}],
+  log: {level: Aerospike.log.INFO},
+  policies: {timeout: 15000}
+});
 
-function checkCredits(userID, creditCheck)
-{
-	var apicounter = firebase.database().ref('usrData/' + userID+"/credits");
-	apicounter.on('value', function(snapshot) {
-  			var hasCredits = parseInt(snapshot.val()) >= creditCheck;
-        if(hasCredits)
-          eventEmitter.emit('has credits');
-        else
-          eventEmitter.emit('missing credits');
-	});
-}
+client.connect(function(error){
+  if(error)
+  {
+    console.log("Error connecting to cluster");
+  }else
+  {
+    console.log("Connected to aerospike");
+  }
+});
 
-//return weights from training
 router.route('/api/weights').get(function(req, res)
 {
-    res.json({ message: 'weights go here'});   
+  
 });
 
 router.route('/api/submit-training-data').post(function(req, res)
 {
-  var userID = req.body.userID;
-  var datasetID = req.body.datasetID;
-  var data = req.body.data;
-  var postsRef = firebase.database().ref().child("data/"+userID+"/"+datasetID);
-  postsRef.push().set(
-  {
-    value: data
-  });
-  res.json({message: "the data was " + data +" and pushed to data/users/"+userID+"/"+datasetID});
+    var sampleID = req.body.sampleID;
+    var username = req.body.username;
+    var data = req.body.data;
+
+    var key = new Aerospike.Key('data', username, sampleID);
+    var rec = 
+    {
+      user: username,
+      sample_id: sampleID,
+      dataset: data
+    }
+
+    console.log("Trying to push data...");
+
+    client.put(key, rec, function(error)
+    {
+      if(error)
+      {
+        console.log("Error pushing data.");
+      }else{
+        console.log("Data pushed successfully.");
+      }
+    });
+
+    res.json({"message":"data added"});
+
 });
 
 router.route('/api/train').get(function(req,res)
 {
-  var userID = req.param('userID');
-  var datasetID = req.param('datasetID');
-  //checkCredits(userID, trainCost);
-  var apicounter = firebase.database().ref('usrData/' + userID+"/credits");
-  apicounter.once('value', function(snapshot) {
-        var hasCredits = parseInt(snapshot.val()) >= trainCost;
-        if(hasCredits)
-        {
-           console.log("training!");
-           var postsRef = firebase.database().ref().child("usrData/"+userID+"/");
-           var apicounter = firebase.database().ref('usrData/' + userID+"/credits");
-           var credits = trainCost;
-           apicounter.once('value', function(snapshot) {
-              credits = parseInt(snapshot.val())-credits;
-              if(credits<0)
-              {
-                credits = 0;
-              }
-              postsRef.set({
-                credits: credits
-              });
-            console.log(credits);
-          });
-              res.json({message: "trained!"});
-        }
-        else
-          res.json({message: "missing credits"});
-  });
-    //var train  = spawn('java', ['-jar', 'helloworld.jar']);
+
 });
 
 router.route('/admin/addCredits').post(function(req, res)
 {
-	var userID = req.body.userID;
-	var credits = parseInt(req.body.credits);
-	var postsRef = firebase.database().ref().child("usrData/"+userID+"/");
-
-	var apicounter = firebase.database().ref('usrData/' + userID+"/credits");
-	apicounter.on('value', function(snapshot) {
-  			credits = credits+parseInt(snapshot.val());
-	});
-  	postsRef.set({
-    	credits: credits
-  	});
-  res.json({message: "added!"});
+  
 });
 
 router.route('/admin/removeCredits').post(function(req, res)
 {
-	var userID = req.body.userID;
-	var credits = parseInt(req.body.credits);
-	var postsRef = firebase.database().ref().child("usrData/"+userID+"/");
-
-	var apicounter = firebase.database().ref('usrData/' + userID+"/credits");
-	apicounter.on('value', function(snapshot) {
-  			credits = parseInt(snapshot.val())-credits;
-  			if(credits<0)
-  			{
-  				credits = 0;
-  			}
-	});
-  	postsRef.set({
-    	credits: credits
-  	});
-  res.json({message: "removed!"});
+  
 });
+
+/*
+router.route('/api/get-training-data').get(function(req,res)
+{
+  var namespace = 'test';
+  var username = req.query.username;
+  var scan = client.scan(namespace, username);
+  
+  scan.concurrent = false;
+  scan.nobins = false;
+  console.log('Getting data for: '+username);
+  var stream = scan.foreach()
+  stream.on('data', function(record)
+    {
+      console.log(record);
+    })
+  res.json({"message":"data retrieved!"});
+});
+
+/*
+router.route('/admin/setPassword').post(function(req, res)
+{
+    var username = req.body.username;
+    var password = String(req.body.password);
+    bcrypt.hash(password, null, null, function(err, hash)
+    {
+      if(err)
+        res.json({"message" : "There was an error"});
+      else
+      {
+          var key = new Aerospike.Key('users','admin_passwords', username);
+          var rec = 
+          {
+            user: username,
+            password: hash
+          }
+
+          console.log("setting password...");
+
+          client.put(key, rec, function(error)
+          {
+            if(error)
+            {
+              console.log("Password not set.");
+            }else{
+              console.log("Password set "+password);
+            }
+          });
+
+          res.json({"message":"password changed"});
+      }
+  });
+});
+
+router.route('/admin/login/:username/:password').get(function(req, res)
+{
+    var username = req.params.username;
+    var password = req.params.password;
+    const key = new Aerospike.key('users','admin_passwords', username);
+    client.get(key, function(error, record, metadata)
+    {
+      if(error)
+        res.json({"message":"user not found"});
+      else
+      {
+        var hash = record.password;
+          
+        bcrypt.compare(password, hash, function(err, results)
+        {
+          if(err)
+            res.json({"message":"logon servers not available"});
+          else if(results)
+             res.json({"message":"welcome!"});
+           else
+             res.json({"message":"wrong password!"});
+        })
+        
+      }
+    });
+});
+*/
 
 router.route('/admin/setCredits').post(function(req, res)
 {
-	var userID = req.body.userID;
-	var credits = parseInt(req.body.credits);
-	var postsRef = firebase.database().ref().child("usrData/"+userID+"/");
 
-  	postsRef.set({
-    	credits: credits
-  	});
-  res.json({message: "set "+credits+" as user credits for " +userID});
 });
 
 router.route('/admin/addUser').post(function(req, res)
 {
-	var userID = req.body.userID;
-	var postsRef = firebase.database().ref().child("usrData/"+userID+"/");
-
-  	postsRef.set({
-    	credits: 0
-  	});
-  res.json({message: "added "+userID});
+	
 });
 
 router.route('/admin/getCredits').get(function(req, res)
 {
-	var userID = req.param('userID');
-	var credits = 0;
-	var apicounter = firebase.database().ref('usrData/' + userID+"/credits");
-	apicounter.on('value', function(snapshot) {
-  			credits = parseInt(snapshot.val());
-	});
-  res.json({message: userID+" has "+credits+" api calls remaining"});
+	
 });
+
+router.route('/admin/test').get(function(req, res)
+{
+  res.json({message: "hello world"});
+});
+
+
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/', router);
 // START THE SERVER
 // =============================================================================
-app.listen(port);
-console.log('Magic happens on port ' + port);
+http.createServer(app).listen(port);
+console.log("Listening on port: "+port);

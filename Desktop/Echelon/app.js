@@ -184,7 +184,7 @@ router.route('/admin/getCredits').get(function(req, res)
 
 router.route('/admin/test').get(function(req, res)
 {
-  res.json({message: "hello world"});
+  res.json({"message": "hello world"});
 });
 
 

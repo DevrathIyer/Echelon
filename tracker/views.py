@@ -13,15 +13,13 @@ def signedin(request):
     GoogleID = request.POST.get('googleid')
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+id_token
     response = requests.get(url)
-    """
     if response.json()['aud'] == GoogleID:
         try:
-            LoggedInUser = EchelonUser.objects.get(user_email=email)
-            userUrl = 'https://echelonportal.herokuapp.com/tracker/user/' + models.b64encode(LoggedInUser.user_index)
-            return redirect(userUrl)
+            #LoggedInUser = EchelonUser.objects.get(user_email=email)
+            #userUrl = 'https://echelonportal.herokuapp.com/tracker/user/' + models.b64encode(LoggedInUser.user_index)
+            #return redirect(userUrl)
         except:
             return NewUser(request,email)
 
     else:
         return render(request, 'tracker/faliure.html', {})
-    """

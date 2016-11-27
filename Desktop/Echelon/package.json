@@ -3,6 +3,7 @@
   "main": "app.js",
   "dependencies": {
     "aerospike": "^2.4.3",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.0.1",
     "express": "~4.0.0",
     "gcloud": "^0.37.0"
@@ -13,7 +14,7 @@
   "scripts": {
     "start": "node app.js"
   },
-  "engines":{
+  "engines": {
     "node": "6.9.1"
   }
 }

@@ -86,6 +86,22 @@ router.route('/admin/removeCredits').post(function(req, res)
   
 });
 
+router.route('/admin/check-user-exists').post(function(req, res)
+{
+  var uid = req.params.uid;
+  const key = Aerospike.Key('users', 'userinfo', uid);
+
+  client.get(key, function(error, record, metadata)
+  {
+    if(error)
+    {
+      res.json({"user":"false"});
+    }
+    else
+      res.json({"user":"true"});
+  });
+}
+
 /*
 router.route('/api/get-training-data').get(function(req,res)
 {
@@ -184,7 +200,7 @@ router.route('/admin/getCredits').get(function(req, res)
 
 router.route('/admin/test').get(function(req, res)
 {
-  res.json({"message": "hello world"});
+  res.json({"message": "hello world", "test-env":process.env.TEST_VAR});
 });
 
 

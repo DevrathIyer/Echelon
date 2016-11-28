@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var port = process.env.PORT || 8080;        // set our port
-//const SERVER_PUBLIC_KEY="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4bstItI4kdHNqONsukB2l4fT2OdpurLNwsjvYEC3boN7Q8PfPGNB1fnyAPBa63yZYjcjK7QmIsLehrb+0vURmWFNiPGUIvsfL/rJlQ3Vga2hlyy0sH33JluYrKnZQ04UuTmzk0eUvMyPVl9kQMWkeX7YwrC52FlL6wxYVgzxNC/rUJYDVfpd+fp9Lq+12fFxDtcB1+5dy6mWD9GCasxhbX1dbMkCftpeDnvvIQ1aYySmRKSD3ZkOccXOo2NaAyHqByR2KICcymvP3uvr622WQfNjPFhkoZLo4GQ/Aa+Lk8/KKHHhHhBI9k9LSJlMRpktO1oLUY+Zt77Aob7smmnAuwIDAQAB";
+const SERVER_PUBLIC_KEY="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4bstItI4kdHNqONsukB2l4fT2OdpurLNwsjvYEC3boN7Q8PfPGNB1fnyAPBa63yZYjcjK7QmIsLehrb+0vURmWFNiPGUIvsfL/rJlQ3Vga2hlyy0sH33JluYrKnZQ04UuTmzk0eUvMyPVl9kQMWkeX7YwrC52FlL6wxYVgzxNC/rUJYDVfpd+fp9Lq+12fFxDtcB1+5dy6mWD9GCasxhbX1dbMkCftpeDnvvIQ1aYySmRKSD3ZkOccXOo2NaAyHqByR2KICcymvP3uvr622WQfNjPFhkoZLo4GQ/Aa+Lk8/KKHHhHhBI9k9LSJlMRpktO1oLUY+Zt77Aob7smmnAuwIDAQAB";
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -206,12 +206,12 @@ router.route('/admin/test').get(function(req, res)
   var abpath = path.resolve("public.pem");
   var publickey = fs.readFileSync(abpath, "utf8");
   var buffer = new Buffer("hello world");
-  var encrypted = crypto.publicEncrypt(publickey,buffer);
+  var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY,buffer);
   var test = encrypted.toString("base64");
   abpath = path.resolve("private_unencrypted.pem");
   var privatekey = fs.readFileSync(abpath);
   buffer = new Buffer(test);
-  var decrypted = crypto.privateDecrypt(privatekey, buffer);
+  var decrypted = crypto.privateDecrypt(process.env.SERVER_PRIVATE_KEY, buffer);
   res.json({"message":decrypted.toString("utf8")});
 });
 

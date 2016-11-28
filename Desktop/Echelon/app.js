@@ -208,7 +208,11 @@ router.route('/admin/test').get(function(req, res)
   var buffer = new Buffer("hello world");
   var encrypted = crypto.publicEncrypt(publickey,buffer);
   var test = encrypted.toString("base64");
-  res.json({"encrypted":test});
+  abpath = path.resolve("private_unencrypted.pem");
+  var privatekey = fs.readFileSync(abpath);
+  buffer = new Buffer(test);
+  var decrypted = crypto.publicDecrypt(privatekey, buffer);
+  res.json({"message":decrypted.toString("utf8")});
 });
 
 

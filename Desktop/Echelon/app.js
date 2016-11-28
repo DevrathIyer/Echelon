@@ -206,7 +206,7 @@ router.route('/admin/test').get(function(req, res)
   var abpath = path.resolve("public.pem");
   var publickey = fs.readFileSync(abpath, "utf8");
   var buffer = new Buffer("hello world");
-  var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY,buffer);
+  var encrypted = crypto.publicEncrypt(publickey,buffer);
   var test = encrypted.toString("base64");
   res.json({"encrypted":test});
 });

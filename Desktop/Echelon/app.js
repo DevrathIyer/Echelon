@@ -210,7 +210,7 @@ router.route('/admin/test').get(function(req, res)
   abpath = path.resolve("private_unencrypted.pem");
   var privatekey = fs.readFileSync(abpath);
   buffer = new Buffer(test);
-  var decrypted = crypto.privateDecrypt(process.env.SERVER_PRIVATE_KEY.toString() buffer);
+  var decrypted = crypto.privateDecrypt(process.env.SERVER_PRIVATE_KEY.toString(), buffer);
   res.json({"message":decrypted.toString("utf8")});
 });
 

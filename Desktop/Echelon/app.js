@@ -204,17 +204,14 @@ router.route('/admin/getCredits').get(function(req, res)
 
 router.route('/admin/test').get(function(req, res)
 {
-  var abpath = path.resolve("public.pem");
-  var publickey = fs.readFileSync(abpath, "utf8");
   var buffer = new Buffer("hello world");
   var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY,buffer);
   var test = encrypted.toString("base64");
-  res.json({"encrypted":encrypted});
   abpath = path.resolve("private_unencrypted.pem");
   var privatekey = fs.readFileSync(abpath);
   buffer = new Buffer(test);
   var decrypted = crypto.privateDecrypt(process.env.SERVER_PRIVATE_KEY, buffer);
-  
+  res.json({"message":decrypted.toString("utf8")});
 });
 
 

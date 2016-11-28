@@ -100,7 +100,7 @@ router.route('/admin/check-user-exists').post(function(req, res)
     else
       res.json({"user":"true"});
   });
-}
+});
 
 /*
 router.route('/api/get-training-data').get(function(req,res)

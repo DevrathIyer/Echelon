@@ -208,8 +208,8 @@ router.route('/admin/test').get(function(req, res)
   var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY,buffer);
   var test = encrypted.toString("base64");
   abpath = path.resolve("private.pem");
-  var privatekey = {"key":fs.readFileSync(abpath), "passphrase":process.env.ENCRYPTION_PASSWORD};
-  buffer = new Buffer(test);
+  var privatekey = {"key":fs.readFileSync(abpath, "utf8"), "passphrase":process.env.ENCRYPTION_PASSWORD};
+  buffer = new Buffer(test, "base64");
   //var privateKey = "-----BEGIN PRIVATE KEY-----\n"+process.env.SERVER_PRIVATE_KEY.toString("utf8")+"\n-----END PRIVATE KEY-----";
   //res.json({"message":privatekey})
   //console.log(privatekey);

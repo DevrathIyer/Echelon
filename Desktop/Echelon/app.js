@@ -204,16 +204,15 @@ router.route('/admin/getCredits').get(function(req, res)
 
 router.route('/admin/test').get(function(req, res)
 {
-  var buffer = new Buffer("hello world");
+  
+  var buffer = new Buffer("secure information!");
   var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY,buffer);
   var test = encrypted.toString("base64");
-  abpath = path.resolve("private.pem");
+
+  var abpath = path.resolve("private.pem");
   var privatekey = {"key":fs.readFileSync(abpath, "utf8"), "passphrase":process.env.ENCRYPTION_PASSWORD};
-  buffer = new Buffer(test, "base64");
-  //var privateKey = "-----BEGIN PRIVATE KEY-----\n"+process.env.SERVER_PRIVATE_KEY.toString("utf8")+"\n-----END PRIVATE KEY-----";
-  //res.json({"message":privatekey})
-  //console.log(privatekey);
-  var decrypted = crypto.privateDecrypt(privatekey, buffer);
+  var buffer2 = new Buffer(test, "base64");
+  var decrypted = crypto.privateDecrypt(privatekey, buffer2);
   res.json({"message":decrypted.toString("utf8")});
 });
 

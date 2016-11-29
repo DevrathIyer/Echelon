@@ -211,9 +211,10 @@ router.route('/admin/test').get(function(req, res)
   var privatekey = fs.readFileSync(abpath);
   buffer = new Buffer(test);
   var privateKey = "-----BEGIN PRIVATE KEY-----\n"+process.env.SERVER_PRIVATE_KEY.toString("utf8")+"\n-----END PRIVATE KEY-----";
-  console.log(privatekey);
-  var decrypted = crypto.privateDecrypt(privatekey, buffer);
-  res.json({"message":decrypted.toString("utf8")});
+  res.json({"message":privatekey});
+  //console.log(privatekey);
+  //var decrypted = crypto.privateDecrypt(privatekey, buffer);
+  //res.json({"message":decrypted.toString("utf8")});
 });
 
 

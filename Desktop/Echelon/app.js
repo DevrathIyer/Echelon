@@ -209,10 +209,10 @@ router.route('/admin/test').get(function(req, res)
   var test = encrypted.toString("base64");
   buffer = new Buffer(test);
   var privateKey = "-----BEGIN PRIVATE KEY-----\n"+process.env.SERVER_PRIVATE_KEY+"\n-----END PRIVATE KEY-----";
-  res.json({"message":privateKey});
-  //console.log(privatekey);
-  //var decrypted = crypto.privateDecrypt(privatekey, buffer);
-  //res.json({"message":decrypted.toString("utf8")});
+  //res.json({"message":privateKey});
+  console.log(privateKey);
+  var decrypted = crypto.privateDecrypt(privateKey, buffer);
+  res.json({"message":decrypted.toString("utf8")});
 });
 
 

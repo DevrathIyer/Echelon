@@ -92,7 +92,7 @@ router.route('/api/train').get(function(req,res)
 
 router.route('/admin/userops/addCredits').post(function(req, res)
 {
-  res.json({"message":"Routed!"});
+  res.json({"message":"Admin access!"});
 });
 
 router.route('/admin/userops/check-user-exists').post(function(req, res)

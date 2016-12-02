@@ -44,11 +44,26 @@ client.connect(function(error){
   }
 });
 
+function decrypt(text)
+{
+  //decrypt server
+  var server_buffer = new Buffer(text, "base64");
+  var server_decrypted = crypto.privateDecrypt(privatekey, server_buffer);
+  
+  //decrypt client
+  var client_buffer = new Buffer(decrypted.toString("utf8"), "base64");
+  var client_decrypted = crypto.publicDecrypt(CLIENT_PUBLIC_KEY, client_buffer);
+
+  return client_decrypted.toString("utf8");
+}
+
+/*
 router.use('/admin/userops',function(req, res, next)
 {
   console.log('Admin attempt from '+req.connection.remoteAddress);
   next();
 });
+*/
 
 router.route('/api/weights').get(function(req, res)
 {
@@ -92,50 +107,52 @@ router.route('/api/train').get(function(req,res)
 
 router.route('/admin/userops/addCredits').post(function(req, res)
 {
-  res.json({"message":"Admin access granted!"});
+
 });
 
-router.route('/admin/userops/check-user-exists').post(function(req, res)
+router.route('/admin/userops/getCredits').get(function(req, res)
+{
+  
+});
+
+router.route('/admin/userops/createUser').post(function(req, res)
 {
   var uid = req.params.uid;
-  const key = Aerospike.Key('users', 'userinfo', uid);
+  var name = req.params.name;
+  var email = req.params.email;
+
+	var key = new Aerospike.Key('uims', 'userinfo', uid);
+  var rec = 
+  {
+    user_id: uid,
+    user_name: name,
+    email_address: email,
+    credits: 0 
+  }
 
   client.get(key, function(error, record, metadata)
   {
     if(error)
     {
-      res.json({"user":"false"});
+      client.put(key, rec, function(err)
+      {
+        if(err)
+        {
+          res.json({"message":"error creating user"});
+        }else
+        {
+          res.json({"message":"user created"});
+        }
+      });
     }
     else
-      res.json({"user":"true"});
+      res.json({"message":"user already exists"});
   });
-});
-
-router.route('/admin/setCredits').post(function(req, res)
-{
-
-});
-
-router.route('/admin/userops/addUser').post(function(req, res)
-{
-	
-});
-
-router.route('/admin/getCredits').get(function(req, res)
-{
-	
 });
 
 router.route('/admin/test').get(function(req, res)
 {
   
-  var buffer = new Buffer("secure information!");
-  var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY,buffer);
-  var test = encrypted.toString("base64");
-
-  var buffer2 = new Buffer(test, "base64");
-  var decrypted = crypto.privateDecrypt(privatekey, buffer2);
-  res.json({"message":decrypted.toString("utf8")});
 });
 
 

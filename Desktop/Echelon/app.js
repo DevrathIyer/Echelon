@@ -117,9 +117,9 @@ router.route('/admin/userops/getCredits').get(function(req, res)
 
 router.route('/admin/userops/createUser').post(function(req, res)
 {
-  var uid = req.params.uid;
-  var name = req.params.name;
-  var email = req.params.email;
+  var uid = req.body.uid;
+  var name = req.body.name;
+  var email = req.body.email;
 
 	var key = new Aerospike.Key('uims', 'userinfo', uid);
   var rec = 

@@ -114,7 +114,7 @@ router.route('/admin/userops/addCredits').post(function(req, res)
   var key = new Aerospike.Key('uims', 'userinfo', uid);
 
   var ops = [
-    op.increment('credits', numCredits);
+    op.increment('credits', numCredits),
     op.read('credits')
   ];
 

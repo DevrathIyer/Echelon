@@ -22,10 +22,3 @@ requests==2.11.1
 requests-oauthlib==0.7.0
 six==1.10.0
 stormpath==2.4.5
-dj-database-url==0.4.1
-
-gunicorn==19.6.0
-
-psycopg2==2.6.2
-
-whitenoise==3.2

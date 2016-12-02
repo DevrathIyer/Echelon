@@ -113,12 +113,16 @@ router.route('/admin/userops/addCredits').post(function(req, res)
   var numCredits = req.body.numcredits;
   var key = new Aerospike.Key('uims', 'userinfo', uid);
 
-  client.operate(key, op.incr('credits', numCredits), function(error, record)
+  var ops = [
+    op.incr('credits', numCredits),
+    op.read('credits')
+  ];
+  client.operate(key, ops, function(error, record)
   {
     if(error)
       res.json({"message":"could not add credits"});
     else
-      res.json({"message":"user has "+record.credits+" credits."})
+      res.json({"message":"user has "+record+" credits."})
   });
 });
 

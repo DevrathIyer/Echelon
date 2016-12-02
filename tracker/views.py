@@ -2,7 +2,8 @@ from django.shortcuts import redirect, render
 from django.db import models
 #from .models import  EchelonUser
 from random import randint
-import bcrypt
+from Crypto.PublicKey import RSA
+from Crypto import Random
 import requests
 
 def home(request):
@@ -13,6 +14,8 @@ def signedin(request):
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+id_token
     response = requests.get(url)
+    random_generator = Random.new().read
+    key = RSA.generate(1024, random_generator)
     if response.json()['aud'] == GoogleID:
         try:
             UserID = response.json()['sub']

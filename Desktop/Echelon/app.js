@@ -46,7 +46,7 @@ client.connect(function(error){
 
 router.use('/admin/userops',function(req, res, next)
 {
-  alert('Welcome to the app!');
+  console.log('Admin attempt from '+req.connection.remoteAddress);
   next();
 });
 

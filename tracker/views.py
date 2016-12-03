@@ -14,8 +14,7 @@ def signedin(request):
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+id_token
     response = requests.get(url)
-    f = "-----BEGIN RSA PRIVATE KEY----- \
-        Proc-Type: 4,ENCRYPTED \
+    f = "-----BEGIN RSA PRIVATE KEY----- Proc-Type: 4,ENCRYPTED \
         DEK-Info: DES-EDE3-CBC,F06040FFE2E81A78 \
         5oQO5bhieEwjonstBJr5RMgda/b+PuaNO/0SrCrYEUpL4DkPs9Kl9j7PL6qlzjT3 \
         6RvuLsI5zMnxPl/5LdiTmuWwBrfKkMIld0bWxmc5BYMFdigoRQDvbkbwNZewQcQj \

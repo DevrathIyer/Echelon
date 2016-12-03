@@ -17,14 +17,14 @@ def signedin(request):
     if response.json()['aud'] == GoogleID:
         try:
             #UserID = response.json()['sub']
-            return render(request, 'tracker/faliure.html', {'JSON': response.json()})
+            return render(request, 'tracker/Faliure.html', {'JSON': response.json()})
             #LoggedInUser = EchelonUser.objects.get(user_email=email)
             #userUrl = 'https://echelonportal.herokuapp.com/tracker/user/' + models.b64encode(LoggedInUser.user_index)
             #return redirect(userUrl)
         except:
-            return render(request, 'tracker/faliure.html', {'JSON': response.json()})
+            return render(request, 'tracker/Faliure.html', {'JSON': response.json()})
             #return NewUser(request,email)
             UserID = 0
 
     else:
-        return render(request, 'tracker/faliure.html', {})
+        return render(request, 'tracker/Faliure.html', {})

@@ -48,7 +48,7 @@ def signedin(request):
     data = r.encrypt('abcdefgh', 32)
     if response.json()['aud'] == GoogleID:
         try:
-            UserID = response.json()['sub']
+            #UserID = response.json()['sub']
             responses = requests.get("echelon-nn.herokuapp.com/admin/test?text="+data)
             return render(request, 'tracker/Faliure.html', {'JSON': data})
             #LoggedInUser = EchelonUser.objects.get(user_email=email)

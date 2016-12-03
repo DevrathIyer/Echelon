@@ -127,9 +127,9 @@ router.route('/admin/userops/addCredits').post(function(req, res)
   });
 });
 
-router.route('/admin/userops/getCredits/:id').get(function(req, res)
+router.route('/admin/userops/getCredits/').get(function(req, res)
 {
-  var uid = req.params(':id');
+  var uid = req.query.uid;
   var key = new Aerospike.Key('uims', 'userinfo', uid);
   
   var ops = [

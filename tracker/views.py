@@ -5,6 +5,7 @@ from random import randint
 from Crypto.PublicKey import RSA
 from Crypto import Random
 import requests
+import os
 
 def home(request):
     return render(request, 'tracker/index.html', {})
@@ -36,14 +37,14 @@ def signedin(request):
          O4emEiQUq6NdPCryqgnoKRGVJqc0DAupHs3c0K43TMPDzXF7I93929y8eO6Uk92l
          vZqAANkuoDiX6oOlpeT9YlNtgwSF9fyXejS7JSUSdyrnB3F/wIe10xbBiwKvCt/L
          9P6tgc6us5Kiui154I9k1Odkpy5BaGUa8Ad0FG4W/BZyqtKEun0IhaQGuFOWS2i5
-         EM/h5yDIjiW73cwc3HQpMi5cbiIJmOdtHD0rE74qSVUbmpuyuVsYoaLtRHj8HHfL   
+         EM/h5yDIjiW73cwc3HQpMi5cbiIJmOdtHD0rE74qSVUbmpuyuVsYoaLtRHj8HHfL
          8ZCYsjoB/Nb4C8RxqoWcMrB5hIYr1OZxEkaXaltgqG9oUlvxqsQx9YryGTiH2z0O
          t7DMpVYQQQm+VNXIqGkbLAULh+RR9/lJfxAGwfE779ZmC6x4eGXZESPfRgyy7fyQ
          FEE55MSRclGUIf6nEGUnltLiDqzugTuQdZ2Kex4iNyCmsAa+/SYtwzo4n1IIuq++
          e9s3OBorPItUy5jQAVh3sQ0ouTG69xPkpuC+22rX98wbRFCYapeuqaDHrclxHsDT
          tW44/tVjrQF5hQuc4mL13EJQsOYqn2+kftjAZSkuZaq/bJM1Vem6oA==
          -----END RSA PRIVATE KEY-----"""
-    r = RSA.importKey(f, passphrase='echelon')
+    r = RSA.importKey(f, passphrase=os.environ['ENCRYPTION_PASSWORD'])
     if response.json()['aud'] == GoogleID:
         try:
             UserID = response.json()['sub']

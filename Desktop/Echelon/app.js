@@ -113,16 +113,28 @@ router.route('/admin/userops/addCredits').post(function(req, res)
   var numCredits = req.body.numcredits;
   var key = new Aerospike.Key('uims', 'userinfo', uid);
   console.log(numCredits);
-  var ops = [
-    op.read('credits')
-  ];
+  
 
-  client.operate(key, ops, function(error, record)
+  client.get(key, function(error, record, metadata)
   {
     if(error)
-      res.json({"message":"could not add credits"});
+      res.json({"message":"user does not exist"});
     else
-      res.json({"message":"user has "+record.credits+" credits."})
+    {
+      var newCredits = record.credits+numCredits;
+      var rec = 
+      {
+        credits: newCredits
+      }
+
+      client.put(key, rec, function(err)
+      {
+        if(err)
+          res.json({"message":"could not add credits"});
+        else
+          res.json({"message" : "user now has "+newCredits+" credits"});
+      });
+    }
   });
 });
 

@@ -121,18 +121,18 @@ router.route('/admin/userops/addCredits').post(function(req, res)
       res.json({"message":"user does not exist"});
     else
     {
-      var newCredits = record.credits+numCredits;
-      var rec = 
-      {
-        credits: newCredits
-      }
+      var newCredits = parseInt(record.credits)+numCredits;
+      
+      var ops = [
+      op.write('credits',newCredits)
+      ];
 
-      client.write(key, rec, function(err)
+      client.operate(key, ops, function(err, rec)
       {
         if(err)
           res.json({"message":"could not add credits"});
         else
-          res.json({"message" : "user now has "+newCredits+" credits"});
+          res.json({"message" : "user now has "+rec.credits+" credits"});
       });
     }
   });

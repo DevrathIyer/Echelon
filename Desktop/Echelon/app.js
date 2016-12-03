@@ -14,7 +14,7 @@ var crypto = require('crypto');
 var path = require('path');
 var fs = require('fs');
 var constants = require("constants");
-const op = Aerospike.operator;
+var op = Aerospike.operator;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -114,7 +114,6 @@ router.route('/admin/userops/addCredits').post(function(req, res)
   var key = new Aerospike.Key('uims', 'userinfo', uid);
   console.log(numCredits);
   var ops = [
-    op.incr('credits', numCredits),
     op.read('credits')
   ];
 
@@ -123,7 +122,7 @@ router.route('/admin/userops/addCredits').post(function(req, res)
     if(error)
       res.json({"message":"could not add credits"});
     else
-      res.json({"message":"user has "+record+" credits."})
+      res.json({"message":"user has "+record.toString("utf8")+" credits."})
   });
 });
 

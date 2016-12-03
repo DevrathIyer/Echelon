@@ -110,7 +110,7 @@ router.route('/api/train').get(function(req,res)
 router.route('/admin/userops/addCredits').post(function(req, res)
 {
   var uid = req.body.uid;
-  var numCredits = req.body.numcredits;
+  var numCredits = parseInt(req.body.numcredits);
   var key = new Aerospike.Key('uims', 'userinfo', uid);
   console.log(numCredits);
   
@@ -149,6 +149,7 @@ router.route('/admin/userops/createUser').post(function(req, res)
   var uid = req.body.uid;
   var name = req.body.name;
   var email = req.body.email;
+  var usercredits = 0;
 
 	var key = new Aerospike.Key('uims', 'userinfo', uid);
   var rec = 
@@ -156,7 +157,7 @@ router.route('/admin/userops/createUser').post(function(req, res)
     user_id: uid,
     user_name: name,
     email_address: email,
-    credits: 0 
+    credits: usercredits 
   }
 
   client.get(key, function(error, record, metadata)

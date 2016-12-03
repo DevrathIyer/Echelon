@@ -122,7 +122,7 @@ router.route('/admin/userops/addCredits').post(function(req, res)
     if(error)
       res.json({"message":"could not add credits"});
     else
-      res.json({"message":"user has "+record.toString("utf8")+" credits."})
+      res.json({"message":"user has "+record.credits+" credits."})
   });
 });
 

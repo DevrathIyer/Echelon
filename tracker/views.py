@@ -17,7 +17,7 @@ def signedin(request):
     if response.json()['aud'] == GoogleID:
         try:
             UserID = response.json()['sub']
-            return render(request, 'tracker/Faliure.html', {'JSON': "All Good Here!"})
+            return render(request, 'tracker/Faliure.html', {'JSON': UserID})
             #LoggedInUser = EchelonUser.objects.get(user_email=email)
             #userUrl = 'https://echelonportal.herokuapp.com/tracker/user/' + models.b64encode(LoggedInUser.user_index)
             #return redirect(userUrl)

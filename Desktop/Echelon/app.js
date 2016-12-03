@@ -2,6 +2,7 @@
 // =============================================================================
 
 var express    = require('express');
+const Aerospike = require('aerospike');
 var app        = express(); 
 var http = require('http');
 var bodyParser = require('body-parser');
@@ -12,7 +13,7 @@ var fs = require('fs');
 var constants = require("constants");
 var op = Aerospike.operator;
 
-const Aerospike = require('aerospike');
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

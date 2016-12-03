@@ -124,7 +124,8 @@ router.route('/admin/userops/addCredits').post(function(req, res)
       var newCredits = parseInt(record.credits)+numCredits;
       
       var ops = [
-      op.write('credits',newCredits)
+      op.write('credits',newCredits),
+      op.read('credits')
       ];
 
       client.operate(key, ops, function(err, rec)

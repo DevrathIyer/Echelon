@@ -163,7 +163,11 @@ router.route('/admin/userops/createUser').post(function(req, res)
       });
     }
     else
+    {
+      console.info(record);
       res.json({"message":"user already exists"});
+    }
+    }
   });
 });
 

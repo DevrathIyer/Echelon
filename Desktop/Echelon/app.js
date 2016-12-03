@@ -114,7 +114,19 @@ router.route('/admin/userops/addCredits').post(function(req, res)
   var key = new Aerospike.Key('uims', 'userinfo', uid);
   console.log(numCredits);
   
+  var ops = [
+      op.write('credits',numCredits),
+      op.read('credits')
+  ];
 
+  client.operate(key, ops, function(err, rec)
+  {
+    if(err)
+      res.json({"message":"could not add credits"});
+    else
+      res.json({"message" : "user now has "+rec.credits+" credits"});
+  });
+      /*
   client.get(key, function(error, record, metadata)
   {
     if(error)
@@ -136,7 +148,7 @@ router.route('/admin/userops/addCredits').post(function(req, res)
           res.json({"message" : "user now has "+rec.credits+" credits"});
       });
     }
-  });
+  });*/
 });
 
 router.route('/admin/userops/getCredits').get(function(req, res)

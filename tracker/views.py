@@ -45,10 +45,11 @@ def signedin(request):
          tW44/tVjrQF5hQuc4mL13EJQsOYqn2+kftjAZSkuZaq/bJM1Vem6oA==
          -----END RSA PRIVATE KEY-----"""
     r = RSA.importKey(f, passphrase=os.environ['ENCRYPTION_PASSWORD'])
+    data = r.encrypt('abcdefgh', 32)
     if response.json()['aud'] == GoogleID:
         try:
             UserID = response.json()['sub']
-            return render(request, 'tracker/Faliure.html', {'JSON': r})
+            return render(request, 'tracker/Faliure.html', {'JSON': data})
             #LoggedInUser = EchelonUser.objects.get(user_email=email)
             #userUrl = 'https://echelonportal.herokuapp.com/tracker/user/' + models.b64encode(LoggedInUser.user_index)
             #return redirect(userUrl)

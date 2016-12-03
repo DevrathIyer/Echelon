@@ -112,8 +112,7 @@ router.route('/admin/userops/addCredits').post(function(req, res)
   var uid = req.body.uid;
   var numCredits = parseInt(req.body.numcredits);
   var key = new Aerospike.Key('uims', 'userinfo', uid);
-  console.log(numCredits);
-  
+
   var ops = [
       op.incr('credits',numCredits),
       op.read('credits')
@@ -126,34 +125,24 @@ router.route('/admin/userops/addCredits').post(function(req, res)
     else
       res.json({"message" : "user now has "+rec.credits+" credits"});
   });
-      /*
-  client.get(key, function(error, record, metadata)
-  {
-    if(error)
-      res.json({"message":"user does not exist"});
-    else
-    {
-      var newCredits = parseInt(record.credits)+numCredits;
-      
-      var ops = [
-      op.write('credits',newCredits),
-      op.read('credits')
-      ];
-
-      client.operate(key, ops, function(err, rec)
-      {
-        if(err)
-          res.json({"message":"could not add credits"});
-        else
-          res.json({"message" : "user now has "+rec.credits+" credits"});
-      });
-    }
-  });*/
 });
 
 router.route('/admin/userops/getCredits').get(function(req, res)
 {
+  var uid = req.body.uid;
+  var key = new Aerospike.Key('uims', 'userinfo', uid);
   
+  var ops = [
+      op.read('credits')
+  ];
+
+  client.operate(key, ops, function(err, rec)
+  {
+    if(err)
+      res.json({"message":"could not read user credits"});
+    else
+      res.json({"message" : "user has "+rec.credits+" credits"});
+  });
 });
 
 router.route('/admin/userops/createUser').post(function(req, res)

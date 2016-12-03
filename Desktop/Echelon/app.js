@@ -115,7 +115,7 @@ router.route('/admin/userops/addCredits').post(function(req, res)
   console.log(numCredits);
   
   var ops = [
-      op.write('credits',numCredits),
+      op.incr('credits',numCredits),
       op.read('credits')
   ];
 

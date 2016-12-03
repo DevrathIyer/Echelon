@@ -1,14 +1,10 @@
-// server.js
 
-// BASE SETUP
 // =============================================================================
 
-// call the packages we need
-var express    = require('express');        // call express
+var express    = require('express');
 var app        = express(); 
-var http = require('http');               // define our app using express
+var http = require('http');
 var bodyParser = require('body-parser');
-const Aerospike = require('aerospike');
 var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 var path = require('path');
@@ -16,19 +12,26 @@ var fs = require('fs');
 var constants = require("constants");
 var op = Aerospike.operator;
 
+const Aerospike = require('aerospike');
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080;        // set our port
+var port = process.env.PORT || 8080;
 var SERVER_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4bstItI4kdHNqONsukB2l4fT2OdpurLNwsjvYEC3boN7Q8PfPGNB1fnyAPBa63yZYjcjK7QmIsLehrb+0vURmWFNiPGUIvsfL/rJlQ3Vga2hlyy0sH33JluYrKnZQ04UuTmzk0eUvMyPVl9kQMWkeX7YwrC52FlL6wxYVgzxNC/rUJYDVfpd+fp9Lq+12fFxDtcB1+5dy6mWD9GCasxhbX1dbMkCftpeDnvvIQ1aYySmRKSD3ZkOccXOo2NaAyHqByR2KICcymvP3uvr622WQfNjPFhkoZLo4GQ/Aa+Lk8/KKHHhHhBI9k9LSJlMRpktO1oLUY+Zt77Aob7smmnAuwIDAQAB\n-----END PUBLIC KEY-----";
-var CLIENT_PUBLIC_KEY="SOME KEY";
+var CLIENT_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs+eZDButVb8nC91QA2NuHh9uD3FyG7gtOQZQGAnY5EKjVyytWirv1T4mk7jGBRL0e6f7NlZSMive2m9qAfzIxdm4PTYqob/I59Qe2yqEE1SrC9yWGMqLOOKahsBmb3cEncJ6R/RQD0ETx6gXGYbhxqHh7bpwULmc0Yjoh1Wf8PI7e/KFVzBziNj/u64Fjitcm4wPl6OobrWFFjDEaTP2NN3Bq68L2PXTBg7kLHa7tK2x3Gz0wOCPjpzN34N27zRIBPK4zo299zv5jSnA8chUSQIDAQAB\n-----END PUBLIC KEY-----";
 
 var abpath = path.resolve("private.pem");
 var privatekey = {"key":fs.readFileSync(abpath, "utf8"), "passphrase":process.env.ENCRYPTION_PASSWORD};
   
-// ROUTES FOR OUR API
+//Echelon marketing costs
+const CREATE_PROJECT = 50;
+const TRAIN = 25;
+const PULL_WEIGHTS = 10;
+const ADD_DATA = 1;
+
 // =============================================================================
-var router = express.Router();              // get an instance of the express Router
+var router = express.Router();
 
 var client = Aerospike.client({
   hosts: [{addr: "104.196.232.255", port: 3000}],
@@ -57,6 +60,23 @@ function decrypt(text)
   var client_decrypted = crypto.publicDecrypt(CLIENT_PUBLIC_KEY, client_buffer);
 
   return client_decrypted.toString("utf8");
+}
+
+function checkCredits(cost, uid)
+{
+  var key = Aerospike.key('uims', 'userinfo', uid);
+  client.get(key, function(error, record, metadata)
+    {
+      if(error)
+        return false;
+      else
+      {
+        if(record.credits>=cost)
+          return true;
+        else
+          return false;
+      }
+    });
 }
 
 /*
@@ -184,17 +204,53 @@ router.route('/admin/userops/createUser').post(function(req, res)
   });
 });
 
-router.route('/admin/test').get(function(req, res)
+router.route('admin/userops/createNewProject').post(function(req, res)
 {
-  
+  var uid = req.body.uid;
+  var projectid = req.body.projectid;
+  var apikey = req.body.apikey;
+
+  var key = new Aerospike.Key('pims', 'projectinfo', projectid);
+  var rec = 
+  {
+    user_id: uid,
+    project_id: projectid,
+    api_key: apikey
+  }
+
+  client.get(key, function(error, record, metadata)
+  {
+    if(error)
+    {
+      client.put(key, rec, function(err)
+      {
+        if(err)
+        {
+          res.json({"message":"error creating project"});
+        }else{
+          if(checkCredits(CREATE_PROJECT, uid))
+            res.json({"message":"project created"});
+          else
+            res.json({"message":"not enough credits"});
+        }
+      });
+    }
+    else
+    {
+      console.info(record);
+      res.json({"message":"Project name taken"});
+    }
+  });
 });
 
-
-
-// REGISTER OUR ROUTES -------------------------------
-app.use('/', router);
-
-// START THE SERVER
+router.route('/admin/test').get(function(req, res)
+{
+  var text = req.query.text;
+  var client_buffer = new Buffer(text, "base64");
+  var client_decrypted = crypto.publicDecrypt(CLIENT_PUBLIC_KEY, client_buffer);
+  console.log(client_decrypted.toString("utf8"));
+});
 // =============================================================================
+app.use('/', router);
 http.createServer(app).listen(port);
 console.log("Listening on port: "+port);

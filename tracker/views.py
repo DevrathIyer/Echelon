@@ -14,7 +14,7 @@ def signedin(request):
     id_token = request.POST.get('TokenID')
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+id_token
-    response = requests.get(url)
+    #response = requests.get(url)
     f = """-----BEGIN RSA PRIVATE KEY-----
          Proc-Type: 4,ENCRYPTED
          DEK-Info: DES-EDE3-CBC,F06040FFE2E81A78
@@ -46,10 +46,11 @@ def signedin(request):
          -----END RSA PRIVATE KEY-----"""
     r = RSA.importKey(f, passphrase=os.environ['ENCRYPTION_PASSWORD'])
     data = r.encrypt('abcdefgh', 32)
-    if response.json()['aud'] == GoogleID:
+    """response.json()['aud'] == GoogleID:"""
+    if 1==1:
         try:
             #UserID = response.json()['sub']
-            responses = requests.get("echelon-nn.herokuapp.com/admin/test?text=hello")
+            response = requests.get("echelon-nn.herokuapp.com/admin/test?text=hello")
             return render(request, 'tracker/Faliure.html', {'JSON': data})
             #LoggedInUser = EchelonUser.objects.get(user_email=email)
             #userUrl = 'https://echelonportal.herokuapp.com/tracker/user/' + models.b64encode(LoggedInUser.user_index)

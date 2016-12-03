@@ -127,7 +127,7 @@ router.route('/admin/userops/addCredits').post(function(req, res)
         credits: newCredits
       }
 
-      client.put(key, rec, function(err)
+      client.write(key, rec, function(err)
       {
         if(err)
           res.json({"message":"could not add credits"});

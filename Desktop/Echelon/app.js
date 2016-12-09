@@ -251,7 +251,11 @@ router.route('/admin/test').get(function(req, res)
   //res.json({"message":text});
   var client_buffer = new Buffer(text, "base64");
   var pathToPrivateClientKey = path.resolve("EchelonClientKeys/private.pem");
-  var privateClientKey = fs.readFileSync(pathToPrivateClientKey, "utf8");
+  var privateClientKeyString = fs.readFileSync(pathToPrivateClientKey, "utf8");
+  var privateClientKey = {
+    "key":privateClientKeyString,
+    "password":"echelon"
+  };
   var encrypted = crypto.privateEncrypt(privateClientKey, client_buffer);
 
   //var client_decrypted = crypto.publicDecrypt(CLIENT_PUBLIC_KEY, client_buffer);

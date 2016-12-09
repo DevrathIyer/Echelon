@@ -50,7 +50,7 @@ def signedin(request):
     if 1==1:
         try:
             #UserID = response.json()['sub']
-            response = request.get("echelon-nn.herokuapp.com/admin/test?text=hello")
+            #response = request.get("echelon-nn.herokuapp.com/admin/test?text=hello")
             return render(request, 'tracker/Faliure.html', {'JSON': data})
             #LoggedInUser = EchelonUser.objects.get(user_email=email)
             #userUrl = 'https://echelonportal.herokuapp.com/tracker/user/' + models.b64encode(LoggedInUser.user_index)

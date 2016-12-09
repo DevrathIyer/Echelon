@@ -26,6 +26,7 @@ var abpath = path.resolve("private.pem");
 var privatekey = {"key":fs.readFileSync(abpath, "utf8"), "passphrase":process.env.ENCRYPTION_PASSWORD};
   
 //Echelon marketing costs
+
 const CREATE_PROJECT = 50;
 const TRAIN = 25;
 const PULL_WEIGHTS = 10;
@@ -248,12 +249,16 @@ router.route('/admin/test').get(function(req, res)
 {
   var text = req.query.text;
   //res.json({"message":text});
-  var client_buffer = new Buffer(text);
-  var client_decrypted = crypto.publicDecrypt(CLIENT_PUBLIC_KEY, client_buffer);
+  var client_buffer = new Buffer(text, "base64");
+  var pathToPrivateClientKey = path.resolve("EchelonClientKeys/private.pem");
+  var privateClientKey = fs.readFileSync(pathToPrivateClientKey, "utf8");
+  var encrypted = crypto.privateEncrypt(privateClientKey, client_buffer);
+
+  //var client_decrypted = crypto.publicDecrypt(CLIENT_PUBLIC_KEY, client_buffer);
   //console.log(client_decrypted.toString("utf8"));
   //res.json({"message":client_decrypted.toString("utf8")});
-  console.log("success");
-  res.json({"message":"done"});
+  //console.log("success");
+  res.json({"message":encrypted.toString()});
 });
 // =============================================================================
 app.use('/', router);

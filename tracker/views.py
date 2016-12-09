@@ -50,13 +50,13 @@ def signedin(request):
     if 1==1:
         try:
             #UserID = response.json()['sub']
-            response = requests.get("echelon-nn.herokuapp.com/admin/test?text=hello")
+            response = request.get("echelon-nn.herokuapp.com/admin/test?text=hello")
             return render(request, 'tracker/Faliure.html', {'JSON': data})
             #LoggedInUser = EchelonUser.objects.get(user_email=email)
             #userUrl = 'https://echelonportal.herokuapp.com/tracker/user/' + models.b64encode(LoggedInUser.user_index)
             #return redirect(userUrl)
         except:
-            return render(request, 'tracker/Faliure.html', {'JSON': response.json()})
+            #return render(request, 'tracker/Faliure.html', {'JSON': response.json()})
             #return NewUser(request,email)
             UserID = 0
 

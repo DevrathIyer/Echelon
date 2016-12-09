@@ -45,7 +45,7 @@ def signedin(request):
          tW44/tVjrQF5hQuc4mL13EJQsOYqn2+kftjAZSkuZaq/bJM1Vem6oA==
          -----END RSA PRIVATE KEY-----"""
     r = RSA.importKey(f, passphrase=os.environ['ENCRYPTION_PASSWORD'])
-    data = r.encrypt('abcdefgh', 32)
+    data = r.encrypt('a', 32)
     """response.json()['aud'] == GoogleID:"""
     if 1==1:
         try:

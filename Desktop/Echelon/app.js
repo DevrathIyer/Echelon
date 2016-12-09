@@ -247,10 +247,11 @@ router.route('admin/userops/createNewProject').post(function(req, res)
 router.route('/admin/test').get(function(req, res)
 {
   var text = req.query.text;
-  var client_buffer = new Buffer(text, "utf8");
-  var client_decrypted = crypto.publicDecrypt(CLIENT_PUBLIC_KEY, client_buffer);
-  console.log(client_decrypted.toString("utf8"));
-  res.json({"message":client_decrypted.toString("utf8")});
+  res.json({"message":text});
+  //var client_buffer = new Buffer(text, "utf8");
+  //var client_decrypted = crypto.publicDecrypt(CLIENT_PUBLIC_KEY, client_buffer);
+  //console.log(client_decrypted.toString("utf8"));
+  //res.json({"message":client_decrypted.toString("utf8")});
 });
 // =============================================================================
 app.use('/', router);

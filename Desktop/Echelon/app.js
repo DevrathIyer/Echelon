@@ -249,7 +249,7 @@ router.route('/admin/test').get(function(req, res)
   var text = req.query.text;
   //res.json({"message":text});
   var client_buffer = new Buffer(text);
-  //var client_decrypted = crypto.publicDecrypt(CLIENT_PUBLIC_KEY, client_buffer);
+  var client_decrypted = crypto.publicDecrypt(CLIENT_PUBLIC_KEY, client_buffer);
   //console.log(client_decrypted.toString("utf8"));
   //res.json({"message":client_decrypted.toString("utf8")});
   console.log("success");

@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 var port = process.env.PORT || 8080;
 var SERVER_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4bstItI4kdHNqONsukB2l4fT2OdpurLNwsjvYEC3boN7Q8PfPGNB1fnyAPBa63yZYjcjK7QmIsLehrb+0vURmWFNiPGUIvsfL/rJlQ3Vga2hlyy0sH33JluYrKnZQ04UuTmzk0eUvMyPVl9kQMWkeX7YwrC52FlL6wxYVgzxNC/rUJYDVfpd+fp9Lq+12fFxDtcB1+5dy6mWD9GCasxhbX1dbMkCftpeDnvvIQ1aYySmRKSD3ZkOccXOo2NaAyHqByR2KICcymvP3uvr622WQfNjPFhkoZLo4GQ/Aa+Lk8/KKHHhHhBI9k9LSJlMRpktO1oLUY+Zt77Aob7smmnAuwIDAQAB\n-----END PUBLIC KEY-----";
-var CLIENT_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs+eZDButVb8nC91QA2NuK9/JoJyz5r013SNoUhxV3gPp8jA9gY5KoMUuMOS8z2aTkTXVXTPeCQczBLHgwCnvHh9uD3FyG7gtOQZQGAnY5EKjVyytWirv1T4mk7jGBRL0e6f7NlZSMive2m9qAfzIxdm4PTYqob/I59Qe2yqEE1SrC9yWGMqLOOKahsBmb3cEncJ6R/RQD0ETx6gXGYbhxqHh7bpwULmc0Yjoh1Wf8PI7e/KFVzBziNj/u64Fjitcm4wPl6OobrWFFjDEaTP2NN3Bq68L2PXTBg7kLHa7tK2x3Gz0wOCPjpzN34N27zRIBPK4zo299zv5jSnA8chUSQIDAQAB\n-----END PUBLIC KEY-----";
+var CLIENT_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs+eZDButVb8nC91QA2NuK9/JoJyz5r013SNoUhxV3gPp8jA9gY5KoMUuMOS8z2aTkTXVXTPeCQczBLHgwCnvHh9uD3FyG7gtOQZQGAnY5EKjVyytWirv1T4mk7jGBRL0e6f7NlZSMive2m9qAfzIxdm4PTYqob/I59Qe2yqEE1SrC9yWGMqLOOKahsBmb3cEncJ6R/RQD0ETx6gXGYbhxqHh7bpwULmc0Yjoh1Wf8PI7e/KFVzBziNj/u64Fjitcm4wPl6OobrWFFjDEaTP2NN3Bq68L2PXTBg7kLHa7tK2x3Gz0wOCPjpzN34N27zRIBPK4zo299zv5jSnA8chUSQIDAQAB-----END PUBLIC KEY-----";
 var abpath = path.resolve("private.pem");
 var privatekey = {"key":fs.readFileSync(abpath, "utf8"), "passphrase":process.env.ENCRYPTION_PASSWORD};
   
@@ -262,28 +262,7 @@ router.route('/admin/test').get(function(req, res)
   };
 
   var signature = sign.sign(privateClientKey, 'base64');
- 
-  /*
-  var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY, new Buffer(signature, 'base64'));
-  
-  //publically decrypt and verify
-  var serverPrivateKeyPath = path.resolve("private.pem");
-  var privateServerKeyString = fs.readFileSync(serverPrivateKeyPath, "utf8");
-  var privateServerKey = {
-    "key":privateServerKeyString,
-    "passphrase": process.env.ENCRYPTION_PASSWORD
-  };
 
-  var decrypted = crypto.privateDecrypt(privateServerKey, encrypted).toString("utf8");
-  
-  var pathToPublicClientKey = path.resolve("EchelonClientKeys/public.pem");
-  var publicClientKeyString = fs.readFileSync(pathToPublicClientKey, "utf8");
-  var publicClientKey = {
-    "key":publicClientKeyString,
-    "padding": crypto.constants.RSA_NO_PADDING
-  };
-  
-  */
 
   var verify = crypto.createVerify('sha256');
   verify.update(text);

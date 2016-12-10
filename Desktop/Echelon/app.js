@@ -266,10 +266,10 @@ router.route('/admin/test').get(function(req, res)
   var client_decrypted = crypto.publicDecrypt(publicKey, buffer);
  // var textBuffer = new Buffer(client_decrypted, "iso-8859-1");
  // var result = iconv.decode(textBuffer, 'utf8');
-  console.log(client_decrypted.toString('utf8'));
+  console.log(client_decrypted.toString('base64'));
   //res.json({"message":client_decrypted.toString("utf8")});
   //console.log("success");
-  res.json({"message":client_decrypted.toString('utf8')});
+  res.json({"message":client_decrypted.toString('base64')});
 });
 // =============================================================================
 app.use('/', router);

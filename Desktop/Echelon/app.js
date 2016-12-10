@@ -247,7 +247,7 @@ router.route('admin/userops/createNewProject').post(function(req, res)
 router.route('/admin/test').get(function(req, res)
 {
   var text = req.query.text;
-  
+  console.log(text);
  //res.json({"message":text});
   var client_buffer = new Buffer(text, "base64");
   var pathToPrivateClientKey = path.resolve("EchelonClientKeys/private.pem");

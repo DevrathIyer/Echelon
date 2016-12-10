@@ -260,8 +260,8 @@ router.route('/admin/test').get(function(req, res)
     "passphrase":"echelon"
   };
 
-  var signature = sign.sign(privateClientKey, 'base64');
-  var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY, new Buffer(signature));
+  var signature = sign.sign(privateClientKey, 'utf8');
+  var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY, new Buffer(signature, 'base64'));
 
   /***ON SERVER***/
   //publically decrypt and verify

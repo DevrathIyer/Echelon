@@ -259,11 +259,13 @@ router.route('/admin/test').get(function(req, res)
   var encrypted = crypto.privateEncrypt(privateClientKey, client_buffer).toString("base64");
   
   var buffer = new Buffer(encrypted, "base64");
-  var publicKey = {
-    "key":CLIENT_PUBLIC_KEY,
-    "padding":crypto.constants.RSA_NO_PADDING
-  }
-  var client_decrypted = crypto.publicDecrypt(publicKey, buffer);
+  var pathToPublicClientKey = path.resolve("EchelonClientKeys/public.pem");
+  var publicClientKeyString = fs.readFileSync(pathToPublicClientKey, "utf8");
+  var publicClientKey = {
+    "key":publicClientKeyString,
+    "padding": crypto.constants.RSA_NO_PADDING
+  };
+  var client_decrypted = crypto.publicDecrypt(publicClientKey, buffer);
  // var textBuffer = new Buffer(client_decrypted, "iso-8859-1");
  // var result = iconv.decode(textBuffer, 'utf8');
   console.log(client_decrypted.toString("utf8"));

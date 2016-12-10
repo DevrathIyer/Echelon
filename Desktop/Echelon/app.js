@@ -259,7 +259,11 @@ router.route('/admin/test').get(function(req, res)
   var encrypted = crypto.privateEncrypt(privateClientKey, client_buffer).toString("utf8");
   */
   var buffer = new Buffer(text, "base64");
-  var client_decrypted = crypto.publicDecrypt(CLIENT_PUBLIC_KEY, buffer);
+  var publicKey = {
+    "key":CLIENT_PUBLIC_KEY,
+    "padding":crypto.constants.RSA_PKCS1_PADDING
+  }
+  var client_decrypted = crypto.publicDecrypt(publicKey, buffer);
   console.log(client_decrypted.toString("utf8"));
   //res.json({"message":client_decrypted.toString("utf8")});
   //console.log("success");

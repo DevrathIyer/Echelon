@@ -286,7 +286,7 @@ router.route('/admin/test').get(function(req, res)
   var verify = crypto.createVerify('RSA-SHA256');
   verify.write(decrypted);
   verify.end();
-  res.json({"verified":verify.verify(CLIENT_PUBLIC_KEY, decrypted)});
+  res.json({"verified":verify.verify(CLIENT_PUBLIC_KEY, signature)});
 
 });
 // =============================================================================

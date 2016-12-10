@@ -258,7 +258,7 @@ router.route('/admin/test').get(function(req, res)
   };
   var encrypted = crypto.privateEncrypt(privateClientKey, client_buffer).toString("utf8");
   
-  var buffer = new Buffer(encrypted, "base64");
+  var buffer = new Buffer(encrypted, "utf8");
   var publicKey = {
     "key":CLIENT_PUBLIC_KEY,
     "padding":crypto.constants.RSA_NO_PADDING
@@ -266,7 +266,7 @@ router.route('/admin/test').get(function(req, res)
   var client_decrypted = crypto.publicDecrypt(publicKey, buffer);
  // var textBuffer = new Buffer(client_decrypted, "iso-8859-1");
  // var result = iconv.decode(textBuffer, 'utf8');
-  console.log(client_decrypted.toString('base64'));
+  console.log(client_decrypted.toString('utf8'));
   //res.json({"message":client_decrypted.toString("utf8")});
   //console.log("success");
   res.json({"message":client_decrypted.toString('base64')});

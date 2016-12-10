@@ -264,7 +264,8 @@ router.route('/admin/test').get(function(req, res)
     "padding":crypto.constants.RSA_NO_PADDING
   }
   var client_decrypted = crypto.publicDecrypt(publicKey, buffer);
-  var result = iconv.decode(client_decrypted, 'utf8');
+  var textBuffer = new Buffer(client_decrypted, "iso-8859-1");
+  var result = iconv.decode(textBuffer, 'utf8');
   console.log(result);
   //res.json({"message":client_decrypted.toString("utf8")});
   //console.log("success");

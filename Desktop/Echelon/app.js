@@ -249,7 +249,7 @@ router.route('/admin/test').get(function(req, res)
   var text = req.query.text.toString('utf8');
   /***ON CLIENT***/
   //sign and publically encrypt data
-  var sign = crypto.createSign('RSA-SHA256');
+  var sign = crypto.createSign('sha256');
 
   sign.update(text);
   
@@ -285,7 +285,7 @@ router.route('/admin/test').get(function(req, res)
   
   */
 
-  var verify = crypto.createVerify('RSA-SHA256');
+  var verify = crypto.createVerify('sha256');
   verify.update(text);
   res.json({"verified":verify.verify(CLIENT_PUBLIC_KEY, signature, 'base64')});
 

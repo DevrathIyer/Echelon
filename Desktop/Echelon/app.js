@@ -262,9 +262,9 @@ router.route('/admin/test').get(function(req, res)
   };
 
   var signature = sign.sign(privateClientKey, 'utf8');
+  /*
   var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY, new Buffer(signature, 'base64'));
-
-  /***ON SERVER***/
+  
   //publically decrypt and verify
   var serverPrivateKeyPath = path.resolve("private.pem");
   var privateServerKeyString = fs.readFileSync(serverPrivateKeyPath, "utf8");
@@ -274,20 +274,22 @@ router.route('/admin/test').get(function(req, res)
   };
 
   var decrypted = crypto.privateDecrypt(privateServerKey, encrypted).toString("utf8");
-
-  /*
+  
   var pathToPublicClientKey = path.resolve("EchelonClientKeys/public.pem");
   var publicClientKeyString = fs.readFileSync(pathToPublicClientKey, "utf8");
   var publicClientKey = {
     "key":publicClientKeyString,
     "padding": crypto.constants.RSA_NO_PADDING
   };
+  
   */
+
+
 
   var verify = crypto.createVerify('RSA-SHA256');
   verify.write(text);
   verify.end();
-  res.json({"verified":verify.verify(CLIENT_PUBLIC_KEY, decrypted, 'utf8')});
+  res.json({"verified":verify.verify(CLIENT_PUBLIC_KEY, signature, 'utf8')});
 
 });
 // =============================================================================

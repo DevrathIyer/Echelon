@@ -272,7 +272,7 @@ router.route('/admin/test').get(function(req, res)
     "passphrase": process.env.ENCRYPTION_PASSWORD
   };
 
-  var decrypted = crypto.privateDecrypt(privateServerKey, encrypted);
+  var decrypted = crypto.privateDecrypt(privateServerKey, encrypted).toString("utf8");
 
   /*
   var pathToPublicClientKey = path.resolve("EchelonClientKeys/public.pem");

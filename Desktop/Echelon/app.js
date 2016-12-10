@@ -261,7 +261,7 @@ router.route('/admin/test').get(function(req, res)
   };
 
   var signature = sign.sign(privateClientKey, 'base64');
-  var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY, signature);
+  var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY, new Buffer(signature);
 
   /***ON SERVER***/
   //publically decrypt and verify

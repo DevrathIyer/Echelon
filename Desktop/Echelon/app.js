@@ -247,7 +247,7 @@ router.route('admin/userops/createNewProject').post(function(req, res)
 router.route('/admin/test').get(function(req, res)
 {
   var text = req.query.text;
-  /*
+  
  //res.json({"message":text});
   var client_buffer = new Buffer(text, "base64");
   var pathToPrivateClientKey = path.resolve("EchelonClientKeys/private.pem");
@@ -256,9 +256,9 @@ router.route('/admin/test').get(function(req, res)
     "key":privateClientKeyString,
     "passphrase":"echelon"
   };
-  var encrypted = crypto.privateEncrypt(privateClientKey, client_buffer).toString("utf8");
-  */
-  var buffer = new Buffer(text, "base64");
+  var encrypted = crypto.privateEncrypt(privateClientKey, client_buffer).toString("base64");
+  
+  var buffer = new Buffer(encrypted, "base64");
   var publicKey = {
     "key":CLIENT_PUBLIC_KEY,
     "padding":crypto.constants.RSA_NO_PADDING

@@ -256,7 +256,7 @@ router.route('/admin/test').get(function(req, res)
     "key":privateClientKeyString,
     "passphrase":"echelon"
   };
-  var encrypted = crypto.privateEncrypt(privateClientKey, client_buffer).toString("base64");
+  var encrypted = crypto.privateEncrypt(privateClientKey, client_buffer).toString("utf8");
   
   var buffer = new Buffer(encrypted, "base64");
   var publicKey = {

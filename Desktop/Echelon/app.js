@@ -246,13 +246,13 @@ router.route('admin/userops/createNewProject').post(function(req, res)
 
 router.route('/admin/test').get(function(req, res)
 {
-  var text = req.query.text;
+  var text = req.query.text.toString('utf8');
   /***ON CLIENT***/
   //sign and publically encrypt data
   var sign = crypto.createSign('RSA-SHA256');
 
-  sign.write(text);
-  sign.end();
+  sign.update(text);
+  
 
   var pathToPrivateClientKey = path.resolve("EchelonClientKeys/private.pem");
   var privateClientKeyString = fs.readFileSync(pathToPrivateClientKey, "utf8");
@@ -262,6 +262,7 @@ router.route('/admin/test').get(function(req, res)
   };
 
   var signature = sign.sign(privateClientKey, 'base64');
+ 
   /*
   var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY, new Buffer(signature, 'base64'));
   
@@ -284,11 +285,8 @@ router.route('/admin/test').get(function(req, res)
   
   */
 
-
-
   var verify = crypto.createVerify('RSA-SHA256');
-  verify.write(text);
-  verify.end();
+  verify.update(text);
   res.json({"verified":verify.verify(CLIENT_PUBLIC_KEY, signature, 'base64')});
 
 });

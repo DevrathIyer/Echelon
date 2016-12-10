@@ -6,7 +6,8 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.0.1",
     "express": "~4.0.0",
-    "gcloud": "^0.37.0"
+    "gcloud": "^0.37.0",
+    "iconv-lite": "^0.4.15"
   },
   "devDependencies": {
     "aerospike": "^2.4.3"

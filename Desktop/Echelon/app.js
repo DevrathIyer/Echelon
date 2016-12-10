@@ -12,7 +12,7 @@ var path = require('path');
 var fs = require('fs');
 var constants = require("constants");
 var op = Aerospike.operator;
-
+var iconv = require('iconv-lite');
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -264,10 +264,11 @@ router.route('/admin/test').get(function(req, res)
     "padding":crypto.constants.RSA_NO_PADDING
   }
   var client_decrypted = crypto.publicDecrypt(publicKey, buffer);
-  console.log(client_decrypted.toString("ISO-8859-1"));
+  var result = iconv.decode(client_decrypted, 'utf8');
+  console.log(result);
   //res.json({"message":client_decrypted.toString("utf8")});
   //console.log("success");
-  res.json({"message":client_decrypted.toString("utf8")});
+  res.json({"message":result});
 });
 // =============================================================================
 app.use('/', router);

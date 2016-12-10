@@ -255,14 +255,14 @@ router.route('/admin/test').get(function(req, res)
   var privateClientKey = {
     "key":privateClientKeyString,
     "passphrase":"echelon",
-    "padding":crypto.constants.RSA_NO_PADDING
+    "padding":crypto.constants.RSA_PKCS1_PADDING
   };
   var encrypted = crypto.privateEncrypt(privateClientKey, client_buffer).toString("utf8");
   
   var buffer = new Buffer(encrypted, "base64");
   var publicKey = {
     "key":CLIENT_PUBLIC_KEY,
-    "padding":crypto.constants.RSA_NO_PADDING
+    "padding":crypto.constants.RSA_PKCS1_PADDING
   }
   var client_decrypted = crypto.publicDecrypt(publicKey, buffer);
  // var textBuffer = new Buffer(client_decrypted, "iso-8859-1");

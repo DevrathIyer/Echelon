@@ -254,7 +254,7 @@ router.route('/admin/test').get(function(req, res)
   var privateClientKeyString = fs.readFileSync(pathToPrivateClientKey, "utf8");
   var privateClientKey = {
     "key":privateClientKeyString,
-    "passphrase":"echelon"
+    "passphrase":"echelon",
     "padding":crypto.constants.RSA_PKCS1_PADDING
   };
   var encrypted = crypto.privateEncrypt(privateClientKey, client_buffer).toString("utf8");

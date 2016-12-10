@@ -261,7 +261,7 @@ router.route('/admin/test').get(function(req, res)
   var buffer = new Buffer(text, "base64");
   var publicKey = {
     "key":CLIENT_PUBLIC_KEY,
-    "padding":crypto.constants.RSA_PKCS1_OAEP_PADDING
+    "padding":crypto.constants.RSA_NO_PADDING
   }
   var client_decrypted = crypto.publicDecrypt(publicKey, buffer);
   console.log(client_decrypted.toString("utf8"));

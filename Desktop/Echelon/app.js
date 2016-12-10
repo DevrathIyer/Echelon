@@ -261,7 +261,7 @@ router.route('/admin/test').get(function(req, res)
     "passphrase":"echelon"
   };
 
-  var signature = sign.sign(privateClientKey, 'utf8');
+  var signature = sign.sign(privateClientKey, 'base64');
   /*
   var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY, new Buffer(signature, 'base64'));
   
@@ -289,7 +289,7 @@ router.route('/admin/test').get(function(req, res)
   var verify = crypto.createVerify('RSA-SHA256');
   verify.write(text);
   verify.end();
-  res.json({"verified":verify.verify(CLIENT_PUBLIC_KEY, signature, 'utf8')});
+  res.json({"verified":verify.verify(CLIENT_PUBLIC_KEY, signature, 'base64')});
 
 });
 // =============================================================================

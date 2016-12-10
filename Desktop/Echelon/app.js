@@ -246,7 +246,7 @@ router.route('admin/userops/createNewProject').post(function(req, res)
 
 router.route('/admin/test').get(function(req, res)
 {
-  var text = req.query.text.toString('utf8');
+  var text = "hello";
   /***ON CLIENT***/
   //sign and publically encrypt data
   var sign = crypto.createSign('sha256');

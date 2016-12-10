@@ -246,32 +246,46 @@ router.route('admin/userops/createNewProject').post(function(req, res)
 
 router.route('/admin/test').get(function(req, res)
 {
-  var text = req.query.text.toString();
-  console.log(text);
- //res.json({"message":text});
-  var client_buffer = new Buffer(text, "base64");
+  /***ON CLIENT***/
+  //sign and publically encrypt data
+  var sign = crypto.createSign('RSA-SHA256');
+
+  sign.write(req.query.text);
+  sign.end();
+
   var pathToPrivateClientKey = path.resolve("EchelonClientKeys/private.pem");
   var privateClientKeyString = fs.readFileSync(pathToPrivateClientKey, "utf8");
   var privateClientKey = {
     "key":privateClientKeyString,
     "passphrase":"echelon"
   };
-  var encrypted = crypto.privateEncrypt(privateClientKey, client_buffer).toString("base64");
-  
-  var buffer = new Buffer(encrypted, "base64");
+
+  var signature = sign.sign(privateClientKey, 'base64');
+  var encrypted = crypto.publicEncrypt(SERVER_PUBLIC_KEY, signature);
+
+  /***ON SERVER***/
+  //publically decrypt and verify
+  var serverPrivateKeyPath = path.resolve("private.pem");
+  var privateServerKeyString = fs.readFileSync(serverPrivateKeyPath, "utf8");
+  var privateServerKey = {
+    "key":privateServerKeyString,
+    "passphrase": process.env.ENCRYPTION_PASSWORD
+  };
+
+  var decrypted = crypto.privateDecrypt(privateServerKey, encrypted);
+
+  /*
   var pathToPublicClientKey = path.resolve("EchelonClientKeys/public.pem");
   var publicClientKeyString = fs.readFileSync(pathToPublicClientKey, "utf8");
   var publicClientKey = {
     "key":publicClientKeyString,
     "padding": crypto.constants.RSA_NO_PADDING
   };
-  var client_decrypted = crypto.publicDecrypt(publicClientKey, buffer);
- // var textBuffer = new Buffer(client_decrypted, "iso-8859-1");
- // var result = iconv.decode(textBuffer, 'utf8');
-  console.log(client_decrypted.toString("utf8"));
-  //res.json({"message":client_decrypted.toString("utf8")});
-  //console.log("success");
-  res.json({"message":client_decrypted.toString("utf8")});
+  */
+
+  var verify = crypto.createVerify('RSA-SHA256');
+  res.json({"verified":verify.verify(CLIENT_PUBLIC_KEY, decrypted)});
+
 });
 // =============================================================================
 app.use('/', router);

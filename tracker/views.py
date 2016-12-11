@@ -48,10 +48,10 @@ YZwZkOfXiUuP0/8ff94r4B23WE3kAxJXj09IiANe6aX9WJtcGNbhqCNU9hgRMu2h
 -----END RSA PRIVATE KEY-----
 """
     r = RSA.importKey(f, passphrase=os.environ['ENCRYPTION_PASSWORD'])
-    string = base64.b64encode(bytes('hello'))
-    hash = SHA256.new(string).digest()
+    #string = base64.b64encode(bytes('hello'))
+    hash = SHA256.new('hello').digest()
     data = r.sign(hash, 32)
-    post_data = {'command': string, 'signature': data}
+    post_data = {'command': 'hello', 'signature': data}
     """response.json()['aud'] == GoogleID:"""
     if 1==1:
         try:

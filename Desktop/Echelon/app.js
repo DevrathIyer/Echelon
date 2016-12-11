@@ -256,7 +256,7 @@ router.route('/admin/test').get(function(req, res)
 
   var sign = crypto.createSign('sha256');
 
-  sign.update(encrypted);
+  sign.update(encrypted.toString('utf8'));
   
 
   var pathToPrivateClientKey = path.resolve("EchelonClientKeys/private.pem");

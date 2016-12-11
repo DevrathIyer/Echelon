@@ -244,12 +244,13 @@ router.route('admin/userops/createNewProject').post(function(req, res)
   });
 });
 
-router.route('/admin/test').get(function(req, res)
+router.route('/admin/test').post(function(req, res)
 {
-  var text = "hello";
-  /***ON CLIENT***/
-  //sign and publically encrypt data
-  
+  var textENC = req.body.command;
+  var signature = req.body.signature;
+
+  /*var text = "hello";
+
   //encrypt
   var pathToServerPublicKey = path.resolve("public.pem");
   var serverPublicKey = fs.readFileSync(pathToServerPublicKey, 'utf8');
@@ -268,7 +269,8 @@ router.route('/admin/test').get(function(req, res)
   };
   var signature = sign.sign(privateClientKey, 'base64');
 
-  /***ON SERVER***/
+  */
+
   //privately decrypt and verify data
 
   //verify
@@ -277,7 +279,9 @@ router.route('/admin/test').get(function(req, res)
   var verify = crypto.createVerify('sha256');
   verify.update(textENC);
   var verified = verify.verify(publicClientKey, signature, 'base64');
-  
+  console.log(verified);
+  res.json({"message":"check logs :)"});
+  /*
   //decrypt
   if(verified)
   {
@@ -294,7 +298,7 @@ router.route('/admin/test').get(function(req, res)
   {
     res.json({"message":"permission denied"});
   }
-
+  */
 });
 // =============================================================================
 app.use('/', router);

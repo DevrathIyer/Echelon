@@ -278,7 +278,7 @@ router.route('/admin/test').post(function(req, res)
   var publicClientKey = fs.readFileSync(pathToClientPublicKey);
   var verify = crypto.createVerify('sha256');
   verify.update(textENC);
-  var verified = verify.verify(publicClientKey, signature, 'base64');
+  var verified = verify.verify(publicClientKey, signature);
   console.log(verified);
   res.json({"message":"check logs :)"});
   /*

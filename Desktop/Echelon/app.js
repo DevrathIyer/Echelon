@@ -253,13 +253,13 @@ router.route('/admin/test').get(function(req, res)
   //encrypt
   var pathToServerPublicKey = path.resolve("public.pem");
   var serverPublicKey = fs.readFileSync(pathToServerPublicKey, 'utf8');
-  var textBuffer = new Buffer(text, 'base64');
+  var textBuffer = new Buffer(text);
   var encrypted = crypto.publicEncrypt(serverPublicKey, textBuffer);
-  var textENC = encrypted.toString('utf8');
+  var textENC = encrypted.toString('base64');
 
   //sign
   var sign = crypto.createSign('sha256');
-  sign.update(encrypted.toString('utf8'));
+  sign.update(textENC);
   var pathToPrivateClientKey = path.resolve("EchelonClientKeys/private.pem");
   var privateClientKeyString = fs.readFileSync(pathToPrivateClientKey, "utf8");
   var privateClientKey = {
@@ -287,8 +287,8 @@ router.route('/admin/test').get(function(req, res)
       "key":fs.readFileSync(pathToServerPrivateKey, 'utf8'),
       "passphrase": process.env.ENCRYPTION_PASSWORD
     };
-
-    var data = crypto.privateDecrypt(privateKey, new Buffer(textENC, 'base64'));
+    var buffer = new Buffer(textENC, "base64");
+    var data = crypto.privateDecrypt(privateKey, buffer);
     res.json({"data":data.toString('utf8')});
   }else
   {

@@ -48,7 +48,7 @@ YZwZkOfXiUuP0/8ff94r4B23WE3kAxJXj09IiANe6aX9WJtcGNbhqCNU9hgRMu2h
 """
     r = RSA.importKey(f, passphrase=os.environ['ENCRYPTION_PASSWORD'])
     string = base64.b64encode(bytes('hello'))
-    data = r.sign(string, 32)
+    data = base64.b64encode(bytes(r.sign(string, 32)))
     post_data = {'command': string, 'signature': data}
     """response.json()['aud'] == GoogleID:"""
     if 1==1:

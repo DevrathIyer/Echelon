@@ -288,7 +288,7 @@ router.route('/admin/test').get(function(req, res)
       "passphrase": process.env.ENCRYPTION_PASSWORD
     };
 
-    var data = crypto.privateDecrypt(privateKey, new Buffer(textENC));
+    var data = crypto.privateDecrypt(privateKey, new Buffer(textENC, 'base64'));
     res.json({"data":data.toString('utf8')});
   }else
   {

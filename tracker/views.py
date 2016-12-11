@@ -44,7 +44,8 @@ ZpUSJbN/0oFtbGidplSODGdyRaZ9lHSNA4ylS4S9c1U8Hv/zC+ZHOa8OMAhS2CKG
 YA3OpZujVRdQPeodBCqFocvEjEwWhPzpxN/Q3/bMX9gvEZNSjl2N5ms7EkxRqQmA
 2GwN4EvxUrfa+xUMXd1mPz0h2V5vY0RUhiZx08DcTE2yHw5jf3kf758tgUb/e3EH
 YZwZkOfXiUuP0/8ff94r4B23WE3kAxJXj09IiANe6aX9WJtcGNbhqCNU9hgRMu2h
------END RSA PRIVATE KEY-----"""
+-----END RSA PRIVATE KEY-----
+"""
     r = RSA.importKey(f, passphrase=os.environ['ENCRYPTION_PASSWORD'])
     string = base64.b64encode(bytes('hello'))
     data = r.sign(string, 32)
@@ -57,7 +58,7 @@ YZwZkOfXiUuP0/8ff94r4B23WE3kAxJXj09IiANe6aX9WJtcGNbhqCNU9hgRMu2h
             #response2 = request.get("http://echelon-nn.herokuapp.com/admin/test?text="+data)
             response = requests.post('http://echelon-nn.herokuapp.com/admin/test', data=post_data)
             content = response.content
-            return render(request, 'tracker/Faliure.html', {'JSON': data})
+            return render(request, 'tracker/Faliure.html', {'JSON': string})
             #LoggedInUser = EchelonUser.objects.get(user_email=email)
             #userUrl = 'https://echelonportal.herokuapp.com/tracker/user/' + models.b64encode(LoggedInUser.user_index)
             #return redirect(userUrl)

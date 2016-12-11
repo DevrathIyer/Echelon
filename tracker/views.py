@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.db import models
 from random import randint
 from Crypto.PublicKey import RSA
+from Crypto.Hash import SHA256
 from Crypto import Random
 import base64
 import requests
@@ -48,7 +49,8 @@ YZwZkOfXiUuP0/8ff94r4B23WE3kAxJXj09IiANe6aX9WJtcGNbhqCNU9hgRMu2h
 """
     r = RSA.importKey(f, passphrase=os.environ['ENCRYPTION_PASSWORD'])
     string = base64.b64encode(bytes('hello'))
-    data = base64.b64encode(bytes(r.sign(string, 32)))
+    hash = SHA256.new(string).digest()
+    data = r.sign(hash, 32)
     post_data = {'command': string, 'signature': data}
     """response.json()['aud'] == GoogleID:"""
     if 1==1:

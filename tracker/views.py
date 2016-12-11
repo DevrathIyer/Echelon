@@ -50,7 +50,7 @@ YZwZkOfXiUuP0/8ff94r4B23WE3kAxJXj09IiANe6aX9WJtcGNbhqCNU9hgRMu2h
     #string = base64.b64encode(bytes('hello'))
     hash = SHA256.new('hello').digest()
     data = base64.b64encode(bytes(r.sign(hash, 32)))
-    post_data = {'command': 'hello', 'signature': data}
+    post_data = {'command': hash, 'signature': data}
     """response.json()['aud'] == GoogleID:"""
     if 1==1:
         try:

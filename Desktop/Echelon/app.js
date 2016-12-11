@@ -248,7 +248,7 @@ router.route('/admin/test').post(function(req, res)
 {
   var textENC = req.body.command;
   var signature = req.body.signature;
-
+  console.log(textENC);
   /*var text = "hello";
 
   //encrypt

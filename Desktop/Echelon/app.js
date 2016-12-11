@@ -276,7 +276,24 @@ router.route('/admin/test').get(function(req, res)
   var publicClientKey = fs.readFileSync(pathToClientPublicKey);
   var verify = crypto.createVerify('sha256');
   verify.update(textENC);
-  res.json({"verified":verify.verify(publicClientKey, signature, 'base64')});
+  var verified = verify.verify(publicClientKey, signature, 'base64');
+  
+  //decrypt
+  if(verified)
+  {
+    var pathToServerPrivateKey = path.resolve("private.pem");
+    var privateKey = 
+    {
+      "key":fs.readFileSync(pathToServerPrivateKey, 'utf8'),
+      "passphrase": process.env.ENCRYPTION_PASSWORD
+    };
+
+    var data = crypto.privateDecrypt(privateKey, new Buffer(textENC));
+    res.json({"data":data.toString('utf8')});
+  }else
+  {
+    res.json("message":"permission denied");
+  }
 
 });
 // =============================================================================

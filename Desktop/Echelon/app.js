@@ -292,7 +292,7 @@ router.route('/admin/test').get(function(req, res)
     res.json({"data":data.toString('utf8')});
   }else
   {
-    res.json("message":"permission denied");
+    res.json({"message":"permission denied"});
   }
 
 });

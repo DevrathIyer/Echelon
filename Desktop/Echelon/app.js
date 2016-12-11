@@ -276,7 +276,7 @@ router.route('/admin/test').post(function(req, res)
   //verify
   var pathToClientPublicKey = path.resolve("EchelonClientKeys/public.pem");
   var publicClientKey = fs.readFileSync(pathToClientPublicKey);
-  var verify = crypto.createVerify('sha256');
+  var verify = crypto.createVerify('SHA256');
   verify.update(textENC);
   var verified = verify.verify(publicClientKey, signature);
   console.log(verified);

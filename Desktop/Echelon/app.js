@@ -249,9 +249,14 @@ router.route('/admin/test').get(function(req, res)
   var text = "hello";
   /***ON CLIENT***/
   //sign and publically encrypt data
+  var pathToServerPublicKey = path.resolve("public.pem");
+  var serverPublicKey = fs.readFileSync(pathToServerPublicKey);
+  Buffer textBuffer = new Buffer(text);
+  var encrypted = crypto.publicEncrypt(serverPublicKey, textBuffer);
+
   var sign = crypto.createSign('sha256');
 
-  sign.update(text);
+  sign.update(encrypted);
   
 
   var pathToPrivateClientKey = path.resolve("EchelonClientKeys/private.pem");
@@ -263,6 +268,8 @@ router.route('/admin/test').get(function(req, res)
 
   var signature = sign.sign(privateClientKey, 'base64');
 
+  /***ON SERVER***/
+  //privately decrypt and verify data
   var pathToClientPublicKey = path.resolve("EchelonClientKeys/public.pem");
   var publicClientKey = fs.readFileSync(pathToClientPublicKey);
   var verify = crypto.createVerify('sha256');

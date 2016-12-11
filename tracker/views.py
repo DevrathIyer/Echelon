@@ -60,7 +60,7 @@ YZwZkOfXiUuP0/8ff94r4B23WE3kAxJXj09IiANe6aX9WJtcGNbhqCNU9hgRMu2h
             #response2 = request.get("http://echelon-nn.herokuapp.com/admin/test?text="+data)
             response = requests.post('http://echelon-nn.herokuapp.com/admin/test', data=post_data)
             content = response.content
-            return render(request, 'tracker/Faliure.html', {'JSON': string})
+            return render(request, 'tracker/Faliure.html', {'JSON': content})
             #LoggedInUser = EchelonUser.objects.get(user_email=email)
             #userUrl = 'https://echelonportal.herokuapp.com/tracker/user/' + models.b64encode(LoggedInUser.user_index)
             #return redirect(userUrl)

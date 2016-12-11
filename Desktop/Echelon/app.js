@@ -249,27 +249,28 @@ router.route('/admin/test').post(function(req, res)
   var textENC = req.body.command;
   var signature = req.body.signature;
   console.log(textENC);
-  /*var text = "hello";
+  console.log(signature)
+  var text = textENC;
 
   //encrypt
   var pathToServerPublicKey = path.resolve("public.pem");
   var serverPublicKey = fs.readFileSync(pathToServerPublicKey, 'utf8');
   var textBuffer = new Buffer(text);
   var encrypted = crypto.publicEncrypt(serverPublicKey, textBuffer);
-  var textENC = encrypted.toString('base64');
+  var textENC2 = encrypted.toString('base64');
 
   //sign
   var sign = crypto.createSign('sha256');
-  sign.update(textENC);
+  sign.update(textENC2);
   var pathToPrivateClientKey = path.resolve("EchelonClientKeys/private.pem");
   var privateClientKeyString = fs.readFileSync(pathToPrivateClientKey, "utf8");
   var privateClientKey = {
     "key":privateClientKeyString,
     "passphrase":"echelon"
   };
-  var signature = sign.sign(privateClientKey, 'base64');
-
-  */
+  var thesignature = sign.sign(privateClientKey, 'base64');
+  console.log(thesignature);
+  /*
 
   //privately decrypt and verify data
 

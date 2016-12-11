@@ -250,7 +250,7 @@ router.route('/admin/test').get(function(req, res)
   /***ON CLIENT***/
   //sign and publically encrypt data
   var pathToServerPublicKey = path.resolve("public.pem");
-  var serverPublicKey = fs.readFileSync(pathToServerPublicKey);
+  var serverPublicKey = fs.readFileSync(pathToServerPublicKey, 'utf8');
   var textBuffer = new Buffer(text);
   var encrypted = crypto.publicEncrypt(serverPublicKey, textBuffer);
 

@@ -46,9 +46,9 @@ YA3OpZujVRdQPeodBCqFocvEjEwWhPzpxN/Q3/bMX9gvEZNSjl2N5ms7EkxRqQmA
 YZwZkOfXiUuP0/8ff94r4B23WE3kAxJXj09IiANe6aX9WJtcGNbhqCNU9hgRMu2h
 -----END RSA PRIVATE KEY-----"""
     r = RSA.importKey(f, passphrase=os.environ['ENCRYPTION_PASSWORD'])
-    data = r.sign('hello', 32)
-    post_data = {'command': 'hello', 'signature': data}
-    base64.b64encode(bytes('your string', 'utf-8'))
+    string = base64.b64encode(bytes('hello', 'utf-8'))
+    data = r.sign(string, 32)
+    post_data = {'command': string, 'signature': data}
     """response.json()['aud'] == GoogleID:"""
     if 1==1:
         try:

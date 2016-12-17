@@ -257,5 +257,5 @@ var options = {
   cert: hscert
 };
 
-app.createServer(options).listen(port);
+https.createServer(options,app).listen(port);
 console.log("Listening on port: "+port);

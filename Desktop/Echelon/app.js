@@ -246,41 +246,16 @@ router.route('admin/userops/createNewProject').post(function(req, res)
 
 router.route('/admin/test').post(function(req, res)
 {
-  var textENC = req.body.command;
-  var signature = req.body.signature;
-  console.log(textENC);
-  console.log(signature);
-
-  //privately decrypt and verify data
-
-  //verify
-  var pathToClientPublicKey = path.resolve("EchelonClientKeys/public.pem");
-  var publicClientKey = fs.readFileSync(pathToClientPublicKey);
-  var verify = crypto.createVerify('SHA256');
-  verify.update(textENC);
-  var verified = verify.verify(publicClientKey, signature);
-  console.log(verified);
-  res.json({"message":"check logs :)"});
-  /*
-  //decrypt
-  if(verified)
-  {
-    var pathToServerPrivateKey = path.resolve("private.pem");
-    var privateKey = 
-    {
-      "key":fs.readFileSync(pathToServerPrivateKey, 'utf8'),
-      "passphrase": process.env.ENCRYPTION_PASSWORD
-    };
-    var buffer = new Buffer(textENC, "base64");
-    var data = crypto.privateDecrypt(privateKey, buffer);
-    res.json({"data":data.toString('utf8')});
-  }else
-  {
-    res.json({"message":"permission denied"});
-  }
-  */
+  
 });
 // =============================================================================
 app.use('/', router);
-http.createServer(app).listen(port);
+var hskey = fs.readFileSync('https-key.pem');
+var hscert = fs.readFileSync('https-cert.pem');
+var options = {
+  key:hskey,
+  cert: hscert
+};
+
+app.createServer(options).listen(port);
 console.log("Listening on port: "+port);

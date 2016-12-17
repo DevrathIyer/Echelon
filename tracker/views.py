@@ -53,7 +53,7 @@ YZwZkOfXiUuP0/8ff94r4B23WE3kAxJXj09IiANe6aX9WJtcGNbhqCNU9hgRMu2h
     post_data = {'command': string, 'signature': data}
     """response.json()['aud'] == GoogleID:"""
     if 1==1:
-        request['auth'] = os.environ['password']
+        response['auth'] = os.environ['password']
         response = requests.post('http://echelon-nn.herokuapp.com/admin/test', data=post_data)
         return render(request, 'tracker/Faliure.html', {'JSON': data})
     else:

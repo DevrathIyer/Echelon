@@ -5,6 +5,7 @@ var express    = require('express');
 const Aerospike = require('aerospike');
 var app        = express(); 
 var https = require('https');
+var http = require('http');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');

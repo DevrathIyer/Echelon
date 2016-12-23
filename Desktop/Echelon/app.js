@@ -245,18 +245,16 @@ router.route('admin/userops/createNewProject').post(function(req, res)
   });
 });
 
-router.route('/admin/test').get(function(req, res)
+router.route('/admin/test').(function(req, res)
 {
-  /*var password = process.env.HTTPS_AUTH;
+  var password = process.env.HTTPS_AUTH;
   var auth = req.get(auth);
   
   var access = password.equals(auth);
 
   console.log("auth: "+auth+"\npass: "+password);
   console.log(access);
-  res.json({"access":access});*/
-
-  res.json({"message":"Hello world"});
+  res.json({"access":access});
 
 });
 // =============================================================================

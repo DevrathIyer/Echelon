@@ -51,11 +51,13 @@ YZwZkOfXiUuP0/8ff94r4B23WE3kAxJXj09IiANe6aX9WJtcGNbhqCNU9hgRMu2h
     string = 'hello' #base64.b64encode(bytes('hello'))
     hash = SHA256.new(string).digest()
     data = r.sign(hash, 32)
-    post_data = {'auth':os.environ['password']}
-    """response.json()['aud'] == GoogleID:"""
-    if 1==1:
-        #response['auth'] = os.environ['password']
-        response = requests.post('https://echelon-nn.herokuapp.com/admin/test', data=post_data)
-        return render(request, 'tracker/Faliure.html', {'JSON': data})
+    post_data = {'auth':os.environ['password'], 'uid':''}
+    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
+        if response.json()['aud'] == GoogleID:
+            #response['auth'] = os.environ['password']
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/createUser', data=post_data)
+            return render(request, 'tracker/Faliure.html', {'JSON': response.json()})
+        else:
+            return render(request, 'tracker/Faliure.html', {})
     else:
         return render(request, 'tracker/Faliure.html', {})

@@ -80,13 +80,17 @@ function checkCredits(cost, uid)
     });
 }
 
-/*
-router.use('/admin/userops',function(req, res, next)
+var authenticateAdmin = function(req, res, next)
 {
-  console.log('Admin attempt from '+req.connection.remoteAddress);
+  var password = process.env.HTTPS_AUTH.toString();
+  var auth = req.body.auth.toString();  
+  var access = password.localeCompare(auth);
+  console.log(access);
   next();
-});
-*/
+}
+
+router.use('/admin', authenticateAdmin);
+
 
 router.route('/api/weights').get(function(req, res)
 {
@@ -250,17 +254,6 @@ router.route('/admin/test').post(function(req, res)
 });
 
 // =============================================================================
-
-var authenticateAdmin = function(req, res, next)
-{
-  var password = process.env.HTTPS_AUTH.toString();
-  var auth = req.body.auth.toString();  
-  var access = password.localeCompare(auth);
-  console.log(access);
-  next();
-}
-
-router.use('/admin', authenticateAdmin);
 
 app.use('/', router);
 

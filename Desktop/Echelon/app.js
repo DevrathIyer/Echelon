@@ -85,9 +85,9 @@ var authenticateAdmin = function(req, res, next)
   var password = process.env.HTTPS_AUTH.toString();
   var auth = req.body.auth.toString();  
   var access = password.localeCompare(auth);
+  console.log("["+access+"] "+req.connection.remoteAddress);
   if(access==0)
   {
-    console.log(req.connection.remoteAddress);
     next();
   }
   else

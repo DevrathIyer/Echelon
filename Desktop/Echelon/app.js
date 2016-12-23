@@ -4,7 +4,6 @@
 var express    = require('express');
 const Aerospike = require('aerospike');
 var app        = express(); 
-var https = require('https');
 var http = require('http');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
@@ -245,10 +244,10 @@ router.route('admin/userops/createNewProject').post(function(req, res)
   });
 });
 
-router.route('/admin/test').(function(req, res)
+router.route('/admin/test').post(function(req, res)
 {
   var password = process.env.HTTPS_AUTH;
-  var auth = req.get(auth);
+  var auth = req.body.auth;
   
   var access = password.equals(auth);
 
@@ -259,11 +258,5 @@ router.route('/admin/test').(function(req, res)
 });
 // =============================================================================
 app.use('/', router);
-var hskey = fs.readFileSync('https-key.pem');
-var hscert = fs.readFileSync('https-cert.pem');
-var options = {
-  key:hskey,
-  cert: hscert
-};
 http.createServer(app).listen(port);
 console.log("Listening on port: "+port);

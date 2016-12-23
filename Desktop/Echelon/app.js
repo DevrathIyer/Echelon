@@ -159,7 +159,7 @@ router.route('/admin/userops/addCredits').post(function(req, res)
   });
 });
 
-router.route('/admin/userops/getData').post(function(req, res)
+router.route('/admin/userops/getUserData').post(function(req, res)
 {
   var uid = req.body.uid;
   var key = new Aerospike.Key('uims', 'userinfo', uid);

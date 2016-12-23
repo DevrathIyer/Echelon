@@ -246,14 +246,18 @@ router.route('admin/userops/createNewProject').post(function(req, res)
 
 router.route('/admin/test').post(function(req, res)
 {
-  var password = process.env.HTTPS_AUTH;
+  /*var password = process.env.HTTPS_AUTH;
   var auth = req.get(auth);
   
   var access = password.equals(auth);
 
   console.log("auth: "+auth+"\npass: "+password);
   console.log(access);
-  res.json({"access":access});
+  res.json({"access":access});*/
+
+  var number = req.body.number;
+  res.json({"number":number});
+  
 });
 // =============================================================================
 app.use('/', router);

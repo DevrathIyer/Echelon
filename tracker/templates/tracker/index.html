@@ -2,7 +2,7 @@
 <meta name="google-signin-client_id" content="867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com">
 <div class="g-signin2" data-onsuccess="onSignIn"></div>
 <a href="#" onclick="signOut();">Sign out</a>
-<form id = "SignInForm" action="{% url 'tracker:signedin' %}" method="post">
+<form id = "SignInForm" action="{% url 'tracker:viewuserdata' %}" method="post">
 {% csrf_token %}
     <input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">
     <input type="hidden" id = "Email" name="Email" value="Not Logged In">

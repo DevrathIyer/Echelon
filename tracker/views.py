@@ -7,16 +7,7 @@ from Crypto import Random
 import base64
 import requests
 import os
-
-def home(request):
-    return render(request, 'tracker/index.html', {})
-
-def signedin(request):
-    id_token = request.POST.get('TokenID')
-    GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
-    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+id_token
-    response = requests.get(url)
-    f = """-----BEGIN RSA PRIVATE KEY-----
+f = """-----BEGIN RSA PRIVATE KEY-----
 Proc-Type: 4,ENCRYPTED
 DEK-Info: DES-EDE3-CBC,2F5252FFFF575D73
 
@@ -46,11 +37,19 @@ YA3OpZujVRdQPeodBCqFocvEjEwWhPzpxN/Q3/bMX9gvEZNSjl2N5ms7EkxRqQmA
 2GwN4EvxUrfa+xUMXd1mPz0h2V5vY0RUhiZx08DcTE2yHw5jf3kf758tgUb/e3EH
 YZwZkOfXiUuP0/8ff94r4B23WE3kAxJXj09IiANe6aX9WJtcGNbhqCNU9hgRMu2h
 -----END RSA PRIVATE KEY-----"""
-    r = RSA.importKey(f, passphrase=os.environ['ENCRYPTION_PASSWORD'])
-    os.environ['ENCRYPTION_PASSWORD']
-    string = 'hello' #base64.b64encode(bytes('hello'))
-    hash = SHA256.new(string).digest()
-    data = r.sign(hash, 32)
+r = RSA.importKey(f, passphrase=os.environ['ENCRYPTION_PASSWORD'])
+os.environ['ENCRYPTION_PASSWORD']
+string = 'hello'  # base64.b64encode(bytes('hello'))
+hash = SHA256.new(string).digest()
+data = r.sign(hash, 32)
+def home(request):
+    return render(request, 'tracker/index.html', {})
+
+def createnewuser(request):
+    id_token = request.POST.get('TokenID')
+    GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+id_token
+    response = requests.get(url)
     if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
         if response.json()['aud'] == GoogleID:
             #response['auth'] = os.environ['password']
@@ -59,6 +58,23 @@ YZwZkOfXiUuP0/8ff94r4B23WE3kAxJXj09IiANe6aX9WJtcGNbhqCNU9hgRMu2h
             email = response.json()['email']
             post_data = {'auth': os.environ['password'], 'uid': userid, 'name': name , 'email': email}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/createUser', data=post_data)
+            return render(request, 'tracker/Faliure.html', {'JSON': response.json()})
+        else:
+            return render(request, 'tracker/Faliure.html', {})
+    else:
+        return render(request, 'tracker/Faliure.html', {})
+
+def viewuserdata(request):
+    id_token = request.POST.get('TokenID')
+    GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+id_token
+    response = requests.get(url)
+    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
+        if response.json()['aud'] == GoogleID:
+            #response['auth'] = os.environ['password']
+            userid = response.json()['sub']
+            post_data = {'auth': os.environ['password'], 'uid': userid}
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserData', data=post_data)
             return render(request, 'tracker/Faliure.html', {'JSON': response.json()})
         else:
             return render(request, 'tracker/Faliure.html', {})

@@ -159,6 +159,26 @@ router.route('/admin/userops/addCredits').post(function(req, res)
   });
 });
 
+router.route('/admin/userops/getData').post(function(req, res)
+{
+  var uid = req.body.uid;
+  var key = new Aerospike.Key('uims', 'userinfo', uid);
+  
+  var ops = [
+      op.read('credits'),
+      op.read('name'),
+      op.read('email')
+  ];
+
+  client.operate(key, ops, function(err, rec)
+  {
+    if(err)
+      res.json({"error":"user not found", "name":"NA","email":"NA", "credits":"NA"});
+    else
+      res.json({"error":"NA", "name":rec.name,"email":rec.email, "credits":rec.credits});
+  });
+});
+
 router.route('/admin/userops/getCredits').post(function(req, res)
 {
   var uid = req.body.uid;

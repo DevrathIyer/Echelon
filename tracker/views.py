@@ -47,14 +47,15 @@ YA3OpZujVRdQPeodBCqFocvEjEwWhPzpxN/Q3/bMX9gvEZNSjl2N5ms7EkxRqQmA
 YZwZkOfXiUuP0/8ff94r4B23WE3kAxJXj09IiANe6aX9WJtcGNbhqCNU9hgRMu2h
 -----END RSA PRIVATE KEY-----"""
     r = RSA.importKey(f, passphrase=os.environ['ENCRYPTION_PASSWORD'])
+    os.environ['ENCRYPTION_PASSWORD']
     string = 'hello' #base64.b64encode(bytes('hello'))
     hash = SHA256.new(string).digest()
     data = r.sign(hash, 32)
-    post_data = {'command': string, 'signature': data}
+    post_data = {'auth':os.environ['password']}
     """response.json()['aud'] == GoogleID:"""
     if 1==1:
         response['auth'] = os.environ['password']
-        response = requests.post('http://echelon-nn.herokuapp.com/admin/test', data=post_data)
+        response = requests.post('https://echelon-nn.herokuapp.com/admin/test', data=post_data)
         return render(request, 'tracker/Faliure.html', {'JSON': data})
     else:
         return render(request, 'tracker/Faliure.html', {})

@@ -246,10 +246,9 @@ router.route('admin/userops/createNewProject').post(function(req, res)
 
 router.route('/admin/test').post(function(req, res)
 {
-  var password = process.env.HTTPS_AUTH.toString();
-  var auth = req.body.auth.toString();  
-  var access = password.localeCompare(auth);
+  res.json({"message":"you in!"});
 });
+
 // =============================================================================
 
 var authenticateAdmin = function(req, res, next)

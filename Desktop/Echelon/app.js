@@ -249,7 +249,7 @@ router.route('/admin/test').post(function(req, res)
   var password = process.env.HTTPS_AUTH.toString();
   var auth = req.body.auth.toString();
   
-  var access = password.localCompare(auth);
+  var access = password.localeCompare(auth);
 
   console.log("auth: "+auth+"\npass: "+password);
   console.log(access);

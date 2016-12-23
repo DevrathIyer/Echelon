@@ -244,7 +244,7 @@ router.route('admin/userops/createNewProject').post(function(req, res)
   });
 });
 
-router.route('/admin/test').post(function(req, res)
+router.route('/admin/test').get(function(req, res)
 {
   /*var password = process.env.HTTPS_AUTH;
   var auth = req.get(auth);
@@ -255,9 +255,8 @@ router.route('/admin/test').post(function(req, res)
   console.log(access);
   res.json({"access":access});*/
 
-  var number = req.body.number;
-  res.json({"number":number});
-  
+  res.json({"message":"Hello world"});
+
 });
 // =============================================================================
 app.use('/', router);

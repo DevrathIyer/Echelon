@@ -85,8 +85,15 @@ var authenticateAdmin = function(req, res, next)
   var password = process.env.HTTPS_AUTH.toString();
   var auth = req.body.auth.toString();  
   var access = password.localeCompare(auth);
-  console.log(access);
-  next();
+  if(access==0)
+  {
+    console.log(req.connection.remoteAddress);
+    next();
+  }
+  else
+  {
+    res.json({"error":"access denied"});
+  }
 }
 
 router.use('/admin', authenticateAdmin);

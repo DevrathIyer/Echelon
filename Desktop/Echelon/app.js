@@ -166,8 +166,8 @@ router.route('/admin/userops/getUserData').post(function(req, res)
   
   var ops = [
       op.read('credits'),
-      op.read('name'),
-      op.read('email')
+      op.read('user_name'),
+      op.read('email_address')
   ];
 
   client.operate(key, ops, function(err, rec)
@@ -175,7 +175,7 @@ router.route('/admin/userops/getUserData').post(function(req, res)
     if(err)
       res.json({"error":"user not found", "name":"NA","email":"NA", "credits":"NA"});
     else
-      res.json({"error":"NA", "name":rec.name,"email":rec.email, "credits":rec.credits});
+      res.json({"error":"NA", "name":rec.user_name,"email":rec.email_address, "credits":rec.credits});
   });
 });
 

@@ -247,16 +247,23 @@ router.route('admin/userops/createNewProject').post(function(req, res)
 router.route('/admin/test').post(function(req, res)
 {
   var password = process.env.HTTPS_AUTH.toString();
-  var auth = req.body.auth.toString();
-  
+  var auth = req.body.auth.toString();  
   var access = password.localeCompare(auth);
-
-  console.log("auth: "+auth+"\npass: "+password);
-  console.log(access);
-  res.json({"access":access});
-
 });
 // =============================================================================
+
+var authenticateAdmin = function(req, res, next)
+{
+  var password = process.env.HTTPS_AUTH.toString();
+  var auth = req.body.auth.toString();  
+  var access = password.localeCompare(auth);
+  console.log(access);
+  next();
+}
+
+router.use('/admin', authenticateAdmin);
+
 app.use('/', router);
+
 http.createServer(app).listen(port);
 console.log("Listening on port: "+port);

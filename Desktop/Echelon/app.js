@@ -80,6 +80,23 @@ function checkCredits(cost, uid)
     });
 }
 
+function validateAPIKey(projectID, key)
+{
+  var key = Aerospike.key('pims','projectinfo', projectID);
+  client.get(key, function(error, record, metadata)
+    {
+      if(error)
+        return false;
+      else
+      {
+        if(bcrypt.compareSync(key, record.api_key))
+          return true;
+        else
+          return false;
+      }
+    });
+}
+
 var authenticateAdmin = function(req, res, next)
 {
   var password = process.env.HTTPS_AUTH.toString();
@@ -106,33 +123,39 @@ router.route('/api/weights').get(function(req, res)
 
 router.route('/api/submit-training-data').post(function(req, res)
 {
-    var sampleID = req.body.sampleID;
-    var username = req.body.username;
-    var data = req.body.data;
+    var projectid = req.body.projectid;
+    var apikey = req.body.key;
 
-    var key = new Aerospike.Key('data', username, sampleID);
-    var rec = 
+    if(validateAPIKey(projectid, key))
     {
-      user: username,
-      sample_id: sampleID,
-      dataset: data
-    }
+      var sampleID = req.body.sampleID;
+      var datapoint = req.body.datapoint;
 
-    console.log("Trying to push data...");
-
-    client.put(key, rec, function(error)
-    {
-      if(error)
+      var key = new Aerospike.Key('dims', projectid, sampleID);
+      var rec = 
       {
-        console.log("Error pushing data.");
-      }else{
-        console.log("Data pushed successfully.");
+        id: sampleID,
+        data: datapoint
       }
-    });
 
-    res.json({"message":"data added"});
+      console.log("Trying to push data...");
 
-});
+      client.put(key, rec, function(error)
+      {
+        if(error)
+        {
+          console.log("Error pushing data.");
+        }else{
+          console.log("Data pushed successfully.");
+        }
+      });
+
+      res.json({"message":"data added"});
+
+      }else{
+        res.json({"message":"access denied"})
+      }
+  });
 
 router.route('/api/train').get(function(req,res)
 {
@@ -241,13 +264,17 @@ router.route('admin/userops/createNewProject').post(function(req, res)
   var uid = req.body.uid;
   var projectid = req.body.projectid;
   var apikey = req.body.apikey;
+  var numLayers = req.body.numlayers;
+  var neuronsPerLayer = req.body.neurons;
 
   var key = new Aerospike.Key('pims', 'projectinfo', projectid);
   var rec = 
   {
     user_id: uid,
     project_id: projectid,
-    api_key: apikey
+    api_key: apikey,
+    num_layers: numlayers,
+    neurons: neuronsPerLayer
   }
 
   client.get(key, function(error, record, metadata)
@@ -277,7 +304,7 @@ router.route('admin/userops/createNewProject').post(function(req, res)
 
 router.route('/admin/test').post(function(req, res)
 {
-  res.json({"message":"you in!"});
+  res.json({"passkey":bcrypt.hash(req.body.key)});
 });
 
 // =============================================================================

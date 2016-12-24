@@ -70,7 +70,7 @@ function checkCredits(cost, uid)
     {
       if(error)
       {
-        console.log("user not found");
+        console.log("user not found"+", uid: "+uid);
         return false;
       }
       else

@@ -242,53 +242,57 @@ router.route('/admin/userops/createNewProject').post(function(req, res)
   var apikey = req.body.apikey;
   var numLayers = req.body.numlayers;
   var neuronsPerLayer = req.body.nodes;
-
-  var key = new Aerospike.Key('pims', 'projectinfo', projectid);
-  var rec = 
+  if(neuronsPerLayer.split(",").length!=numLayers)
+    res.json({"message":"Neuron and layer counts do not match!"});
+  else
   {
-    user_id: uid,
-    project_id: projectid,
-    api_key: apikey,
-    num_layers: numLayers,
-    neurons: neuronsPerLayer
-  }
-
-  client.get(key, function(error, record, metadata)
-  {
-    if(error)
+    var key = new Aerospike.Key('pims', 'projectinfo', projectid);
+    var rec = 
     {
-      var key2 = Aerospike.key('uims', 'userinfo', uid);
-      client.get(key2, function(error2, record2, metadata2)
-        {
-          if(parseInt(record2.credits)>=CREATE_PROJECT)
+      user_id: uid,
+      project_id: projectid,
+      api_key: apikey,
+      num_layers: numLayers,
+      neurons: neuronsPerLayer
+    }
+
+    client.get(key, function(error, record, metadata)
+    {
+      if(error)
+      {
+        var key2 = Aerospike.key('uims', 'userinfo', uid);
+        client.get(key2, function(error2, record2, metadata2)
           {
-           client.put(key, rec, function(err)
+            if(parseInt(record2.credits)>=CREATE_PROJECT)
             {
-              if(err)
+             client.put(key, rec, function(err)
               {
-                res.json({"message":"error creating project"});
-              }else{
-               var ops = [
-                op.incr('credits',-1*CREATE_PROJECT)
-                ];
-
-                client.operate(key2, ops, function(err, rec)
+                if(err)
                 {
-                 res.json({"message":"project created"});
-                });
-              }
-            });
-          }
-          else
-            res.json({"message":"not enough credits"});
-        });
-    }
-    else
-    {
-      console.info(record);
-      res.json({"message":"Project name taken"});
-    }
-  });
+                  res.json({"message":"error creating project"});
+                }else{
+                 var ops = [
+                  op.incr('credits',-1*CREATE_PROJECT)
+                  ];
+
+                  client.operate(key2, ops, function(err, rec)
+                  {
+                   res.json({"message":"project created"});
+                  });
+                }
+              });
+            }
+            else
+              res.json({"message":"not enough credits"});
+          });
+      }
+      else
+      {
+        console.info(record);
+        res.json({"message":"Project name taken"});
+      }
+    });
+  }
 });
 
 router.route('/admin/userops/editProject').post(function(req, res)
@@ -299,21 +303,23 @@ router.route('/admin/userops/editProject').post(function(req, res)
 
   if(neuronsPerLayer.split(",").length!=numLayers)
     res.json({"message":"Neuron and layer counts do not match!"});
-  
-  var key = new Aerospike.Key('pims', 'projectinfo', projectid);
-  var rec = 
+  else
   {
-    num_layers: numLayers,
-    neurons: neuronsPerLayer
-  }
+    var key = new Aerospike.Key('pims', 'projectinfo', projectid);
+    var rec = 
+    {
+      num_layers: numLayers,
+      neurons: neuronsPerLayer
+    }
 
- client.put(key, rec, function(err)
- {
-    if(err)
-      res.json({"message":"error updating project"});
-    else
-      res.json({"message":"project updated"});
- });
+   client.put(key, rec, function(err)
+   {
+      if(err)
+        res.json({"message":"error updating project"});
+      else
+        res.json({"message":"project updated"});
+   });
+ }
 });
 
 router.route('/admin/userops/getProjectInfo').post(function(req, res)

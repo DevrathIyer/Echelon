@@ -306,7 +306,7 @@ router.route('/admin/userops/editProject').post(function(req, res)
 
  client.put(key, rec, function(err)
  {
-    if(error)
+    if(err)
       res.json({"message":"error updating project"});
     else
       res.json({"message":"project updated"});

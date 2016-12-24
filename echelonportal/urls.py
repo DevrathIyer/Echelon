@@ -19,7 +19,7 @@ from home import views
 #from tracker import views as views2
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',views.index,name = 'home'),
+    url(r'^home/',views.index,name='home'),
 #    url(r'^login', views2.login, name = 'login'),
 #    url(r'^signup', views2.signup, name = 'signup'),
 #    url(r'^newuser', views2.createnewuser, name = 'createnewuser'),

@@ -16,12 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from home import views as views1
-from tracker import views as views2
+#from tracker import views as views2
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',views1.index,name = 'home'),
-    url(r'^login', views2.login, name = 'login'),
-    url(r'^signup', views2.signup, name = 'signup'),
-    url(r'^newuser', views2.createnewuser, name = 'createnewuser'),
-    url(r'^signedin', views2.viewuserdata, name = 'viewuserdata'),
+#    url(r'^login', views2.login, name = 'login'),
+#    url(r'^signup', views2.signup, name = 'signup'),
+#    url(r'^newuser', views2.createnewuser, name = 'createnewuser'),
+#    url(r'^signedin', views2.viewuserdata, name = 'viewuserdata'),
 ]

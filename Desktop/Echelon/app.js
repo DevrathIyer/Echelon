@@ -65,26 +65,7 @@ function decrypt(text)
 
 function checkCredits(cost, uid)
 {
-  var key = Aerospike.key('uims', 'userinfo', uid);
-  client.get(key, function(error, record, metadata)
-    {
-      if(error)
-      {
-        console.log("user not found"+", uid: "+uid);
-       return false;
-      }
-      else
-      {
-        console.log(record.credits+" , "+cost);
-        if(parseInt(record.credits)>=cost)
-        {
-          console.log("returning true");
-         return true;
-        }
-        else
-          return false;
-      }
-    });
+
 }
 
 function validateAPIKey(projectID, key)
@@ -291,20 +272,25 @@ router.route('/admin/userops/createNewProject').post(function(req, res)
   {
     if(error)
     {
-      if(checkCredits(CREATE_PROJECT, uid))
-      {
-        client.put(key, rec, function(err)
+      var key2 = Aerospike.key('uims', 'userinfo', uid);
+      client.get(key2, function(error2, record2, metadata2)
         {
-          if(err)
+          if(parseInt(record2.credits)>=cost)
           {
-            res.json({"message":"error creating project"});
-          }else{
-            res.json({"message":"project created"});
+           client.put(key, rec, function(err)
+            {
+              if(err)
+              {
+                res.json({"message":"error creating project"});
+              }else{
+                res.json({"message":"project created"});
+              }
+            });
+          }
+          else
+            res.json({"message":"not enough credits"});
           }
         });
-      }else{
-          res.json({"message":"not enough credits"});
-      }
     }
     else
     {

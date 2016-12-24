@@ -77,7 +77,10 @@ function checkCredits(cost, uid)
       {
         console.log(record.credits+" , "+cost);
         if(parseInt(record.credits)>=cost)
+        {
+          console.log("returning true");
          return true;
+        }
         else
           return false;
       }

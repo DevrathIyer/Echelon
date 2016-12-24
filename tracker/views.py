@@ -45,6 +45,12 @@ data = r.sign(hash, 32)
 def home(request):
     return render(request, 'tracker/index.html', {})
 
+def login(request):
+    return render(request, 'tracker/Login.html', {})
+
+def signup(request):
+    return render(request, 'tracker/NewUser.html', {})
+
 def createnewuser(request):
     id_token = request.POST.get('TokenID')
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"

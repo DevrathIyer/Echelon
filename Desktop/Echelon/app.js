@@ -75,7 +75,7 @@ function checkCredits(cost, uid)
       }
       else
       {
-        cosnole.log(record.credits+" , "+cost);
+        console.log(record.credits+" , "+cost);
         if(parseInt(record.credits)>=cost)
           return true;
         else

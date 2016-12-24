@@ -275,7 +275,7 @@ router.route('/admin/userops/createNewProject').post(function(req, res)
       var key2 = Aerospike.key('uims', 'userinfo', uid);
       client.get(key2, function(error2, record2, metadata2)
         {
-          if(parseInt(record2.credits)>=cost)
+          if(parseInt(record2.credits)>=CREATE_PROJECT)
           {
            client.put(key, rec, function(err)
             {

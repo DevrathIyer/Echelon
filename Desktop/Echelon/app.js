@@ -69,7 +69,10 @@ function checkCredits(cost, uid)
   client.get(key, function(error, record, metadata)
     {
       if(error)
+      {
+        console.log("user not found");
         return false;
+      }
       else
       {
         if(record.credits>=cost)

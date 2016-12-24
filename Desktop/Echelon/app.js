@@ -65,22 +65,7 @@ function decrypt(text)
 
 function validateAPIKey(projectID, key)
 {
-  var key = Aerospike.key('pims','projectinfo', projectID);
-  client.get(key, function(error, record, metadata)
-    {
-      if(error)
-      {
-        console.log("user not found");
-        return false;
-        
-      }else
-      {
-        if(bcrypt.compareSync(key, record.api_key))
-          return true;
-        else
-          return false;
-      }
-    });
+  
 }
 
 var authenticateAdmin = function(req, res, next)
@@ -109,43 +94,48 @@ router.route('/api/weights').get(function(req, res)
 
 router.route('/api/submit-training-data').post(function(req, res)
 {
-    var projectid = req.body.projectid;
-    var apikey = req.body.key;
-
-    if(validateAPIKey(projectid, key))
+  var projectid = req.body.projectid;
+  var apikey = req.body.key;
+  var key1 = Aerospike.key('pims','projectinfo', projectid);
+  client.get(key1, function(error, record, metadata)
+  {
+    if(error)
     {
-      var sampleID = req.body.sampleID;
-      var datapoint = req.body.datapoint;
-
-      var key = new Aerospike.Key('dims', projectid, sampleID);
-      var rec = 
+      res.json({"message":"project not found"});
+    }else
+    {
+      if(bcrypt.compareSync(apikey, record.api_key))
       {
-        id: sampleID,
-        data: datapoint
-      }
+        var sampleID = req.body.sampleID;
+        var datapoint = req.body.datapoint;
 
-      console.log("Trying to push data...");
-
-      client.put(key, rec, function(error)
-      {
-        if(error)
+        var key2 = new Aerospike.Key('dims', projectid, sampleID);
+        var rec = 
         {
-          console.log("Error pushing data.");
-        }else{
-          console.log("Data pushed successfully.");
+          id: sampleID,
+          data: datapoint
         }
-      });
 
-      res.json({"message":"data added"});
-
-      }else{
-        res.json({"message":"access denied"})
+        client.put(key2, rec, function(error)
+        {
+          if(error)
+          {
+            res.json({"message":"error pushing data"});
+          }else{
+            res.json({"message":"data pushed successfully"});
+          }
+        });
       }
+      else
+      {
+        res.json({"message":"invalid key"});
+      }
+    }
   });
+});
 
 router.route('/api/train').get(function(req,res)
 {
-
 });
 
 router.route('/admin/userops/addCredits').post(function(req, res)
@@ -300,6 +290,44 @@ router.route('/admin/userops/createNewProject').post(function(req, res)
     }
   });
 });
+
+router.route('/admin/userops/editProject').post(function(req, res)
+{
+  var projectid = req.body.projectid;
+  var numLayers = req.body.numlayers;
+  var neuronsPerLayer = req.body.nodes;
+
+  var key = new Aerospike.Key('pims', 'projectinfo', projectid);
+  var rec = 
+  {
+    num_layers: numLayers,
+    neurons: neuronsPerLayer
+  }
+
+ client.put(key, rec, function(err)
+ {
+    if(error)
+      res.json({"message":"error updating project"});
+    else
+      res.json({"message":"project updated"});
+ });
+});
+
+router.route('/admin/userops/getProjectInfo').post(function(req, res)
+{
+  var projectid = req.body.projectid;
+  var key = new Aerospike.Key('pims', 'projectinfo', projectid);
+  client.get(key, function(error, record, metadata)
+  {
+    if(error)
+      res.json({"message":"could not get project info"});
+    else
+    {
+      res.json({"Project ID":record.project_id, "Layers":record.num_layers, "Neurons per Layer":record.neurons});
+    }
+  });
+});
+
 
 router.route('/admin/test').post(function(req, res)
 {

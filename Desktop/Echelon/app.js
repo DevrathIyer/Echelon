@@ -297,6 +297,9 @@ router.route('/admin/userops/editProject').post(function(req, res)
   var numLayers = req.body.numlayers;
   var neuronsPerLayer = req.body.nodes;
 
+  if(neuronsPerLayer.split(",").length!=numLayers)
+    res.json({"message":"Neuron and layer counts do not match!"});
+  
   var key = new Aerospike.Key('pims', 'projectinfo', projectid);
   var rec = 
   {

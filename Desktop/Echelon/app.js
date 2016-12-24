@@ -274,7 +274,7 @@ router.route('/admin/userops/createNewProject').post(function(req, res)
     project_id: projectid,
     api_key: apikey,
     num_layers: numLayers,
-    neurons: neuronsPerLayer
+    neurons_per_layer: neuronsPerLayer
   }
 
   client.get(key, function(error, record, metadata)

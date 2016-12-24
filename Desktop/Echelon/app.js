@@ -281,18 +281,20 @@ router.route('/admin/userops/createNewProject').post(function(req, res)
   {
     if(error)
     {
-      client.put(key, rec, function(err)
+      if(checkCredits(CREATE_PROJECT, uid))
       {
-        if(err)
+        client.put(key, rec, function(err)
         {
-          res.json({"message":"error creating project"});
-        }else{
-          if(checkCredits(CREATE_PROJECT, uid))
+          if(err)
+          {
+            res.json({"message":"error creating project"});
+          }else{
             res.json({"message":"project created"});
-          else
-            res.json({"message":"not enough credits"});
-        }
-      });
+          }
+        });
+      }else{
+          res.json({"message":"not enough credits"});
+      }
     }
     else
     {

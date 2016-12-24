@@ -259,7 +259,7 @@ router.route('/admin/userops/createUser').post(function(req, res)
   });
 });
 
-router.route('/admin/userops/createNewProject').post(function(req, res)
+router.route('admin/userops/createNewProject').post(function(req, res)
 {
   var uid = req.body.uid;
   var projectid = req.body.projectid;

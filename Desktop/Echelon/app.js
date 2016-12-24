@@ -265,7 +265,7 @@ router.route('/admin/userops/createNewProject').post(function(req, res)
   var projectid = req.body.projectid;
   var apikey = req.body.apikey;
   var numLayers = req.body.numlayers;
-  var neuronsPerLayer = req.body.neurons;
+  var neuronsPerLayer = req.body.nodes;
 
   var key = new Aerospike.Key('pims', 'projectinfo', projectid);
   var rec = 
@@ -274,7 +274,7 @@ router.route('/admin/userops/createNewProject').post(function(req, res)
     project_id: projectid,
     api_key: apikey,
     num_layers: numLayers,
-    neurons_per_layer: neuronsPerLayer
+    neurons: neuronsPerLayer
   }
 
   client.get(key, function(error, record, metadata)

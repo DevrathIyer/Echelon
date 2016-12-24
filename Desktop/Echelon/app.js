@@ -110,6 +110,7 @@ router.route('/api/submit-training-data').post(function(req, res)
         var datapoint = req.body.datapoint;
 
         var requiredLength = record.neurons.split(",")[0]+record.neurons.split(",")[record.neurons.split(",").length-1];
+        console.log("required length: "+requiredLength);
         if(datapoint.split(",").length!=requiredLength)
           res.json({"message": "not enough information"});
         else

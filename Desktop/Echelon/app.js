@@ -63,11 +63,6 @@ function decrypt(text)
   return client_decrypted.toString("utf8");
 }
 
-function checkCredits(cost, uid)
-{
-
-}
-
 function validateAPIKey(projectID, key)
 {
   var key = Aerospike.key('pims','projectinfo', projectID);
@@ -283,7 +278,14 @@ router.route('/admin/userops/createNewProject').post(function(req, res)
               {
                 res.json({"message":"error creating project"});
               }else{
-                res.json({"message":"project created"});
+               var ops = [
+                op.incr('credits',-1*CREATE_PROJECT)
+                ];
+
+                client.operate(key2, ops, function(err, rec)
+                {
+                 res.json({"message":"project created"});
+                });
               }
             });
           }

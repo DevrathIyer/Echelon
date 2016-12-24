@@ -109,22 +109,28 @@ router.route('/api/submit-training-data').post(function(req, res)
         var sampleID = req.body.sampleID;
         var datapoint = req.body.datapoint;
 
-        var key2 = new Aerospike.Key('dims', projectid, sampleID);
-        var rec = 
+        var requiredLength = record.neurons.split(",")[0]+record.neurons.split(",")[record.neurons.split(",").length-1];
+        if(datapoint.split(",").length!=requiredLength)
+          res.json({"message": "not enough information"});
+        else
         {
-          id: sampleID,
-          data: datapoint
-        }
-
-        client.put(key2, rec, function(error)
-        {
-          if(error)
+          var key2 = new Aerospike.Key('dims', projectid, sampleID);
+          var rec = 
           {
-            res.json({"message":"error pushing data"});
-          }else{
-            res.json({"message":"data pushed successfully"});
+            id: sampleID,
+            data: datapoint
           }
-        });
+
+          client.put(key2, rec, function(error)
+          {
+            if(error)
+            {
+              res.json({"message":"error pushing data"});
+            }else{
+              res.json({"message":"data pushed successfully"});
+            }
+          });
+        }
       }
       else
       {

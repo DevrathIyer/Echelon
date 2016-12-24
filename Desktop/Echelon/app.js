@@ -66,24 +66,22 @@ function decrypt(text)
 function checkCredits(cost, uid)
 {
   var key = Aerospike.key('uims', 'userinfo', uid);
-  var hasCreds = false;
   client.get(key, function(error, record, metadata)
     {
       if(error)
       {
         console.log("user not found"+", uid: "+uid);
-        hasCreds = false;
+       return false;
       }
       else
       {
         console.log(record.credits+" , "+cost);
         if(parseInt(record.credits)>=cost)
-         hasCreds = true;
+         return true;
         else
-          hasCreds = false;
+          return false;
       }
     });
-  return hasCreds;
 }
 
 function validateAPIKey(projectID, key)

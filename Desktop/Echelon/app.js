@@ -86,8 +86,11 @@ function validateAPIKey(projectID, key)
   client.get(key, function(error, record, metadata)
     {
       if(error)
+      {
+        console.log("user not found");
         return false;
-      else
+        
+      }else
       {
         if(bcrypt.compareSync(key, record.api_key))
           return true;

@@ -107,10 +107,9 @@ router.route('/api/viewData').post(function(req, res)
       if(bcrypt.compareSync(apikey, record.api_key))
       {
         var yourData = {"projectid": projectid};
-        var scan = client.scan('dims', projectid)
-        scan.nobins = false
+        var query = client.query('dims', projectid)
 
-        var stream = scan.foreach()
+        var stream = query.foreach()
         stream.on('data', function(record)
         {
           var id = record.sampleID
@@ -118,7 +117,7 @@ router.route('/api/viewData').post(function(req, res)
         })
         stream.on('error', function(error)
         {
-
+          console.log("there was an error");
         })
         stream.on('end', function()
         {

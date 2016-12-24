@@ -92,6 +92,45 @@ router.route('/api/weights').get(function(req, res)
   
 });
 
+router.route('/api/viewData').post(function(req, res)
+{
+  var projectid = req.body.projectid;
+  var apikey = req.body.key;
+  var key1 = Aerospike.key('pims','projectinfo', projectid);
+  client.get(key1, function(error, record, metadata)
+  {
+    if(error)
+    {
+      res.json({"message":"project not found"});
+    }else
+    {
+      if(bcrypt.compareSync(apikey, record.api_key))
+      {
+        var yourData = {"projectid": projectid};
+        var scan = client.scan('dims', projectid);
+        var stream = scan.foreach();
+        stream.on('data', function(record)
+        {
+          var id = record.sampleID;
+          yourData.id = {"value": record.datapoint};
+        });
+        stream.on('error', function(error)
+        {
+
+        });
+        stream.on('end', function()
+        {
+            res.json(yourData);
+        });
+      }
+      else
+      {
+        res.json({"message":"invalid key"});
+      }
+    }
+  });
+});
+
 router.route('/api/submit-training-data').post(function(req, res)
 {
   var projectid = req.body.projectid;

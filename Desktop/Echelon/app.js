@@ -304,7 +304,8 @@ router.route('admin/userops/createNewProject').post(function(req, res)
 
 router.route('/admin/test').post(function(req, res)
 {
-  res.json({"passkey":bcrypt.hash(req.body.key)});
+  var hash = bcrypt.hash(req.body.key);
+  res.json({"passkey":hash});
 });
 
 // =============================================================================

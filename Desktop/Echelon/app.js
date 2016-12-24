@@ -289,7 +289,6 @@ router.route('/admin/userops/createNewProject').post(function(req, res)
           }
           else
             res.json({"message":"not enough credits"});
-          }
         });
     }
     else

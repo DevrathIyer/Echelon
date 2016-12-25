@@ -108,7 +108,7 @@ router.route('/api/viewData').post(function(req, res)
       {
         var scan  = client.scan('dims', projectid);
         var stream = scan.foreach();
-        stream.on('data', function(rec)
+        stream.on('data', function(rec)  
         {
           console.log("["+rec.id+"] "+rec.data);
           res.write("["+rec.id+"] "+rec.data+"\n");
@@ -204,6 +204,27 @@ router.route('/admin/userops/addCredits').post(function(req, res)
   });
 });
 
+rotuer.route('/admin/projectops/pushWeights').post(function(req, res)
+{
+  var projectid = req.body.projectid;
+  var the_weights = req.body.weights;
+  var trainingError = req.body.trainingError;
+
+  var key = new Aerospike.Key('pims', 'projectweights', projectid);
+  
+  var rec = 
+  {
+    weights: the_weights,
+    error: trainingError
+  }
+
+  client.put(key, rec, function(err)
+    {
+      if(err)
+        res.write("error");
+    });
+
+});
 router.route('/admin/userops/getUserData').post(function(req, res)
 {
   var uid = req.body.uid;

@@ -107,7 +107,8 @@ router.route('/api/viewData').post(function(req, res)
       if(bcrypt.compareSync(apikey, record.api_key))
       {
         var yourData = {"projectid": projectid};
-        var stream  = client.query('dims', projectid).execute();
+        var scan  = client.scan('dims', projectid);
+        var stream = scan.foreach();
         stream.on('data', function(record)
         {
           var id = record.id;

@@ -106,14 +106,12 @@ router.route('/api/viewData').post(function(req, res)
     {
       if(bcrypt.compareSync(apikey, record.api_key))
       {
-        var yourData = {"projectid": projectid};
         var scan  = client.scan('dims', projectid);
         var stream = scan.foreach();
         stream.on('data', function(rec)
         {
-          var id = rec.id;
-          yourData.id = {"value": rec.data};
-          console.log("["+id+"] "+rec.data);
+          console.log("["+rec.id+"] "+rec.data);
+          res.write("["+rec.id+"] "+rec.data);
         });
         stream.on('error', function(error)
         {
@@ -121,12 +119,13 @@ router.route('/api/viewData').post(function(req, res)
         });
         stream.on('end', function()
         {
-            res.json(yourData);
+            res.end();
         });
       }
       else
       {
         res.json({"message":"invalid key"});
+        res.end();
       }
     }
   });

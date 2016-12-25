@@ -107,22 +107,22 @@ router.route('/api/viewData').post(function(req, res)
       if(bcrypt.compareSync(apikey, record.api_key))
       {
         var yourData = {"projectid": projectid};
-        var query = client.query('dims', projectid).execute();
+        var query = client.query('dims', projectid).execute()
 
-        var stream = query.foreach();
+        var stream = query.foreach()
         stream.on('data', function(record)
         {
-          var id = record.sampleID;
-          yourData.id = {"value": record.datapoint};
-        });
+          var id = record.sampleID
+          yourData.id = {"value": record.datapoint}
+        })
         stream.on('error', function(error)
         {
           console.log("there was an error");
-        });
+        })
         stream.on('end', function()
         {
             res.json(yourData)
-        });
+        })
       }
       else
       {

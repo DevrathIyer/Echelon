@@ -109,10 +109,11 @@ router.route('/api/viewData').post(function(req, res)
         var yourData = {"projectid": projectid};
         var scan  = client.scan('dims', projectid);
         var stream = scan.foreach();
-        stream.on('data', function(record)
+        stream.on('data', function(rec)
         {
-          var id = record.id;
-          yourData.id = {"value": record.data};
+          var id = rec.id;
+          yourData.id = {"value": rec.data};
+          console.log("["+id+"] "+rec.data);
         });
         stream.on('error', function(error)
         {

@@ -111,7 +111,7 @@ router.route('/api/viewData').post(function(req, res)
         stream.on('data', function(record)
         {
           var id = record.sampleID
-          yourData.id = {"value": record.datapoint}
+          yourData.data = {"value": record.datapoint}
         })
         stream.on('error', function(error)
         {

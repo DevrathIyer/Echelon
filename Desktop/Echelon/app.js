@@ -107,20 +107,20 @@ router.route('/api/viewData').post(function(req, res)
       if(bcrypt.compareSync(apikey, record.api_key))
       {
         var yourData = {"projectid": projectid};
-        var stream  = client.query('dims', projectid).execute()
+        var stream  = client.query('dims', projectid).execute();
         stream.on('data', function(record)
         {
           var id = record.sampleID
-          yourData.data = {"value": record.datapoint}
-        })
+          yourData.data = {"value": record.datapoint.toString()}
+        });
         stream.on('error', function(error)
         {
           console.log("there was an error");
-        })
+        });
         stream.on('end', function()
         {
             res.json(yourData)
-        })
+        });
       }
       else
       {
@@ -381,7 +381,6 @@ router.route('/admin/userops/getProjectInfo').post(function(req, res)
     }
   });
 });
-
 
 router.route('/admin/test').post(function(req, res)
 {

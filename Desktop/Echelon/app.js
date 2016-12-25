@@ -111,7 +111,7 @@ router.route('/api/viewData').post(function(req, res)
         stream.on('data', function(rec)
         {
           console.log("["+rec.id+"] "+rec.data);
-          res.write("["+rec.id+"] "+rec.data);
+          res.write("["+rec.id+"] "+rec.data+"\n");
         });
         stream.on('error', function(error)
         {

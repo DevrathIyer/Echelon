@@ -110,8 +110,8 @@ router.route('/api/viewData').post(function(req, res)
         var stream  = client.query('dims', projectid).execute();
         stream.on('data', function(record)
         {
-          var id = record.sampleID;
-          yourData.data = {"value": record.datapoint.toString()};
+          var id = record.id;
+          yourData.id = {"value": record.data};
         });
         stream.on('error', function(error)
         {

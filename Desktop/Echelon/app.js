@@ -199,17 +199,26 @@ router.route('/api/train').post(function(req,res)
   var projectid = req.body.projectid;
   var numepochs = req.body.epochs;
   var algo = req.body.algo;
-
-  var exec = require('child_process').exec;
-  var child = exec('java -jar train.jar '+projectid+" "+numepochs+" "+algo, function(error, stdout, stderr)
+  var key2 = Aerospike.key('uims', 'userinfo', uid);
+  client.get(key2, function(error2, record2, metadata2)
   {
-    console.log(stdout);
-    if(error!=null)
-      console.log(stderr);
+    if(parseInt(record2.credits)>=CREATE_PROJECT)
+    {
+      var exec = require('child_process').exec;
+      var child = exec('java -jar train.jar '+projectid+" "+numepochs+" "+algo, function(error, stdout, stderr)
+      {
+        console.log(stdout);
+        if(error!=null)
+          console.log(stderr);
+        else
+          res.json({"message":"done!"});
+      });
+    }
     else
-      res.json({"message":"done!"});
+    {
+      res.json({"message":"not enough credits"});
+    }
   });
-
 });
 
 router.route('/api/pullWeights').post(function(req,res)
@@ -427,10 +436,16 @@ router.route('/admin/userops/createNewProject').post(function(req, res)
                  var ops = [
                   op.incr('credits',-1*CREATE_PROJECT)
                   ];
-
+                  var newList = record2.projectList +" "+projectid;
                   client.operate(key2, ops, function(err, rec)
                   {
-                   res.json({"message":"project created"});
+                    var newRec = {
+                      projects : newList
+                    }
+                    client.put(key2, newRec, function(err)
+                    {
+                       res.json({"message":"project created"});
+                    });
                   });
                 }
               });
@@ -494,6 +509,16 @@ router.route('/admin/test').post(function(req, res)
 {
   var hash = bcrypt.hashSync(req.body.key);
   res.json({"passkey":hash});
+});
+
+router.route('/admin/getUserProjects').post(function(req, res)
+{
+  var uid = req.body.uid;
+  var key = Aerospike.key('uims', 'userinfo', uid);
+  client.get(key, function(error, record, metadata)
+  {
+    res.json({"project list":record.projects});
+  });
 });
 
 // =============================================================================

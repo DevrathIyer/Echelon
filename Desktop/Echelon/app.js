@@ -204,7 +204,7 @@ router.route('/admin/userops/addCredits').post(function(req, res)
   });
 });
 
-rotuer.route('/admin/projectops/pushWeights').post(function(req, res)
+router.route('/admin/projectops/pushWeights').post(function(req, res)
 {
   var projectid = req.body.projectid;
   var the_weights = req.body.weights;

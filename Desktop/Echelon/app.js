@@ -216,7 +216,7 @@ router.route('/api/pullWeights').post(function(req,res)
                   op.incr('credits',-1*PULL_WEIGHTS)
                 ];
 
-                client.operate(key0, ops, function(err2 rec2)
+                client.operate(key0, ops, function(err2, rec2)
                 {
                   res.json({"weights":rec.weights, "error":rec.error});
                 });

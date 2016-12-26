@@ -18,7 +18,7 @@ from django.contrib import admin
 from tracker import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.home, name = 'login'),
+    url(r'^$', views.home, name = 'home'),
     url(r'^login', views.login, name = 'login'),
     url(r'^signup', views.signup, name = 'signup'),
     url(r'^newuser', views.createnewuser, name = 'createnewuser'),

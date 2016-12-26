@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0df7f327-dd2a-47ee-bd76-97627e883084" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tracker/static/tracker/main.css" afterPath="$PROJECT_DIR$/tracker/static/tracker/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tracker/templates/tracker/Homepage.html" afterPath="$PROJECT_DIR$/tracker/templates/tracker/Homepage.html" />
     </list>
     <ignored path="echelonportal.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,7 +54,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Homepage.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Homepage.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tracker/templates/tracker/Homepage.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="595">
@@ -75,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tracker/static/tracker/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
-              <caret line="3129" column="42" selection-start-line="3129" selection-start-column="42" selection-end-line="3129" selection-end-column="42" />
+            <state relative-caret-position="855">
+              <caret line="3982" column="1" selection-start-line="3982" selection-start-column="1" selection-end-line="3982" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -134,8 +133,8 @@
         <option value="$PROJECT_DIR$/echelonportal/urls.py" />
         <option value="$PROJECT_DIR$/tracker/views.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/tracker/static/tracker/main.css" />
         <option value="$PROJECT_DIR$/tracker/templates/tracker/Homepage.html" />
+        <option value="$PROJECT_DIR$/tracker/static/tracker/main.css" />
       </list>
     </option>
   </component>
@@ -834,14 +833,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tracker/static/tracker/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="3129" column="42" selection-start-line="3129" selection-start-column="42" selection-end-line="3129" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tracker/static/tracker/font-awesome.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -870,6 +861,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
           <caret line="35" column="91" selection-start-line="35" selection-start-column="91" selection-end-line="35" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tracker/static/tracker/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="855">
+          <caret line="3982" column="1" selection-start-line="3982" selection-start-column="1" selection-end-line="3982" selection-end-column="1" />
           <folding />
         </state>
       </provider>

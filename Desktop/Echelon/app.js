@@ -312,8 +312,8 @@ router.route('/admin/projectops/pushWeights').post(function(req, res)
         res.json({"message":"updated!"});
       }
     });
-
 });
+
 router.route('/admin/userops/getUserData').post(function(req, res)
 {
   var uid = req.body.uid;

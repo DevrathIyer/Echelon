@@ -43,6 +43,9 @@ string = 'hello'  # base64.b64encode(bytes('hello'))
 hash = SHA256.new(string).digest()
 data = r.sign(hash, 32)
 
+def home(request):
+    return render(request, 'tracker/Home.html', {})
+
 def login(request):
     return render(request, 'tracker/Login.html', {})
 

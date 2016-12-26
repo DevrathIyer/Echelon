@@ -222,6 +222,8 @@ router.route('/admin/projectops/pushWeights').post(function(req, res)
     {
       if(err)
         res.write("error");
+      else
+        res.write("updated!");
     });
 
 });

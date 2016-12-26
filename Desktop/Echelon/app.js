@@ -206,6 +206,8 @@ router.route('/api/train').post(function(req,res)
     console.log(stdout);
     if(error!=null)
       console.log(stderr);
+    else
+      res.json({"message":"done!"});
   });
 
 });

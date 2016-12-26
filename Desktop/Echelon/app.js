@@ -184,6 +184,37 @@ router.route('/api/train').get(function(req,res)
 {
 });
 
+router.route('/api/pullWeights').post(function(req,res)
+{
+  var projectid = req.body.projectid;
+  var apikey = req.body.key;
+  var key1 = Aerospike.key('pims','projectinfo', projectid);
+  client.get(key1, function(error, record, metadata)
+  {
+    if(error)
+    {
+      res.json({"message":"project not found"});
+    }else
+    {
+      if(bcrypt.compareSync(apikey, record.api_key))
+      {
+        var key2 = new Aerospike.Key('pims', 'projectweights', projectid);
+        client.get(key2, function(err, rec, metadata2)
+        {
+          if(err)
+            res.json({"message":"could not pull weights"});
+          else
+            res.json({"weights":rec.weights, "error":rec.error});
+        });
+      }
+      else
+      {
+        res.json({"message":"invalid key"});
+      }
+    }
+  });
+});
+
 router.route('/admin/userops/addCredits').post(function(req, res)
 {
   var uid = req.body.uid;

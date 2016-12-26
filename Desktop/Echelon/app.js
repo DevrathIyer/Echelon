@@ -210,7 +210,17 @@ router.route('/api/pullWeights').post(function(req,res)
               if(err)
                 res.json({"message":"could not pull weights"});
               else
-                res.json({"weights":rec.weights, "error":rec.error});
+              {
+                var ops = 
+                [
+                  op.incr('credits',-1*PULL_WEIGHTS)
+                ];
+
+                client.operate(key0, ops, function(err, rec)
+                {
+                  res.json({"weights":rec.weights, "error":rec.error});
+                });
+              }
             });
           }
           else

@@ -194,7 +194,7 @@ router.route('/api/submit-training-data').post(function(req, res)
   });
 });
 
-router.route('/api/train').get(function(req,res)
+router.route('/api/train').post(function(req,res)
 {
   var projectid = req.body.projectid;
   var numepochs = req.body.epochs;

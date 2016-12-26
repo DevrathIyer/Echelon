@@ -188,6 +188,7 @@ router.route('/api/pullWeights').post(function(req,res)
 {
   var projectid = req.body.projectid;
   var apikey = req.body.key;
+
   var key1 = Aerospike.key('pims','projectinfo', projectid);
   client.get(key1, function(error, record, metadata)
   {
@@ -196,21 +197,32 @@ router.route('/api/pullWeights').post(function(req,res)
       res.json({"message":"project not found"});
     }else
     {
-      if(bcrypt.compareSync(apikey, record.api_key))
+      var key0 = Aerospike.key('uims', 'userinfo', record.user_id);
+      client.get(key0, function(error2, record2, metadata2)
       {
-        var key2 = new Aerospike.Key('pims', 'projectweights', projectid);
-        client.get(key2, function(err, rec, metadata2)
+        if(parseInt(record2.credits)>=PULL_WEIGHTS)
         {
-          if(err)
-            res.json({"message":"could not pull weights"});
+          if(bcrypt.compareSync(apikey, record.api_key))
+          {
+            var key2 = new Aerospike.Key('pims', 'projectweights', projectid);
+            client.get(key2, function(err, rec, metadata2)
+            {
+              if(err)
+                res.json({"message":"could not pull weights"});
+              else
+                res.json({"weights":rec.weights, "error":rec.error});
+            });
+          }
           else
-            res.json({"weights":rec.weights, "error":rec.error});
-        });
-      }
-      else
-      {
-        res.json({"message":"invalid key"});
-      }
+          {
+            res.json({"message":"invalid key"});
+          }
+        }
+        else
+        {
+          res.json({"message":"not enough credits"});
+        }
+      });
     }
   });
 });

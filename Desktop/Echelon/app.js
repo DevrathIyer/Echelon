@@ -81,12 +81,6 @@ var authenticateAdmin = function(req, res, next)
 
 router.use('/admin', authenticateAdmin);
 
-
-router.route('/api/weights').get(function(req, res)
-{
-  
-});
-
 router.route('/api/viewData').post(function(req, res)
 {
   var projectid = req.body.projectid;
@@ -511,7 +505,7 @@ router.route('/admin/test').post(function(req, res)
   res.json({"passkey":hash});
 });
 
-router.route('/admin/getUserProjects').post(function(req, res)
+router.route('/admin/userops/getUserProjects').post(function(req, res)
 {
   var uid = req.body.uid;
   var key = Aerospike.key('uims', 'userinfo', uid);

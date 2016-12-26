@@ -196,6 +196,18 @@ router.route('/api/submit-training-data').post(function(req, res)
 
 router.route('/api/train').get(function(req,res)
 {
+  var projectid = req.body.projectid;
+  var numepochs = req.body.epochs;
+  var algo = req.body.algo;
+
+  var exec = require('child_process').exec;
+  var child = exec('java -jar train.jar '+projectid+" "+numepochs+" "+algo, function(error, stdout, stderr)
+  {
+    console.log(stdout);
+    if(error!=null)
+      console.log(stderr);
+  });
+
 });
 
 router.route('/api/pullWeights').post(function(req,res)
@@ -488,3 +500,4 @@ app.use('/', router);
 
 http.createServer(app).listen(port);
 console.log("Listening on port: "+port);
+

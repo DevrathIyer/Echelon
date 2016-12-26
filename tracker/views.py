@@ -44,7 +44,7 @@ hash = SHA256.new(string).digest()
 data = r.sign(hash, 32)
 
 def home(request):
-    return render(request, 'tracker/Login.html', {})
+    return render(request, 'tracker/Homepage.html', {})
 
 def login(request):
     return render(request, 'tracker/Login.html', {})

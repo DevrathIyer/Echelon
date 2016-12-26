@@ -63,11 +63,6 @@ function decrypt(text)
   return client_decrypted.toString("utf8");
 }
 
-function validateAPIKey(projectID, key)
-{
-  
-}
-
 var authenticateAdmin = function(req, res, next)
 {
   var password = process.env.HTTPS_AUTH.toString();

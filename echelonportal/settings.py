@@ -29,7 +29,6 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
-    'home.apps.HomeConfig',
     'tracker.apps.TrackerConfig',
     'django.contrib.admin',
     'django.contrib.auth',

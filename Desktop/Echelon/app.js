@@ -143,39 +143,58 @@ router.route('/api/submit-training-data').post(function(req, res)
       res.json({"message":"project not found"});
     }else
     {
-      if(bcrypt.compareSync(apikey, record.api_key))
+      var key0 = Aerospike.key('uims', 'userinfo', record.user_id);
+      client.get(key0, function(error2, record2, metadata2)
       {
-        var sampleID = req.body.sampleID;
-        var datapoint = req.body.datapoint;
+        if(parseInt(record2.credits)>=ADD_DATA)
+        {
+          if(bcrypt.compareSync(apikey, record.api_key))
+          {
+            var sampleID = req.body.sampleID;
+            var datapoint = req.body.datapoint;
 
-        var requiredLength = parseInt(record.neurons.split(",")[0])+parseInt(record.neurons.split(",")[record.neurons.split(",").length-1]);
-       
-        if(datapoint.split(",").length!=requiredLength)
-          res.json({"message": "not enough information"});
+            var requiredLength = parseInt(record.neurons.split(",")[0])+parseInt(record.neurons.split(",")[record.neurons.split(",").length-1]);
+           
+            if(datapoint.split(",").length!=requiredLength)
+              res.json({"message": "not enough information"});
+            else
+            {
+              var key2 = new Aerospike.Key('dims', projectid, sampleID);
+              var rec = 
+              {
+                id: sampleID,
+                data: datapoint
+              }
+
+              client.put(key2, rec, function(error)
+              {
+                if(error)
+                {
+                  res.json({"message":"error pushing data"});
+                }else{
+                  var ops = 
+                  [
+                    op.incr('credits',-1*ADD_DATA)
+                  ];
+
+                  client.operate(key0, ops, function(err2, rec2)
+                  {
+                    res.json({"message":"data pushed successfully"});
+                  });
+                }
+              });
+            }
+          }
+          else
+          {
+            res.json({"message":"invalid key"});
+          }
+        }
         else
         {
-          var key2 = new Aerospike.Key('dims', projectid, sampleID);
-          var rec = 
-          {
-            id: sampleID,
-            data: datapoint
-          }
-
-          client.put(key2, rec, function(error)
-          {
-            if(error)
-            {
-              res.json({"message":"error pushing data"});
-            }else{
-              res.json({"message":"data pushed successfully"});
-            }
-          });
+          res.json({"message":"not enough credits"});
         }
-      }
-      else
-      {
-        res.json({"message":"invalid key"});
-      }
+      });
     }
   });
 });

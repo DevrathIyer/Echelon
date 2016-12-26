@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Introspect by TEMPLATED</title>
+		<title>Echelon</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="google-signin-client_id" content="867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com">
@@ -16,6 +16,11 @@
         <link rel="stylesheet" type="text/css" href="{% static 'tracker/font-awesome-min.css' %}" />
 	</head>
 	<body>
+		<form id = "SignInForm" action="{% url 'viewuserdata' %}" method="post">
+		{% csrf_token %}
+			<input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">
+			<input type="hidden" id = "Email" name="Email" value="Not Logged In">
+		</form>
 
 		<!-- Header -->
 			<header id="header">
@@ -24,8 +29,14 @@
 					<nav id="nav">
 						<a href="">Home</a>
 						<a href="generic">About</a>
-						<a href="generic">Get started</a>
-                        <a href="login">Log in</a>
+						<a href="generic">Blog</a>
+						<div class="dropdown">
+							<a class="dropbtn">Login </a>
+							<div class="dropdown-content">
+                        		<meta name="google-signin-client_id" content="867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com">
+								<div class="g-signin2" data-onsuccess="onSignIn"></div>
+							</div>
+						</div>
 					</nav>
 				</div>
 			</header>
@@ -154,4 +165,13 @@
 			</section>
 
 	</body>
+<script>
+  function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    var id_token = googleUser.getAuthResponse().id_token;
+    document.getElementById("TokenID").value = id_token;
+    document.getElementById("Email").value = profile.getEmail();
+    document.getElementById("SignInForm").submit();
+}
+</script>
 </html>

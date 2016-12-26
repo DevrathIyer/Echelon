@@ -3127,7 +3127,7 @@
 			}
 
 		#header .logo {
-			font-family: 'Pacifico';
+			font-family: 'Pacifico', print;
 			display: inline-block;
 			height: inherit;
 			left: 0;

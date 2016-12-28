@@ -16,6 +16,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'tracker/font-awesome-min.css' %}" />
 	</head>
 	<body>
+	Hello
 		<form id = "SignInForm" action="{% url 'viewuserdata' %}" method="post">
 		{% csrf_token %}
 			<input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">

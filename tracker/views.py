@@ -54,7 +54,10 @@ def signup(request):
     return render(request, 'tracker/NewUser.html', {})
 
 def credits(request):
-    id_token = request.POST.get('TokenID')
+    try:
+        id_token = request.session['TokenID']
+    except:
+        return render(request, 'tracker/faliure.html',{'JSON':'Failed'})
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
     response = requests.get(url)

@@ -5,7 +5,7 @@
 <form id = "SignInForm" action="{% url 'viewuserdata' %}" method="post">
 {% csrf_token %}
     <input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">
-    <input type="hidden" id = "Email" name="Email" value="Not Logged In">
+    <input type="hidden" id = "User" name="User" value="Not Logged In">
 </form>
 <script>
   function signOut() {
@@ -18,7 +18,7 @@
     var profile = googleUser.getBasicProfile();
     var id_token = googleUser.getAuthResponse().id_token;
     document.getElementById("TokenID").value = id_token;
-    document.getElementById("Email").value = profile.getEmail();
+    document.getElementById("User").value = googleUser;
     document.getElementById("SignInForm").submit();
 }
 </script>

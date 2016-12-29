@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta charset="UTF-8">
     <title>Echelon</title>
 </head>
 <body>
-<button type="button" onclick="ClickMe()">Manage Credits</button>
+<button type="button" onclick="SubmitForm()">Manage Credits</button>
 {{Projects}}{{UserName}}{{UserCredits}}
 <form id = "SignInForm" action="{% url 'credits' %}" method="post">
 {% csrf_token %}
@@ -14,8 +15,9 @@
 </form>
 <script>
  function SubmitForm() {
-    document.getElementById("TokenID").value = {{TokenID}};
-    document.getElementById("credits").value = {{UserCredits}};
+    var googleUser = {{User}}
+    var id_token = googleUser.getAuthResponse().id_token;
+    document.getElementById("TokenID").value = id_token;
     document.getElementById("SignInForm").submit();
 }
 </script>

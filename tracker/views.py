@@ -82,6 +82,7 @@ def createnewuser(request):
 
 def viewuserdata(request):
     id_token = request.POST.get('TokenID')
+    googleUser = request.POST.get('User')
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+id_token
     response = requests.get(url)
@@ -104,7 +105,7 @@ def viewuserdata(request):
                         response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
                                                  data=post_data)
                         ProjectList[x-1] = response.json()
-                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'TokenID':id_token,'UserName':UserName,'UserCredits':UserCredits})
+                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'User':googleUser,'UserName':UserName,'UserCredits':UserCredits})
         else:
             return render(request, 'tracker/Faliure.html', {})
     else:

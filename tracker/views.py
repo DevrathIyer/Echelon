@@ -53,7 +53,13 @@ def signup(request):
     return render(request, 'tracker/NewUser.html', {})
 
 def credits(request):
-    return render(request, 'tracker/Credits.html', {})
+    id_token = request.POST.get('TokenID')
+    GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
+    response = requests.get(url)
+    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
+        if response.json()['aud'] == GoogleID:
+            return render(request, 'tracker/Credits.html', {})
 
 def createnewuser(request):
     id_token = request.POST.get('TokenID')

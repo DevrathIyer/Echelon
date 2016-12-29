@@ -2,18 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Echelon</title>
 </head>
 <body>
-<a href="javascript:call_func();">...</a>
+<a href="javascript:SubmitForm();">...</a>
 {{Projects}}{{UserName}}{{UserCredits}}
 <form id = "SignInForm" action="{% url 'credits' %}" method="post">
 {% csrf_token %}
     <input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">
+    <input type="hidden" id = "credits" name="Credits" value="Not Logged In">
 </form>
 <script>
-  function onSignIn(googleUser) {
+  function SubmitForm() {
     document.getElementById("TokenID").value = {{TokenID}};
+    document.getElementById("TokenID").value = {{UserCredits}};
     document.getElementById("SignInForm").submit();
 }
 </script>

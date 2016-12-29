@@ -15,8 +15,7 @@
 </form>
 <script>
  function SubmitForm() {
-    var googleUser = {{User}}
-    var id_token = googleUser.getAuthResponse().id_token;
+    id_token = 0;
     document.getElementById("TokenID").value = id_token;
     document.getElementById("SignInForm").submit();
 }

@@ -5,7 +5,7 @@
     <title>Echelon</title>
 </head>
 <body>
-<a href="javascript:SubmitForm();">...</a>
+<button type="button" href="javascript:SubmitForm();">Manage Credits</button>
 {{Projects}}{{UserName}}{{UserCredits}}
 <form id = "SignInForm" action="{% url 'credits' %}" method="post">
 {% csrf_token %}

@@ -5,6 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-{{Projects}}{{UID}}
+<a href="javascript:call_func();">...</a>
+{{Projects}}{{UserName}}{{UserCredits}}
+<form id = "SignInForm" action="{% url 'credits' %}" method="post">
+{% csrf_token %}
+    <input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">
+</form>
+<script>
+  function onSignIn(googleUser) {
+    document.getElementById("TokenID").value = {{TokenID}};
+    document.getElementById("SignInForm").submit();
+}
+</script>
 </body>
 </html>

@@ -7,7 +7,7 @@
 </head>
 <body>
 <button type="button" onclick="SubmitForm({{user}})">Manage Credits</button>
-{{Projects}}{{UserName}}{{UserCredits}}
+{{Projects}}{{UserName}}{{UserCredits}}{{User}}
 <form id = "SignInForm" action="{% url 'credits' %}" method="post">
 {% csrf_token %}
     <input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">

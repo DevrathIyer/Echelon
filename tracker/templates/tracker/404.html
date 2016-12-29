@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Coderthemes">
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <title>Echelon</title>
+    {% load static %}
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'tracker/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Animate -->
+    <link href="{% static 'tracker/css/animate.css' %}" rel="stylesheet">
+
+    <!-- Magnific-popup -->
+    <link rel="stylesheet" href="{% static 'tracker/css/magnific-popup.css' %}">
+    
+    <!-- Icon-font -->
+    <link rel="stylesheet" type="text/css" href="{% static 'tracker/css/ionicons.min.css' %}">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'tracker/css/style.css' %}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="{% static 'tracker/js/html5shiv.js' %}"></script>
+      <script src="{% static 'tracker/js/respond.min.js' %}"></script>
+    <![endif]-->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-64308715-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+  </head>
+
+<body>
+
+  <!-- Pre-loader -->
+<!--  <div class="preloader">
+     <div class="status">&nbsp;</div>
+  </div>
+-->
+
+
+  <!-- HOME -->
+  <section class="home bg-dark">
+    <div class="navbar navbar-custom" role="navigation">
+      <div class="container">
+        <!-- Navbar-header -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <i class="ion-navicon"></i>
+          </button>
+          <!-- LOGO -->
+          <a class="navbar-brand logo" href="index.html">
+              <span>Echelon</span>
+          </a>
+        </div>
+        <!-- end navbar-header -->
+
+
+      </div>
+      <!-- end container -->
+    </div>
+    <!-- End navbar -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <div class="home-wrapper">
+            <h1 class="animated fadeInDown wow" data-wow-delay=".1s">You seem lost</h1>
+            <h4 class="page-sub-title animated fadeInDown wow" data-wow-delay=".3s">Redirecting you back to home...</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section bg-gray2 footer-cta">
+    <div class="container">
+      <div class="row text-center">
+         <div class="col-sm-10 col-sm-offset-1">
+          <h4 class="text-uppercase animated fadeInDown wow" data-wow-delay=".1s">Not expecting this? Contact us.</h4>
+          <h1 class="animated fadeInDown wow" data-wow-delay=".3s">Our help desk will keep you running</h1>
+          <a href="" class="btn btn-custom btn-rnd animated fadeInDown wow" data-wow-delay=".1s">Submit a Ticket</a>
+         </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- END FOOTER -->
+
+
+
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    {% load static %}
+    <script src="{% static 'tracker/js/jquery.js' %}"></script>
+    <script src="{% static 'tracker/js/bootstrap.min.js' %}"></script>
+    <!-- Jquery easing -->                                                      
+    <script type="text/javascript" src="{% static 'tracker/js/jquery.easing.1.3.min.js' %}"></script>
+    <script src="{% static 'tracker/js/SmoothScroll.js' %}"></script>
+    <script src="{% static 'tracker/js/wow.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'tracker/js/jquery.magnific-popup.min.js' %}"></script>
+    <!--common script for all pages-->
+    <script src="{% static 'tracker/js/jquery.app.js' %}"></script>
+
+    
+  </body>
+</html>

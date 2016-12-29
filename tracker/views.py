@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.db import models
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from random import randint
 from Crypto.PublicKey import RSA
 from Crypto.Hash import SHA256
@@ -57,7 +57,7 @@ def credits(request):
     try:
         id_token = request.session['TokenID']
     except:
-        return render(request, 'tracker/Faliure.html',{'JSON':'Failed'})
+        return Http404()
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
     response = requests.get(url)

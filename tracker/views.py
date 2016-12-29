@@ -65,7 +65,7 @@ def createnewuser(request):
             email = response.json()['email']
             post_data = {'auth': os.environ['password'], 'uid': userid, 'name': name , 'email': email}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/createUser', data=post_data)
-            return render(request, 'tracker/Faliure.html', {'JSON': response.json()})
+            return render(request, 'tracker/NewUser.html', {'JSON': response.json()})
         else:
             return render(request, 'tracker/Faliure.html', {})
     else:
@@ -82,7 +82,18 @@ def viewuserdata(request):
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'uid': userid}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserData', data=post_data)
-            return render(request, 'tracker/Faliure.html', {'JSON': response.json()})
+            if response.json('error') == "NA":
+                post_data = {'auth': os.environ['password'], 'uid': userid}
+                response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserProjects', data=post_data)
+                Projects = response.json('project list').split()
+                ProjectList = []
+                for item in Projects:
+                    if(item != 0):
+                        post_data = {'auth': os.environ['password'], 'projectid': item}
+                        response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
+                                                 data=post_data)
+                        ProjectList[item-1] = response.json()
+                return render(request, 'tracker/Projects.html', {'Projects': ProjectList})
         else:
             return render(request, 'tracker/Faliure.html', {})
     else:

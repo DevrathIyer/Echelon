@@ -6,7 +6,7 @@
     <title>Echelon</title>
 </head>
 <body>
-<button type="button" onclick="SubmitForm({{user}})">Manage Credits</button>
+<button type="button" onclick="SubmitForm({{User}})">Manage Credits</button>
 {{Projects}}{{UserName}}{{UserCredits}}{{User}}Hello World
 <form id = "SignInForm" action="{% url 'credits' %}" method="post">
 {% csrf_token %}

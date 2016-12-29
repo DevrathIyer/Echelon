@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.db import models
+from django.http import HttpResponse
 from random import randint
 from Crypto.PublicKey import RSA
 from Crypto.Hash import SHA256
@@ -82,7 +83,7 @@ def createnewuser(request):
 
 def viewuserdata(request):
     id_token = request.POST.get('TokenID')
-    googleUser = request.POST.get('User')
+    request.session['TokenID'] = id_token
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+id_token
     response = requests.get(url)
@@ -105,7 +106,7 @@ def viewuserdata(request):
                         response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
                                                  data=post_data)
                         ProjectList[x-1] = response.json()
-                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'User':googleUser,'UserName':UserName,'UserCredits':UserCredits})
+                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'UserName':UserName,'UserCredits':UserCredits})
         else:
             return render(request, 'tracker/Faliure.html', {})
     else:

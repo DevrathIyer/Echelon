@@ -6,25 +6,7 @@
     <title>Echelon</title>
 </head>
 <body>
-<button type="button" onclick="SubmitForm({{User}})">Manage Credits</button>
+<button type="button" href = "{% url 'credits' %}">Manage Credits</button>
 {{Projects}}{{UserName}}{{UserCredits}}{{User}}Hello World
-<form id = "SignInForm" action="{% url 'credits' %}" method="post">
-{% csrf_token %}
-    <input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">
-    <input type="hidden" id = "credits" name="Credits" value="Not Logged In">
-</form>
-<script>
- function SubmitForm(User) {
-    var id_token = User.getAuthResponse().id_token;
-    document.getElementById("TokenID").value = id_token;
-    document.getElementById("SignInForm").submit();
-}
-</script>
-<script>
-function ClickMe() {
-    document.getElementById("TokenID").value = {{UserCredits}};
-    console.log("hello!");
-}
-</script>
 </body>
 </html>

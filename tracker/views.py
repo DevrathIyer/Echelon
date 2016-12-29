@@ -82,7 +82,7 @@ def viewuserdata(request):
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'uid': userid}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserData', data=post_data)
-            if response.json('error') == "NA":
+            if response.json()['error'] == "NA":
                 post_data = {'auth': os.environ['password'], 'uid': userid}
                 response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserProjects', data=post_data)
                 Projects = response.json('project list').split()

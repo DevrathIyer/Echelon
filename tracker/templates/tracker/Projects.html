@@ -9,15 +9,14 @@
 <body>
 <a href = "{% url 'credits' %}">Manage Credits</a>
 {{Projects.1}}{{Number2}}
-{% for item in Number %}
-    <button id = {{item}} value='hide/show'>{{Projects.item.Project_ID}}
+{% for item in Projects %}
+    <button id = {{item.Project_ID}} value='hide/show'>{{item.Project_ID}}
     </button>
-    <div id="DIV{{item}}">
-        {{item}}
-        Layers: {{Projects.item.Layers}}
+    <div id="DIV{{item.Project_ID}}">
+        Layers: {{item.Layers}}
         Neurons Per Layer:
-            {% for item in Project.item.Layers %}
-                Layer {{Projets.item.Layers.item}}: {{Projets.item.Neurons_per_Layer.item}} Neurons
+            {% for item in item.Layers %}
+                Layer {{item.Layers.{{forloop.counter0}}}}: {{item.Neurons_per_Layer.{{forloop.counter0}}}} Neurons
             {%endfor%}
     </div>
     <script>

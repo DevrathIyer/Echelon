@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Echelon</title>
+</head>
+<body>
+<a href = "{% url 'credits' %}">Manage Credits</a>
+{% for item in Number %}
+    <button id = {{item}} value='hide/show'>
+    </button>
+{% endfor %}
+{{Projects}}{{UserName}}{{UserCredits}}{{User}}Hello World
+</body>
+<script>
+    jQuery(document).ready(function(){
+        jQuery('#hideshow').on('click', function(event) {
+             jQuery('#content').toggle('show');
+        });
+    });
+</script>
+</html>

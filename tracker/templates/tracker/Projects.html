@@ -11,9 +11,7 @@
 {{Number}}
 {% for item in Number %}
     <button id = {{item}} value='hide/show'>
-        {% with ThisProject="{{Projects.item}}" %}
-            {{ThisProject}}
-        {% endwith %}
+        {{Projects.item}}
     </button>
     <div id="DIV{{item}}">OKAY WE GOOD YALL</div>
     <script>

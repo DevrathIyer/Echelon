@@ -8,8 +8,8 @@
 </head>
 <body>
 <a href = "{% url 'credits' %}">Manage Credits</a>
+{{Number}}
 {% for item in Number %}
-    {{Projects}}
     <button id = {{item}} value='hide/show'>{{Projects.item}}
     </button>
     <div id="DIV{{item}}">OKAY WE GOOD YALL</div>

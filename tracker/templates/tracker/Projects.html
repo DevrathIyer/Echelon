@@ -13,10 +13,10 @@
     <button id = {{item}} value='hide/show'>{{Projects.item.Project_ID}}
     </button>
     <div id="DIV{{item}}">
-        Layers: {{Projects.item.Layer}}
+        Layers: {{Projects.item.Layers}}
         Neurons Per Layer:
-            {% for item in Project.item.Layer %}
-                Layer {{Projets.item.Layer.item}}: {{Projets.item.Neurons_per_Layer.item}} Neurons
+            {% for item in Project.item.Layers %}
+                Layer {{Projets.item.Layers.item}}: {{Projets.item.Neurons_per_Layer.item}} Neurons
             {%endfor%}
     </div>
     <script>

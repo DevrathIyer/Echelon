@@ -13,12 +13,11 @@
     <button id = {{item}} value='hide/show'>{{Projects.item.Project_ID}}
     </button>
     <div id="DIV{{item}}">
-        Neurons Per Layer: {{Neurons}}
-        {% comment %}
-            {% for layer in Layer %}
-                Layer {{Layer}}: {{Neruons.Layer}} neurons
+        Layers: {{Projects.item.Layer}}
+        Neurons Per Layer:
+            {% for item in Project.item.Layer %}
+                Layer {{Projets.item.Layer.item}}: {{Projets.item.Neurons_per_Layer.item}} Neurons
             {%endfor%}
-        {% endcomment %}
     </div>
     <script>
         jQuery(document).ready(function(){

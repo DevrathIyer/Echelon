@@ -63,6 +63,9 @@ def credits(request):
     response = requests.get(url)
     if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
         if response.json()['aud'] == GoogleID:
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserData', data=post_data)
+            if response.json()['error'] == "NA":
+                UserCredits = response.json()['credits']
             return render(request, 'tracker/Credits.html', {})
 
 def createnewuser(request):
@@ -109,7 +112,7 @@ def viewuserdata(request):
                         response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
                                                  data=post_data)
                         ProjectList[x-1] = response.json()
-                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'UserName':UserName,'UserCredits':UserCredits})
+                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'UserName':UserName})
         else:
             return render(request, 'tracker/Faliure.html', {})
     else:

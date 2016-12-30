@@ -113,7 +113,7 @@ def viewuserdata(request):
                                                  data=post_data)
                         ProjectList[x] = response.json()
                 ProjectList.pop(0)
-                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'Number':range(ProjectNumber).pop(0),'UserName':UserName})
+                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'Number':range(ProjectNumber),'UserName':UserName,'Number2':ProjectNumber})
         else:
             return render(request, 'tracker/Faliure.html', {})
     else:

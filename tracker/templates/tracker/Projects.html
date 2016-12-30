@@ -10,7 +10,7 @@
 <a href = "{% url 'credits' %}">Manage Credits</a>
 {% for item in Number %}
     <button id = {{item}} value='hide/show'>
-        {{ Projects[item].Project_ID }}
+        {{Projects[item]}}
     </button>
 {% endfor %}
 {{Projects}}{{UserName}}{{UserCredits}}{{User}}Hello World

@@ -104,7 +104,10 @@ def viewuserdata(request):
                 UserCredits = response.json()['credits']
                 post_data = {'auth': os.environ['password'], 'uid': userid}
                 response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserProjects', data=post_data)
-                Projects = response.json()['project_list'].split()
+                try:
+                    Projects = response.json()['project_list'].split()
+                except:
+                    Projects = ['']
                 ProjectNumber = len(Projects)
                 ProjectList = ['' for x in range(ProjectNumber)]
                 for x in range(ProjectNumber):
@@ -112,7 +115,7 @@ def viewuserdata(request):
                         response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
                                                  data=post_data)
                         ProjectList[x] = response.json()
-                        Neurons = response.json()['Neurons_per_Layer'].split(',')
+                        Neurons = response.json()['Neurons_per_Layer']
                         Layers = len(Neurons)
                 return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'Number':range(1,ProjectNumber),'UserName':UserName,'Neurons':Neurons,'Layers':range(Layers)})
         else:

@@ -12,8 +12,8 @@
 {% for item in Projects %}
     <button id = {{item.Project_ID}} value='hide/show'>{{item.Project_ID}}
     </button>
-    <div id="DIV {{item.Project_ID}}">
-        Layers: {{item.Layers}}{{item.Project_ID}}
+    <div id="DIV{{item.Project_ID}}">
+        Layers: {{item.Layers}}
         Neurons Per Layer:
             {% for x in item.Layers %}
                 <div id="DIV {{item.Project_ID}} LAYER {{item.Layers.forloopcounter0}}">
@@ -23,8 +23,8 @@
     </div>
     <script>
         jQuery(document).ready(function(){
-            jQuery('#{{item_ProjectID}}').on('click', function(event) {
-                jQuery("#DIV {{item.Project_ID}}").toggle('show');
+            jQuery("#{{item_ProjectID}}").on('click', function(event) {
+                jQuery("#DIV{{item.Project_ID}}").toggle('show');
             });
         });
     </script>

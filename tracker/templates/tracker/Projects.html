@@ -8,7 +8,6 @@
 </head>
 <body>
 <a href = "{% url 'credits' %}">Manage Credits</a>
-{{Projects.1}}{{Number2}}
 {% for item in Projects %}
     <button id = "BUTTON{{item.Project_ID}}" value='hide/show'>{{item.Project_ID}}
     </button>

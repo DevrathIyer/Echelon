@@ -15,7 +15,7 @@
     <div id="DIV{{item}}">Hello Bro!</div>
     <script>
         jQuery(document).ready(function(){
-            jQuery({{item}}).on('click', function(event) {
+            jQuery('#{{item}}').on('click', function(event) {
                 jQuery("#DIV{{item}}").toggle('show');
             });
         });

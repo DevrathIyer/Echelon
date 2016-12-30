@@ -9,7 +9,7 @@
 <body>
 <a href = "{% url 'credits' %}">Manage Credits</a>
 {% for item in Number %}
-    <button id = {{item}} value='hide/show'>
+    <button id = {{item}} value='hide/show'>{{Projects.item.Project_ID}}
     </button>
     <script>
         jQuery(document).ready(function(){

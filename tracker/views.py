@@ -105,14 +105,15 @@ def viewuserdata(request):
                 post_data = {'auth': os.environ['password'], 'uid': userid}
                 response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserProjects', data=post_data)
                 Projects = response.json()['project_list'].split()
-                ProjectNumber = len(Projects)-1
+                ProjectNumber = len(Projects)
                 ProjectList = ['' for x in range(ProjectNumber)]
                 for x in range(ProjectNumber):
-                    post_data = {'auth': os.environ['password'], 'projectid': Projects[x]}
-                    response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
+                    if(x != 0):
+                        post_data = {'auth': os.environ['password'], 'projectid': Projects[x]}
+                        response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
                                                  data=post_data)
-                    ProjectList[x] = response.json()
-                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'Number':range(ProjectNumber),'UserName':UserName})
+                        ProjectList[x-1] = response.json()
+                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'Number':range(ProjectNumber)'UserName':UserName})
         else:
             return render(request, 'tracker/Faliure.html', {})
     else:

@@ -11,14 +11,14 @@
 {% for item in Number %}
     <button id = {{item}} value='hide/show'>{{Projects.item.Project_ID}}
     </button>
+    <div id="DIV"+{{item}}>Hello Bro!</div>
     <script>
         jQuery(document).ready(function(){
             jQuery({{item}}).on('click', function(event) {
-                jQuery('#content').toggle('show');
+                jQuery('DIV'+{{item}}).toggle('show');
             });
         });
     </script>
 {% endfor %}
-{{Projects}}{{UserName}}{{UserCredits}}{{User}}Hello World
 </body>
 </html>

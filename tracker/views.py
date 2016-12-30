@@ -106,8 +106,8 @@ def viewuserdata(request):
                 response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserProjects', data=post_data)
                 Projects = response.json()['project_list'].split()
                 ProjectNumber = len(Projects)
-                ProjectList = ['' for x in range(1,ProjectNumber)]
-                for x in range(1,ProjectNumber):
+                ProjectList = ['' for x in range(ProjectNumber)]
+                for x in range(ProjectNumber):
                         post_data = {'auth': os.environ['password'], 'projectid': Projects[x]}
                         response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
                                                  data=post_data)

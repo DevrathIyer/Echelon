@@ -13,6 +13,7 @@
     <button id = {{item}} value='hide/show'>{{Projects.item.Project_ID}}
     </button>
     <div id="DIV{{item}}">
+        {{item}}
         Layers: {{Projects.1.Layers}}
         Neurons Per Layer:
             {% for item in Project.item.Layers %}

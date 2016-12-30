@@ -113,7 +113,7 @@ def viewuserdata(request):
                         response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
                                                  data=post_data)
                         ProjectList[x-1] = response.json()
-                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'Number':range(ProjectNumber)'UserName':UserName})
+                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'Number':range(ProjectNumber),'UserName':UserName})
         else:
             return render(request, 'tracker/Faliure.html', {})
     else:

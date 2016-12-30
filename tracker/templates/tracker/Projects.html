@@ -16,8 +16,8 @@
         Layers: {{item.Layers}}
         Neurons Per Layer:
             {% for x in item.Neurons_per_Layer %}
-                <div id="DIV {{item.Project_ID}} LAYER {{item.Layers.forloopcounter0}}">
-                    Layer {{item.Layers.forloop.counter0}}: {{x}} Neurons
+                <div id="DIV {{item.Project_ID}} LAYER {{forloopcounter}}">
+                    Layer {{forloop.counter}}: {{x}} Neurons
                 </div>
             {%endfor%}
     </div>

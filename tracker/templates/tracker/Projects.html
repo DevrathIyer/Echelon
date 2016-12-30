@@ -11,14 +11,14 @@
 {% for item in Number %}
     <button id = {{item}} value='hide/show'>
     </button>
+    <script>
+        jQuery(document).ready(function(){
+            jQuery({{item}}).on('click', function(event) {
+                jQuery('#content').toggle('show');
+            });
+        });
+    </script>
 {% endfor %}
 {{Projects}}{{UserName}}{{UserCredits}}{{User}}Hello World
 </body>
-<script>
-    jQuery(document).ready(function(){
-        jQuery('#hideshow').on('click', function(event) {
-             jQuery('#content').toggle('show');
-        });
-    });
-</script>
 </html>

@@ -10,12 +10,12 @@
 <a href = "{% url 'credits' %}">Manage Credits</a>
 {{Projects.1}}{{Number2}}
 {% for item in Projects %}
-    <button id = {{item.Project_ID}} value='hide/show'>{{item.Project_ID}}
+    <button id = "BUTTON{{item.Project_ID}}" value='hide/show'>{{item.Project_ID}}
     </button>
     <div id="DIV{{item.Project_ID}}">
         Layers: {{item.Layers}}
         Neurons Per Layer:
-            {% for x in item.Layers %}
+            {% for x in item.Neurons_per_Layer %}
                 <div id="DIV {{item.Project_ID}} LAYER {{item.Layers.forloopcounter0}}">
                     Layer {{item.Layers.forloop.counter0}}: {{x}} Neurons
                 </div>
@@ -23,7 +23,7 @@
     </div>
     <script>
         jQuery(document).ready(function(){
-            jQuery("#{{item_ProjectID}}").on('click', function(event) {
+            jQuery("#BUTTON{{item_ProjectID}}").on('click', function(event) {
                 jQuery("#DIV{{item.Project_ID}}").toggle('show');
             });
         });

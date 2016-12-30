@@ -10,9 +10,14 @@
 <a href = "{% url 'credits' %}">Manage Credits</a>
 {{Projects.1}}{{Number2}}
 {% for item in Number %}
-    <button id = {{item}} value='hide/show'>{{Projects.item}}
+    <button id = {{item}} value='hide/show'>{{Projects.item.Project_ID}}
     </button>
-    <div id="DIV{{item}}">OKAY WE GOOD YALL</div>
+    <div id="DIV{{item}}">
+        Neurons Per Layer:
+            {% for layer in Layer %}
+                Layer {{Layer}}: {{Neruons.Layer}} neurons
+            {%endfor%}
+    </div>
     <script>
         jQuery(document).ready(function(){
             jQuery('#{{item}}').on('click', function(event) {

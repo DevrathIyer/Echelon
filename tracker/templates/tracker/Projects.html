@@ -37,9 +37,9 @@
             <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERLABEL{{item.Project_ID}}('down');">-</button>
         </div>
         Neurons Per Layer:
-            {% for x in Neurons.1 %}
+            {% for x in Neurons %}
                 <div id="DIV {{item.Project_ID}} NEURONSPERLAYER {{forloop.counter}}">
-                    Layer {{forloop.counter}}: {{x}} Neurons
+                    Layer {{forloop.counter}}: {{x.1}} Neurons
                 </div>
             {%endfor%}
     </div>

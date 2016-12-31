@@ -53,6 +53,14 @@ def login(request):
 def signup(request):
     return render(request, 'tracker/NewUser.html', {})
 
+def signout(request):
+    try:
+        id_token = request.session['TokenID']
+    except:
+        return Http404()
+    request.session.flush()
+    return redirect('login')
+
 def credits(request):
     try:
         id_token = request.session['TokenID']
@@ -68,7 +76,7 @@ def credits(request):
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserData', data=post_data)
             if response.json()['error'] == "NA":
                 UserCredits = response.json()['credits']
-            return render(request, 'tracker/Credits.html', {})
+                return render(request, 'tracker/Credits.html', {'Credits':UserCredits})
 
 def createnewuser(request):
     id_token = request.POST.get('TokenID')

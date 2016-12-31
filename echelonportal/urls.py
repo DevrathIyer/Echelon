@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name = 'home'),
     url(r'^login', views.login, name = 'login'),
+    url(r'^signout', views.signout, name = 'signout'),
     url(r'^credits', views.credits, name = 'credits'),
     url(r'^signup', views.signup, name = 'signup'),
     url(r'^newuser', views.createnewuser, name = 'createnewuser'),

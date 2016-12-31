@@ -10,11 +10,15 @@
 <body>
 <a href = "{% url 'credits' %}">Manage Credits</a>
 <a onclick="signOut();">Sign out</a>
+<form id = "SignInForm" action="{% url 'signout' %}" method="post">
+{% csrf_token %}
+</form>
 <script>
     function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
         console.log('User signed out.');
+        document.getElementById("SignOutForm").submit();
         });
     }
     function onLoad() {

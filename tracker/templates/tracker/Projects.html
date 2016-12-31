@@ -40,7 +40,7 @@
             {% for x in Neurons.1 %}
                 <div id="DIV {{item.Project_ID}} NEURONSPERLAYER {{forloop.counter}}">
                     Layer {{forloop.counter}}: {{x}} Neurons
-                    {{forloop.parentloop.counter0}}
+                    {{forloop.parentloop}}
                 </div>
             {%endfor%}
     </div>

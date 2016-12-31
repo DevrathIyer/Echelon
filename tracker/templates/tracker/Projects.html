@@ -36,13 +36,24 @@
 
             if (DIVLAYERLABEL{{item.Project_ID}}.value > 1) {
                 if (upordown == 'up')
-                    {++document.getElementById("#DIVLAYERLABEL{{item.Project_ID}}").value;}}
+                {
+                    ++document.getElementById("#DIVLAYERLABEL{{item.Project_ID}}").value;
+                }
                 else if (upordown == 'down')
-                    {--document.getElementById("#DIVLAYERLABEL{{item.Project_ID}}").value;}}
-                else if (quantity.value == 1) {
-                    if (upordown == 'up'){++document.getElementById("#DIVLAYERLABEL{{item.Project_ID}}").value;}}
+                {
+                    --document.getElementById("#DIVLAYERLABEL{{item.Project_ID}}").value;
+                }
+                else if (quantity.value == 1)
+                {
+                    if (upordown == 'up')
+                    {
+                        ++document.getElementById("#DIVLAYERLABEL{{item.Project_ID}}").value;
+                    }
+                }
             else
-                {document.getElementById("#DIVLAYERLABEL{{item.Project_ID}}").value=1;}
+            {
+                document.getElementById("#DIVLAYERLABEL{{item.Project_ID}}").value=1;
+            }
         }
     </script>
 {% endfor %}

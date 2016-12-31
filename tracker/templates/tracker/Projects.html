@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <title>Echelon</title>
@@ -15,6 +15,11 @@
         auth2.signOut().then(function () {
         console.log('User signed out.');
         });
+    }
+    function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
     }
 </script>
 {% for item in Projects %}

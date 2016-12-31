@@ -63,6 +63,8 @@ def credits(request):
     response = requests.get(url)
     if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
         if response.json()['aud'] == GoogleID:
+            userid = response.json()['sub']
+            post_data = {'auth': os.environ['password'], 'uid': userid}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserData', data=post_data)
             if response.json()['error'] == "NA":
                 UserCredits = response.json()['credits']

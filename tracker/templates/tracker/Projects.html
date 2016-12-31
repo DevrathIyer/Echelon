@@ -10,23 +10,40 @@
 <a href = "{% url 'credits' %}">Manage Credits</a>
 {{Neurons}}
 {% for item in Projects %}
-    <button id = "BUTTON{{item.Project_ID}}" value='hide/show'>{{item.Project_ID}}
+    <button id = "HIDEBUTTON{{item.Project_ID}}" value='hide/show'>{{item.Project_ID}}
     </button>
     <div id="DIV{{item.Project_ID}}">
-        Layers: {{item.Layers}}
+        <div id="DIVLAYERCOUNT{{item.ProjectID}}">
+            Layers: <input type="text" id="DIVLAYERLABEL{{item.Project_ID}}" value="{{item.Layers}}" readonly="readonly" />
+            <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantity('up');">+</button>
+            <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantity('up');">+</button>
+        </div>
         Neurons Per Layer:
             {% for x in item.Neurons_per_Layer %}
-                <div id="DIV {{item.Project_ID}} LAYER {{forloopcounter}}">
+                <div id="DIV {{item.Project_ID}} NEURONSPERLAYER {{forloopcounter}}">
                     Layer {{forloop.counter}}: {{x}} Neurons
                 </div>
             {%endfor%}
     </div>
     <script>
         jQuery(document).ready(function(){
-            jQuery("#BUTTON{{item.Project_ID}}").on('click', function(event) {
+            jQuery("#HIDEBUTTON{{item.Project_ID}}").on('click', function(event) {
                 jQuery("#DIV{{item.Project_ID}}").toggle('show');
             });
         });
+        function setQuantity(upordown) {
+            var quantity = document.getElementById('DIVLAYERLABEL{{item.Project_ID}}');
+
+            if (DIVLAYERLABEL{{item.Project_ID}}.value > 1) {
+                if (upordown == 'up')
+                    {++document.getElementById('DIVLAYERLABEL{{item.Project_ID}}'').value;}
+                else if (upordown == 'down')
+                    {--document.getElementById('#DIVLAYERLABEL{{item.Project_ID}}').value;}}
+                else if (quantity.value == 1) {
+                    if (upordown == 'up'){++document.getElementById('#DIVLAYERLABEL{{item.Project_ID}}').value;}}
+            else
+                {document.getElementById('#DIVLAYERLABEL{{item.Project_ID}}').value=1;}
+        }
     </script>
 {% endfor %}
 </body>

@@ -10,7 +10,7 @@
 <body>
 <a href = "{% url 'credits' %}">Manage Credits</a>
 <a onclick="signOut();">Sign out</a>
-<form id = "SignInForm" action="{% url 'signout' %}" method="post">
+<form id = "SignoutForm" action="{% url 'signout' %}" method="post">
 {% csrf_token %}
 </form>
 <script>

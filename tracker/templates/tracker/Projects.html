@@ -15,8 +15,8 @@
     <div id="DIV{{item.Project_ID}}">
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">
             Layers: <input type="text" id="DIVLAYERLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
-            <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantity('up');">+</button>
-            <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantity('down');">-</button>
+            <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERLABEL{{item.Project_ID}}('up');">+</button>
+            <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERLABEL{{item.Project_ID}}('down');">-</button>
         </div>
         Neurons Per Layer:
             {% for x in item.Neurons_per_Layer %}
@@ -31,7 +31,7 @@
                 jQuery("#DIV{{item.Project_ID}}").toggle('show');
             });
         });
-        function setQuantity(upordown) {
+        function setQuantityDIVLAYERLABEL{{item.Project_ID}}(upordown) {
             var quantity = document.getElementById("DIVLAYERLABEL{{item.Project_ID}}");
 
             if (DIVLAYERLABEL{{item.Project_ID}}.value > 1) {

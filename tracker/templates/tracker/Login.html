@@ -56,6 +56,11 @@
     document.getElementById("TokenID").value = id_token;
     document.getElementById("SignInForm").submit();
 }
+function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
+    }
 </script>
 
 <body>
@@ -202,5 +207,7 @@
     <script type="text/javascript" src="{% static 'tracker/js/jquery.magnific-popup.min.js' %}"></script>
     <!--common script for all pages-->
     <script src="{% static 'tracker/js/jquery.app.js' %}"></script>
+
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
   </body>
 </html>

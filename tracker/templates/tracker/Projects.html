@@ -14,7 +14,7 @@
     </button>
     <div id="DIV{{item.Project_ID}}">
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">
-            Layers: <input type="text" id="DIVLAYERLABEL{{item.Project_ID}}" value="{{item.Layers}}" readonly="readonly" />
+            Layers: <input type="text" id="DIVLAYERLABEL{{item.Project_ID}}" value=0 readonly="readonly" />
             <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantity('up');">+</button>
             <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantity('down');">-</button>
         </div>
@@ -32,27 +32,27 @@
             });
         });
         function setQuantity(upordown) {
-            var quantity = document.getElementById("#DIVLAYERLABEL{{item.Project_ID}}");
+            var quantity = document.getElementById("DIVLAYERLABEL{{item.Project_ID}}");
 
             if (DIVLAYERLABEL{{item.Project_ID}}.value > 1) {
                 if (upordown == 'up')
                 {
-                    ++document.getElementById("#DIVLAYERLABEL{{item.Project_ID}}").value;
+                    ++document.getElementById("DIVLAYERLABEL{{item.Project_ID}}").value;
                 }
                 else if (upordown == 'down')
                 {
-                    --document.getElementById("#DIVLAYERLABEL{{item.Project_ID}}").value;
+                    --document.getElementById("DIVLAYERLABEL{{item.Project_ID}}").value;
                 }}
                 else if (quantity.value == 1)
                 {
                     if (upordown == 'up')
                     {
-                        ++document.getElementById("#DIVLAYERLABEL{{item.Project_ID}}").value;
+                        ++document.getElementById("DIVLAYERLABEL{{item.Project_ID}}").value;
                     }
                 }
             else
             {
-                document.getElementById("#DIVLAYERLABEL{{item.Project_ID}}").value=1;
+                document.getElementById("DIVLAYERLABEL{{item.Project_ID}}").value=1;
             }
         }
     </script>

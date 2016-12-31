@@ -8,8 +8,15 @@
 </head>
 <body>
 <a href = "{% url 'credits' %}">Manage Credits</a>
-{{Neurons}}
-{{Projects}}
+<a onclick="signOut();">Sign out</a>
+<script>
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+        console.log('User signed out.');
+        });
+    }
+</script>
 {% for item in Projects %}
     <button id = "HIDEBUTTON{{item.Project_ID}}" value='hide/show'>{{item.Project_ID}}
     </button>

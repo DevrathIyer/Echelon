@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com">
@@ -42,18 +44,12 @@
     </script>
 </head>
 <div class="g-signin2" data-onsuccess="onSignIn"></div>
-<a href="#" onclick="signOut();">Sign out</a>
+
 <form id = "SignInForm" action="{% url 'viewuserdata' %}" method="post">
 {% csrf_token %}
     <input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">
 </form>
 <script>
-  function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-  }
   function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     var id_token = googleUser.getAuthResponse().id_token;
@@ -61,58 +57,6 @@
     document.getElementById("SignInForm").submit();
 }
 </script>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Coderthemes">
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <link rel="shortcut icon" href="images/favicon.ico">
-
-
-    <title>Login/Sign-In</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Animate -->
-    <link href="css/animate.css" rel="stylesheet">
-
-    <!-- Magnific-popup -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
-
-    <!-- Icon-font  -->
-    <link rel="stylesheet" type="text/css" href="css/ionicons.min.css">
-
-    <!-- Custom styles for this template  -->
-    <link href="css/style.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-    <![endif]-->
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-
-
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-64308715-1', 'auto');
-      ga('send', 'pageview');
-
-    </script>
-
-  </head>
 
 <body>
 
@@ -169,91 +113,8 @@
           </div>
         </div>
     </div>
-  </section>
-
-<!-- login stuff -->
-
-
-
-    <div class="logmod__container">
-      <ul class="logmod__tabs">
-        <li data-tabtar="lgm-2"><a href="#">Login</a></li>
-        <li data-tabtar="lgm-1"><a href="#">Sign Up</a></li>
-      </ul>
-      <div class="logmod__tab-wrapper">
-      <div class="logmod__tab lgm-1">
-        <div class="logmod__heading">
-          <span class="logmod__heading-subtitle">Enter your personal details <strong>to create an acount</strong></span>
-        </div>
-        <div class="logmod__form">
-          <form accept-charset="utf-8" action="#" class="simform">
-            <div class="sminputs">
-              <div class="input full">
-                <label class="string optional" for="user-name">Email*</label>
-                <input class="string optional" maxlength="255" id="user-email" placeholder="Email" type="email" size="50" />
-              </div>
-            </div>
-            <div class="sminputs">
-              <div class="input string optional">
-                <label class="string optional" for="user-pw">Password *</label>
-                <input class="string optional" maxlength="255" id="user-pw" placeholder="Password" type="text" size="50" />
-              </div>
-              <div class="input string optional">
-                <label class="string optional" for="user-pw-repeat">Repeat password *</label>
-                <input class="string optional" maxlength="255" id="user-pw-repeat" placeholder="Repeat password" type="text" size="50" />
-              </div>
-            </div>
-            <div class="simform__actions">
-              <input class="sumbit" name="commit" type="sumbit" value="Create Account" />
-              <span class="simform__actions-sidetext">By creating an account you agree to our <a class="special" href="#" target="_blank" role="link">Terms & Privacy</a></span>
-            </div>
-          </form>
-        </div>
-        <div class="logmod__alter">
-          <div class="logmod__alter-container">
-
-
-          </div>
-        </div>
-      </div>
-      <div class="logmod__tab lgm-2">
-        <div class="logmod__heading">
-          <span class="logmod__heading-subtitle">Enter your email and password <strong>to sign in</strong></span>
-        </div>
-        <div class="logmod__form">
-          <form accept-charset="utf-8" action="#" class="simform">
-            <div class="sminputs">
-              <div class="input full">
-                <label class="string optional" for="user-name">Email*</label>
-                <input class="string optional" maxlength="255" id="user-email" placeholder="Email" type="email" size="50" />
-              </div>
-            </div>
-            <div class="sminputs">
-              <div class="input full">
-                <label class="string optional" for="user-pw">Password *</label>
-                <input class="string optional" maxlength="255" id="user-pw" placeholder="Password" type="password" size="50" />
-                						<span class="hide-password">Show</span>
-              </div>
-            </div>
-            <div class="simform__actions">
-              <input class="sumbit" name="commit" type="sumbit" value="Log In" />
-              <span class="simform__actions-sidetext"><a class="special" role="link" href="#">Forgot your password?<br>Click here</a></span>
-            </div>
-          </form>
-        </div>
-        <div class="logmod__alter">
-          <div class="logmod__alter-container">
-          </div>
-        </div>
-          </div>
-      </div>
     </div>
-
-
-
-
-
-
+  </section>
 
   <!-- FOOTER CTA -->
   <section class="section bg-gray2 footer-cta">

@@ -120,7 +120,7 @@ def viewuserdata(request):
                         Neurons[x] = response.json()['Neurons_per_Layer']
                 ProjectList.pop(0)
                 Neurons.pop(0)
-                return render(request, 'tracker/Projects.html', {'Projects': Projects,'UserName':UserName,'Neurons':Neurons})
+                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'UserName':UserName,'Neurons':Neurons})
         else:
             return render(request, 'tracker/Faliure.html', {})
     else:

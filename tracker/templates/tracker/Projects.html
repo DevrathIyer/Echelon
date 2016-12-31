@@ -43,7 +43,8 @@
                 <div id="DIV {{item.Project_ID}} NEURONSPERLAYER {{forloop.counter}}">
                     Layer {{forloop.counter}}: {{x}} Neurons
                 </div>
-            {%endfor%}
+            {% endfor %}
+        {% endwith %}
     </div>
     <script>
         jQuery(document).ready(function(){

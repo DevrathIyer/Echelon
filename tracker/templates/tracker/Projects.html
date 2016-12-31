@@ -14,7 +14,7 @@
     </button>
     <div id="DIV{{item.Project_ID}}">
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">
-            Layers: <input type="text" id="DIVLAYERLABEL{{item.Project_ID}}" value=0 readonly="readonly" />
+            Layers: <input type="text" id="DIVLAYERLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
             <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantity('up');">+</button>
             <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantity('down');">-</button>
         </div>

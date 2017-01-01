@@ -38,8 +38,37 @@
         </div>
         Neurons Per Layer:
             {% for x in item.Neurons_per_Layer %}
-                <div id="DIV {{item.Project_ID}} NEURONSPERLAYER {{forloop.counter}}">
-                    Layer {{forloop.counter}}: {{x}} Neurons
+                <div id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}">
+                    Layer {{forloop.counter}}: Neurons<input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />
+                    <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVLAYERLABEL{{item.Project_ID}}('up');">+</button>
+                    <button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
+                    <script>
+                        function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {
+                            var quantity = document.getElementById("DIVLAYERLABEL{{item.Project_ID}}");
+
+                            if (DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}.value > 1) {
+                                if (upordown == 'up')
+                                {
+                                    ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                }
+                                else if (upordown == 'down')
+                                {
+                                    --document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                }
+                            }
+                            else if (quantity.value == 1)
+                            {
+                                if (upordown == 'up')
+                                {
+                                    ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                }
+                            }
+                            else
+                            {
+                                document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value=1;
+                            }
+                        }
+                    </script>
                 </div>
             {% endfor %}
     </div>
@@ -71,6 +100,30 @@
             else
             {
                 document.getElementById("DIVLAYERLABEL{{item.Project_ID}}").value=1;
+            }
+        }
+        function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {
+            var quantity = document.getElementById("DIVLAYERLABEL{{item.Project_ID}}");
+
+            if (DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}.value > 1) {
+                if (upordown == 'up')
+                {
+                    ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                }
+                else if (upordown == 'down')
+                {
+                    --document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                }}
+                else if (quantity.value == 1)
+                {
+                    if (upordown == 'up')
+                    {
+                        ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                    }
+                }
+            else
+            {
+                document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value=1;
             }
         }
     </script>

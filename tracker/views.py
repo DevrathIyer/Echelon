@@ -130,7 +130,6 @@ def viewuserdata(request):
                         NeuronTemp = response.json()['Neurons_per_Layer'].split(',')
                         Neurons[x] = NeuronTemp
                 ProjectList.pop(0)
-                Neurons.pop(0)
                 return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'UserName':UserName,'Neurons':Neurons})
         else:
             return render(request, 'tracker/Faliure.html', {})

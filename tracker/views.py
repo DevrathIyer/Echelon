@@ -131,7 +131,8 @@ def viewuserdata(request):
                         Neurons[x] = NeuronTemp
                 ProjectList.pop(0)
                 Neurons.pop(0)
-                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'UserName':UserName,'Neurons':Neurons})
+                NeuronLen = range(len(Neurons))
+                return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'UserName':UserName,'Neurons':Neurons,'NeuronLen':NeuronLen})
         else:
             return render(request, 'tracker/Faliure.html', {})
     else:

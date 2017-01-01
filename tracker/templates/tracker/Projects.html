@@ -44,7 +44,7 @@
                     <button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
                     <script>
                         function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {
-                            var quantity = document.getElementById("DIVLAYERLABEL{{item.Project_ID}}");
+                            var quantity = document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}");
 
                             if (DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}.value > 1) {
                                 if (upordown == 'up')

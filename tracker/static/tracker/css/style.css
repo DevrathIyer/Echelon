@@ -59,20 +59,12 @@ textarea {
   border-bottom: 1px solid #e9e9e9;
   border-top: 1px solid #e9e9e9;
 }
-
-.bg-gray2 {
-  background-color: #4b4b4c;
-  border-bottom: 1px solid #e9e9e9;
-  border-top: 1px solid #e9e9e9;
-}
-
 .bg-dark {
-	background-image: url("../images/header-bg.jpeg");
- /* background: -webkit-linear-gradient(#000000, #3E5DE8);
-  background: -moz-linear-gradient(#000000, #3E5DE8);
-  background: -ms-linear-gradient(#000000, #3E5DE8);
-  background: -o-linear-gradient(#000000, #3E5DE8);
-  background: linear-gradient(#000000, #3E5DE8);*/
+  background: -webkit-linear-gradient(#3E5DE8, #334159);
+  background: -moz-linear-gradient(#3E5DE8, #334159);
+  background: -ms-linear-gradient(#3E5DE8, #334159);
+  background: -o-linear-gradient(#3E5DE8, #334159);
+  background: linear-gradient(#3E5DE8, #334159);
 }
 .page-sub-title {
   margin: 10px 0px !important;
@@ -222,18 +214,18 @@ textarea {
   border-radius: 30px;
 }
 .btn-custom:focus {
-  background: #66cc00;
-  border: 1px solid #66cc00;
+  background: #fa3b7c;
+  border: 1px solid #fa3b7c;
   outline: none;
 }
 .btn-custom:hover {
-  background: #76b900 !important;
-  border: 1px solid #76b900;
+  background: #fb6d9d !important;
+  border: 1px solid #fb6d9d;
 }
 .btn-custom {
-  background: #66cc00 !important;
+  background: #fa4a86 !important;
   color: #fff !important;
-  border: 1px solid #66cc00;
+  border: 1px solid #fa4a86;
 }
 
 

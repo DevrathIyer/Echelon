@@ -67,11 +67,7 @@
             Layers: <input type="text" id="DIVLAYERCOUTNLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
             <button id="DIVLAYERCOUNTEDITSHOW{{item.Project_ID}}" value='hide/show'>Edit</button>
             <div id="DIVLAYERCOUNTEDITOVERLAY{{item.Project_ID}}" class="overlay">
-                <div id="DIVLAYERCOUNTEDIT{{item.Project_ID}}" class="LAYERCOUNTEDIT">
-                    Layers: <input type="text" id="DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
-                    <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('up');">+</button>
-                    <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('down');">-</button>
-                </div>
+                Yo What Up
             </div>
         </div>
         Neurons Per Layer:
@@ -112,17 +108,16 @@
     </div>
     <script>
         jQuery(document).ready(function(){
-            jQuery("#DIV{{item.Project_ID}}").toggle('show');
-            jQuery("#DIVLAYERCOUNTEDIT{{item.Project_ID}}").toggle('show');
+
             jQuery("#HIDEBUTTON{{item.Project_ID}}").on('click', function(event) {
                 jQuery("#DIV{{item.Project_ID}}").toggle('show');
             });
             jQuery("#DIVLAYERCOUNTEDITSHOW{{item.Project_ID}}").on('click', function(event) {
-                jQuery("#DIVLAYERCOUNTEDIT{{item.Project_ID}}").toggle('show');
+
                 jQuery("DIVLAYERCOUNTEDITOVERLAY{{item.Project_ID}}").toggle('show');
             });
             jQuery("#DIVLAYERCOUNTEDITCANCEL{{item.Project_ID}}").on('click', function(event) {
-                jQuery("#DIVLAYERCOUNTEDIT{{item.Project_ID}}").toggle('show');
+
                 jQuery("DIVLAYERCOUNTEDITOVERLAY{{item.Project_ID}}").toggle('show');
             });
         });

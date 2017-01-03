@@ -2,32 +2,7 @@
 <html lang="en">
 <head>
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <meta name="google-signin-client_id" content="867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com">
-    <meta charset="UTF-8">
-    <title>Echelon</title>
-    {% load static %}
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'tracker/css/bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- Animate -->
-    <link href="{% static 'tracker/css/animate.css' %}" rel="stylesheet">
-
-    <!-- Magnific-popup -->
-    <link rel="stylesheet" href="{% static 'tracker/css/magnific-popup.css' %}">
-
-    <!-- Icon-font -->
-    <link rel="stylesheet" type="text/css" href="{% static 'tracker/css/ionicons.min.css' %}">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static 'tracker/css/style.css' %}" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-    <!--[if lt IE 9]>
-      <script src="{% static 'tracker/js/html5shiv.js' %}"></script>
-      <script src="{% static 'tracker/js/respond.min.js' %}"></script>
-    <![endif]-->
-
 </head>
 <body>
 <a href = "{% url 'credits' %}">Manage Credits</a>
@@ -56,11 +31,13 @@
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">
             Layers: <input type="text" id="DIVLAYERCOUTNLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
             <button id="Hello" onclick="openNav()" value='hide/show'>Edit</button>
-            <div id="DIVLAYERCOUNTEDIT{{item.Project_ID}}" class="overlay">
+            <div id="myNav" class="overlay">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <div class="overlay-content">
                     Layers: <input type="text" id="DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
                     <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('up');">+</button>
                     <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('down');">-</button>
-                    <div id="DIVLAYERCOUNTEDITOVERLAY{{item.Project_ID}}" class="overlay"></div>
+                </div>
             </div>
         </div>
         Neurons Per Layer:
@@ -95,80 +72,84 @@
                                 document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value=1;
                             }
                         }
+                        function openNav()
+                        {
+                            document.getElementById("myNav").style.height = "100%";
+                        }
+
+                        function closeNav()
+                        {
+                            document.getElementById("myNav").style.height = "0%";
+                        }
                     </script>
                 </div>
             {% endfor %}
-    </div>
-    <script>
-        jQuery(document).ready(function(){
-            jQuery("#DIV{{item.Project_ID}}").toggle('show');
-            jQuery("#HIDEBUTTON{{item.Project_ID}}").on('click', function(event) {
+
+            <script>
+            jQuery(document).ready(function(){
                 jQuery("#DIV{{item.Project_ID}}").toggle('show');
-                closeNav();
+                jQuery("#HIDEBUTTON{{item.Project_ID}}").on('click', function(event) {
+                    jQuery("#DIV{{item.Project_ID}}").toggle('show');
+                    closeNav();
+                });
             });
-        });
 
-        function setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}(upordown) {
-            var quantity = document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}");
+            function setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}(upordown) {
+                var quantity = document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}");
 
-            if (DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}.value > 1) {
-                if (upordown == 'up')
-                {
-                    ++document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
-                    ++document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value;
-                }
-                else if (upordown == 'down')
-                {
-                    --document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
-                    --document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value;
-                }}
-                else if (quantity.value == 1)
-                {
+                if (DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}.value > 1) {
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
                         ++document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value;
                     }
+                    else if (upordown == 'down')
+                    {
+                        --document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
+                        --document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value;
+                    }}
+                    else if (quantity.value == 1)
+                    {
+                        if (upordown == 'up')
+                        {
+                            ++document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
+                            ++document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value;
+                        }
+                    }
+                else
+                {
+                    document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value=1;
+                    document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value=1;
                 }
-            else
-            {
-                document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value=1;
-                document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value=1;
             }
-        }
-        function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {
-            var quantity = document.getElementById("DIVLAYERLABEL{{item.Project_ID}}");
+            function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {
+                var quantity = document.getElementById("DIVLAYERLABEL{{item.Project_ID}}");
 
-            if (DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}.value > 1) {
-                if (upordown == 'up')
-                {
-                    ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
-                }
-                else if (upordown == 'down')
-                {
-                    --document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
-                }}
-                else if (quantity.value == 1)
-                {
+                if (DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}.value > 1) {
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
                     }
+                    else if (upordown == 'down')
+                    {
+                        --document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                    }}
+                    else if (quantity.value == 1)
+                    {
+                        if (upordown == 'up')
+                        {
+                            ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                        }
+                    }
+                else
+                {
+                    document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value=1;
                 }
-            else
-            {
-                document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value=1;
             }
-        }
-        function openNav() {
-            document.getElementById("DIVLAYERCOUNTEDIT{{item.Project_ID}}").style.width = "100%";
-            console.log(document.getElementById("DIVLAYERCOUNTEDIT{{item.Project_ID}}").style.width)
-        }
-        function closeNav() {
-            document.getElementById("DIVLAYERCOUNTEDIT{{item.Project_ID}}").style.width = "0%";
-        }
-    </script>
+        </script>
+    </div>
 {% endfor %}
+
 <style>
 body {
     margin: 0;
@@ -227,29 +208,5 @@ body {
 }
 </style>
 
-<div id="myNav" class="overlay">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <div class="overlay-content">
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
-  </div>
-</div>
-
-<h2>Fullscreen Overlay Nav Example</h2>
-<p>Click on the element below to open the fullscreen overlay navigation menu.</p>
-<p>In this example, the navigation menu will slide downwards from the top:</p>
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-
-<script>
-function openNav() {
-    document.getElementById("myNav").style.height = "100%";
-}
-
-function closeNav() {
-    document.getElementById("myNav").style.height = "0%";
-}
-</script>
 </body>
 </html>

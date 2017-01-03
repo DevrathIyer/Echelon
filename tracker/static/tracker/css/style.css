@@ -639,6 +639,7 @@ textarea {
     width: 50%;
     /* just for example presentation */
     top: 1em;
+    z-index:1000
 }
 .LAYERCOUNTEDIT HEADER {
     padding: 15px;

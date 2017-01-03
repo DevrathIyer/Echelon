@@ -67,10 +67,10 @@
             Layers: <input type="text" id="DIVLAYERCOUTNLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
             <button id="DIVLAYERCOUNTEDITSHOW{{item.Project_ID}}" value='hide/show'>Edit</button>
             <div id="DIVLAYERCOUNTEDIT{{item.Project_ID}}" class="LAYERCOUNTEDIT">
-                <div id="DIVLAYERCOUNTEDITOVERLAY{{item.Project_ID}}" class="overlay"></div>
                 Layers: <input type="text" id="DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
                 <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('up');">+</button>
                 <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('down');">-</button>
+                <div id="DIVLAYERCOUNTEDITOVERLAY{{item.Project_ID}}" class="overlay"></div>
             </div>
         </div>
         Neurons Per Layer:

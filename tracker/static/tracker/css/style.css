@@ -637,7 +637,7 @@ textarea {
     margin-left: auto;
     /* just for example presentation */
     top: 1em;
-    z-index:100;
+    z-index:20;
     border-radius: 25px;
     border: 2px solid #73AD21;
     padding: 20px;

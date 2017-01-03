@@ -162,15 +162,14 @@
                 document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value=1;
             }
         }
-    </script>
-{% endfor %}
-        <script>    
         function openNav() {
             document.getElementById("DIVLAYERCOUNTEDIT{{item.Project_ID}}").style.width = "100%";
         }
         function closeNav() {
             document.getElementById("DIVLAYERCOUNTEDIT{{item.Project_ID}}").style.width = "0%";
         }
-        </script>>
+    </script>
+{% endfor %}
+
 </body>
 </html>

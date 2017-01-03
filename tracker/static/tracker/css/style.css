@@ -627,7 +627,7 @@ textarea {
     height:100%;
     top:0px;
     left:0px;
-    z-index:100;
+    z-index:10;
 }
 
 .LAYERCOUNTEDIT{
@@ -639,7 +639,7 @@ textarea {
     width: 50%;
     /* just for example presentation */
     top: 1em;
-    z-index:1000
+    z-index:100
 }
 .LAYERCOUNTEDIT HEADER {
     padding: 15px;

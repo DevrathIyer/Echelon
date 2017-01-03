@@ -108,16 +108,17 @@
     </div>
     <script>
         jQuery(document).ready(function(){
-
+            jQuery("#DIV{{item.Project_ID}}").toggle('show');
+            jQuery("#DIVLAYERCOUNTEDIT{{item.Project_ID}}").toggle('show');
             jQuery("#HIDEBUTTON{{item.Project_ID}}").on('click', function(event) {
                 jQuery("#DIV{{item.Project_ID}}").toggle('show');
             });
             jQuery("#DIVLAYERCOUNTEDITSHOW{{item.Project_ID}}").on('click', function(event) {
-
+                jQuery("#DIVLAYERCOUNTEDIT{{item.Project_ID}}").toggle('show');
                 jQuery("DIVLAYERCOUNTEDITOVERLAY{{item.Project_ID}}").toggle('show');
             });
             jQuery("#DIVLAYERCOUNTEDITCANCEL{{item.Project_ID}}").on('click', function(event) {
-
+                jQuery("#DIVLAYERCOUNTEDIT{{item.Project_ID}}").toggle('show');
                 jQuery("DIVLAYERCOUNTEDITOVERLAY{{item.Project_ID}}").toggle('show');
             });
         });

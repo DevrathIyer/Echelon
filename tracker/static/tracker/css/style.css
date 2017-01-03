@@ -627,7 +627,7 @@ textarea {
     height:100%;
     top:0px;
     left:0px;
-    z-index:10;
+    z-index:1;
 }
 
 .LAYERCOUNTEDIT{

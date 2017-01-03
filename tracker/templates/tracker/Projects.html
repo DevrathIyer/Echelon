@@ -95,11 +95,13 @@
             if (DIVLAYERLABEL{{item.Project_ID}}.value > 1) {
                 if (upordown == 'up')
                 {
+                    console.log('up');
                     ++document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
                     ++document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value;
                 }
                 else if (upordown == 'down')
                 {
+                    console.log('down');
                     --document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
                     --document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value;
                 }}

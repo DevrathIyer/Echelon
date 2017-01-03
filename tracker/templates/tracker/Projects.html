@@ -32,9 +32,14 @@
     </button>
     <div id="DIV{{item.Project_ID}}">
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">
-            Layers: <input type="text" id="DIVLAYERLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
-            <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERLABEL{{item.Project_ID}}('up');">+</button>
-            <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERLABEL{{item.Project_ID}}('down');">-</button>
+            Layers: <input type="text" id="DIVLAYERCOUTNLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
+            <button id="DIVLAYERCOUNTEDITSHOW{{item.Project_ID}}" value='hide/show'></button>
+            <div id="DIVLAYERCOUNTEDIT{{item.Project_ID}}" class="LAYERCOUNTEDIT">
+                <div id="DIVLAYERCOUNTEDITOVERLAY{{item.Project_ID}}" class="overlay"></div>
+                Layers: <input type="text" id="DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
+                <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERLABEL{{item.Project_ID}}('up');">+</button>
+                <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERLABEL{{item.Project_ID}}('down');">-</button>
+            </div>
         </div>
         Neurons Per Layer:
             {% for x in item.Neurons_per_Layer %}
@@ -77,29 +82,39 @@
             jQuery("#HIDEBUTTON{{item.Project_ID}}").on('click', function(event) {
                 jQuery("#DIV{{item.Project_ID}}").toggle('show');
             });
+            jQuery("#DIVLAYERCOUNTEDITSHOW{{item.Project_ID}}").on('click', function(event) {
+                jQuery("#DIVLAYERCOUNTEDIT{{item.Project_ID}}").toggle('show');
+            });
+            jQuery("#DIVLAYERCOUNTEDITCANCEL{{item.Project_ID}}").on('click', function(event) {
+                jQuery("#DIVLAYERCOUNTEDIT{{item.Project_ID}}").toggle('show');
+            });
         });
-        function setQuantityDIVLAYERLABEL{{item.Project_ID}}(upordown) {
-            var quantity = document.getElementById("DIVLAYERLABEL{{item.Project_ID}}");
+        function setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}(upordown) {
+            var quantity = document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}");
 
             if (DIVLAYERLABEL{{item.Project_ID}}.value > 1) {
                 if (upordown == 'up')
                 {
-                    ++document.getElementById("DIVLAYERLABEL{{item.Project_ID}}").value;
+                    ++document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
+                    ++document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value;
                 }
                 else if (upordown == 'down')
                 {
-                    --document.getElementById("DIVLAYERLABEL{{item.Project_ID}}").value;
+                    --document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
+                    --document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value;
                 }}
                 else if (quantity.value == 1)
                 {
                     if (upordown == 'up')
                     {
-                        ++document.getElementById("DIVLAYERLABEL{{item.Project_ID}}").value;
+                        ++document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
+                        ++document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value;
                     }
                 }
             else
             {
-                document.getElementById("DIVLAYERLABEL{{item.Project_ID}}").value=1;
+                document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value=1;
+                document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value=1;
             }
         }
         function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {

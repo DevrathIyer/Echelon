@@ -638,27 +638,3 @@ textarea {
     text-align: center;
     margin-top: 30px;
 }
-
-.LAYERCOUNTEDIT{
-    position: fixed;
-    right: 0;
-    left: 0;
-    margin-right: auto;
-    margin-left: auto;
-    /* just for example presentation */
-    top: 1em;
-    border-radius: 12px;
-    border: 2px solid #73AD21;
-    padding: 20px;
-    width: 200px;
-    height: 150px;
-}
-.LAYERCOUNTEDIT HEADER {
-    padding: 15px;
-    border-bottom: 1px solid #e5e5e5;
-}
-.LAYERCOUNTEDIT FOOTER {
-    padding: 15px;
-    text-align: right;
-    border-top: 1px solid #e5e5e5;
-}

@@ -33,7 +33,7 @@
     <div id="DIV{{item.Project_ID}}">
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">
             Layers: <input type="text" id="DIVLAYERCOUTNLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
-            <button id="DIVLAYERCOUNTEDITSHOW{{item.Project_ID}}" value='hide/show'>Edit</button>
+            <button id="DIVLAYERCOUNTEDITSHOW{{item.Project_ID}}" value='show/hide'>Edit</button>
             <div id="DIVLAYERCOUNTEDIT{{item.Project_ID}}" class="LAYERCOUNTEDIT">
                 <div id="DIVLAYERCOUNTEDITOVERLAY{{item.Project_ID}}" class="overlay"></div>
                 Layers: <input type="text" id="DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
@@ -97,13 +97,11 @@
             if (DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}.value > 1) {
                 if (upordown == 'up')
                 {
-                    console.log('up');
                     ++document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
                     ++document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value;
                 }
                 else if (upordown == 'down')
                 {
-                    console.log('down');
                     --document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
                     --document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value;
                 }}

@@ -42,6 +42,10 @@
                         Edit Layer Count
                     </div>
                     <div class="LAYERCOUNTEDITBODY">
+                        <form id = "SubmitForm" action="{% url 'viewuserdata' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" id="LayerCount{{item.Project_ID}}" name="LayerCount{{item.Project_ID}}" value="N/A">
+                        </form>
                         Layers: <input type="text" id="DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
                         <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('up');">+</button>
                         <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('down');">-</button>
@@ -56,9 +60,9 @@
         Neurons Per Layer:
             {% for x in item.Neurons_per_Layer %}
                 <div id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}">
-                    Layer {{forloop.counter}}: <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />Neurons
-                    <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('up');">+</button>
-                    <button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
+                    Layer {{forloop.counter}}: <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />
+                    <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('up');">+</button><button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
+                    Neurons
                     <script>
                         function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {
                             var quantity = document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}");
@@ -164,6 +168,10 @@
                 console.log(origValue);
                 document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value = origValue;
             }
+            function DIVLAYERCOUNTEDITSUBMIT{{item.Project_ID}}()
+            {
+                var r = confirm("Attention! If you have made changes to Neurons that are not saved, they will be erased!\nNew layers created will have a default neuron count of 1.\n Are you sure you want to submit?");
+            }
         </script>
     </div>
 {% endfor %}
@@ -202,8 +210,8 @@ body {
     color: #818181;
     display: block;
     transition: 0.3s;
-}
 
+}
 .overlay a:hover, .overlay a:focus {
     color: #f1f1f1;
 }

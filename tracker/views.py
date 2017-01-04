@@ -78,9 +78,6 @@ def credits(request):
                 UserCredits = response.json()['credits']
                 return render(request, 'tracker/Credits.html', {'Credits':UserCredits})
 
-def layeredit(request):
-    try:
-        Newlayers = request.POST.get('')
 def createnewuser(request):
     id_token = request.POST.get('TokenID')
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"

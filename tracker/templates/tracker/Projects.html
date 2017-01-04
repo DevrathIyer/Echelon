@@ -47,8 +47,8 @@
                         <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('down');">-</button>
                     </div>
                     <div class="LAYERCOUNTEDITFOOTER">
-                        <button id="DIVLAYERCOUNTCANCEL{{item.Project_ID}}" onclick="DIVLAYERCOUNTEDITCANCEL{{item.Project_ID}}()"></button>
-                        <button id="DIVLAYERCOUNTSUBMIT{{item.Project_ID}}" onclick="DIVLAYERCOUNTEDITSUBMIT{{item.Project_ID}}()"></button>
+                        <button id="DIVLAYERCOUNTCANCEL{{item.Project_ID}}" onclick="DIVLAYERCOUNTEDITCANCEL{{item.Project_ID}}()">Cancel</button>
+                        <button id="DIVLAYERCOUNTSUBMIT{{item.Project_ID}}" onclick="DIVLAYERCOUNTEDITSUBMIT{{item.Project_ID}}()">Submit</button>
                     </div>
                 </div>
             </div>
@@ -162,6 +162,7 @@
             {
                 closeNav();
                 origValue = document.getElementById('DIVLAYERCOUTNLABEL{{item.Project_ID}}').value;
+                console.log(origValue);
                 document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value = origValue;
             }
         </script>

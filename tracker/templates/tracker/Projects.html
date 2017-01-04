@@ -33,28 +33,16 @@
     </button>
     <div id="DIV{{item.Project_ID}}">
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">
-            Layers: <input type="text" id="DIVLAYERCOUTNLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
+            Layers: <input type="text" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
             <button id="Hello" onclick="openNav()" value='hide/show'>Edit</button>
             <div id="DIVLAYERCOUNTEDIT{{item.Project_ID}}" class="overlay">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <div class="overlay-content">
-                    <div class="LAYERCOUNTEDITHEADER">
-                        Edit Layer Count
-                    </div>
-                    <div class="LAYERCOUNTEDITBODY">
-                        <form id = "SubmitForm" action="{% url 'viewuserdata' %}" method="post">
-                            {% csrf_token %}
-                            <input type="hidden" id="LayerCount{{item.Project_ID}}" name="LayerCount{{item.Project_ID}}" value="N/A">
-                        </form>
-                        Layers: <input type="text" id="DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
-                        <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('up');">+</button>
-                        <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('down');">-</button>
-                    </div>
-                    <div class="LAYERCOUNTEDITFOOTER">
-                        <button id="DIVLAYERCOUNTCANCEL{{item.Project_ID}}" onclick="DIVLAYERCOUNTEDITCANCEL{{item.Project_ID}}()">Cancel</button>
-                        <button id="DIVLAYERCOUNTSUBMIT{{item.Project_ID}}" onclick="DIVLAYERCOUNTEDITSUBMIT{{item.Project_ID}}()">Submit</button>
-                    </div>
-                </div>
+                <form id = "LAYERCOUNTEDITFORM{{item.Proect_ID}}" action="{% url 'viewuserdata' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" id="LayerCountNew{{item.Project_ID}}" name="LayerCountNew{{item.Project_ID}}" value="N/A">
+                    <input type="hidden" id="LayerCountOrig{{item.Project_ID}}" name="LayerCountOrig{{item.Project_ID}}" value="N/A">
+                </form>
+                <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('up');">+</button>
+                <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('down');">-</button>
             </div>
         </div>
         Neurons Per Layer:
@@ -100,31 +88,36 @@
                     jQuery("#DIV{{item.Project_ID}}").toggle('show');
                     closeNav();
                 });
+                $('LAYERCOUNTEDITFORM{{item.Proect_ID}}').on('submit', function(event){
+                    event.preventDefault();
+                    console.log("form submitted!")  // sanity check
+                    create_post();
+                });
             });
 
-            function setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}(upordown) {
-                var quantity = document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}");
+            function setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}(upordown) {
+                var quantity = document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}");
 
-                if (DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}.value > 1) {
+                if (DIVLAYERCOUNTLABEL{{item.Project_ID}}.value > 1) {
                     if (upordown == 'up')
                     {
-                        ++document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
+                        ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
                     }
                     else if (upordown == 'down')
                     {
-                        --document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
+                        --document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
                     }
                 }
                 else if (quantity.value == 1)
                 {
                     if (upordown == 'up')
                     {
-                        ++document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
+                        ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
                     }
                 }
                 else
                 {
-                    document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value=1;
+                    document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value=1;
                 }
             }
             function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {
@@ -134,6 +127,7 @@
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                        document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").submit();
                     }
                     else if (upordown == 'down')
                     {
@@ -164,13 +158,14 @@
             function DIVLAYERCOUNTEDITCANCEL{{item.Project_ID}}()
             {
                 closeNav();
-                origValue = document.getElementById('DIVLAYERCOUTNLABEL{{item.Project_ID}}').value;
+                origValue = document.getElementById('DIVLAYERCOUNTLABEL{{item.Project_ID}}').value;
                 console.log(origValue);
                 document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value = origValue;
             }
-            function DIVLAYERCOUNTEDITSUBMIT{{item.Project_ID}}()
+
+            function create_post()
             {
-                var r = confirm("Attention! If you have made changes to Neurons that are not saved, they will be erased!\nNew layers created will have a default neuron count of 1.\n Are you sure you want to submit?");
+                console.log("create post is working!") // sanity check
             }
         </script>
     </div>

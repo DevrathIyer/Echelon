@@ -35,15 +35,13 @@
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">
             Layers: <input type="text" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
             <button id="Hello" onclick="openNav()" value='hide/show'>Edit</button>
-            <div id="DIVLAYERCOUNTEDIT{{item.Project_ID}}" class="overlay">
                 <form id = "LAYERCOUNTEDITFORM{{item.Proect_ID}}" action="{% url 'viewuserdata' %}" method="post">
                     {% csrf_token %}
                     <input type="hidden" id="LayerCountNew{{item.Project_ID}}" name="LayerCountNew{{item.Project_ID}}" value="N/A">
                     <input type="hidden" id="LayerCountOrig{{item.Project_ID}}" name="LayerCountOrig{{item.Project_ID}}" value="N/A">
                 </form>
-                <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('up');">+</button>
-                <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('down');">-</button>
-            </div>
+                <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
+                <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
         </div>
         Neurons Per Layer:
             {% for x in item.Neurons_per_Layer %}

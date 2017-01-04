@@ -38,16 +38,25 @@
             <div id="DIVLAYERCOUNTEDIT{{item.Project_ID}}" class="overlay">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <div class="overlay-content">
-                    Layers: <input type="text" id="DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
-                    <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('up');">+</button>
-                    <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('down');">-</button>
+                    <div class="LAYERCOUNTEDITHEADER">
+                        Edit Layer Count
+                    </div>
+                    <div class="LAYERCOUNTEDITBODY">
+                        Layers: <input type="text" id="DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
+                        <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('up');">+</button>
+                        <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTEDITLABEL{{item.Project_ID}}('down');">-</button>
+                    </div>
+                    <div class="LAYERCOUNTEDITFOOTER">
+                        <button id="DIVLAYERCOUNTCANCEL{{item.Project_ID}}" onclick="DIVLAYERCOUNTEDITCANCEL{{item.Project_ID}}()"></button>
+                        <button id="DIVLAYERCOUNTSUBMIT{{item.Project_ID}}"></button>
+                    </div>
                 </div>
             </div>
         </div>
         Neurons Per Layer:
             {% for x in item.Neurons_per_Layer %}
                 <div id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}">
-                    Layer {{forloop.counter}}: Neurons<input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />
+                    Layer {{forloop.counter}}: <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />Neurons
                     <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('up');">+</button>
                     <button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
                     <script>
@@ -149,6 +158,13 @@
             function closeNav()
             {
                 document.getElementById("DIVLAYERCOUNTEDIT{{item.Project_ID}}").style.height = "0%";
+            }
+
+            function DIVLAYERCOUNTEDITCANCEL{{item.Project_ID}}()
+            {
+                closeNav();
+                origValue = document.getElementById('DIVLAYERCOUTNLABEL{{item.Project_ID}}').value;
+                document.getElementbyID("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value = origValue;
             }
         </script>
     </div>

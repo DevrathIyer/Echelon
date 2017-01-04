@@ -48,7 +48,7 @@
                     </div>
                     <div class="LAYERCOUNTEDITFOOTER">
                         <button id="DIVLAYERCOUNTCANCEL{{item.Project_ID}}" onclick="DIVLAYERCOUNTEDITCANCEL{{item.Project_ID}}()"></button>
-                        <button id="DIVLAYERCOUNTSUBMIT{{item.Project_ID}}"></button>
+                        <button id="DIVLAYERCOUNTSUBMIT{{item.Project_ID}}" onclick="DIVLAYERCOUNTEDITSUBMIT{{item.Project_ID}}()"></button>
                     </div>
                 </div>
             </div>
@@ -110,20 +110,18 @@
                     else if (upordown == 'down')
                     {
                         --document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
-                        --document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value;
-                    }}
-                    else if (quantity.value == 1)
-                    {
-                        if (upordown == 'up')
-                        {
-                            ++document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
-                            ++document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value;
-                        }
                     }
+                }
+                else if (quantity.value == 1)
+                {
+                    if (upordown == 'up')
+                    {
+                        ++document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value;
+                    }
+                }
                 else
                 {
                     document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value=1;
-                    document.getElementById("DIVLAYERCOUTNLABEL{{item.Project_ID}}").value=1;
                 }
             }
             function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {
@@ -164,7 +162,7 @@
             {
                 closeNav();
                 origValue = document.getElementById('DIVLAYERCOUTNLABEL{{item.Project_ID}}').value;
-                document.getElementbyID("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value = origValue;
+                document.getElementbyId("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value = origValue;
             }
         </script>
     </div>

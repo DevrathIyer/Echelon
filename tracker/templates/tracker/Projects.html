@@ -122,6 +122,9 @@
                 $('.ajaxProgress').show();
                 $.ajax({
                     type:'POST',
+                    url:'{% url 'editproject' %}',
+                    datatype:"json",
+                    async: true,
                 });
             }
         </script>

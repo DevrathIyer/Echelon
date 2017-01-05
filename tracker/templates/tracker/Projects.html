@@ -34,8 +34,7 @@
     <div id="DIV{{item.Project_ID}}">
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">
             Layers: <input type="text" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
-            <button id="Hello" onclick="openNav()" value='hide/show'>Edit</button>
-                <form id = "LAYERCOUNTEDITFORM{{item.Proect_ID}}" action="{% url 'viewuserdata' %}" method="post">
+                <form id = "LAYERCOUNTEDITFORM{{item.Proect_ID}}" action="return false;" method="post">
                     {% csrf_token %}
                     <input type="hidden" id="LayerCountNew{{item.Project_ID}}" name="LayerCountNew{{item.Project_ID}}" value="N/A">
                     <input type="hidden" id="LayerCountOrig{{item.Project_ID}}" name="LayerCountOrig{{item.Project_ID}}" value="N/A">
@@ -100,10 +99,12 @@
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
+                        LAYERCOUNTEDITFORM{{item.Proect_ID}}SUBMIT();
                     }
                     else if (upordown == 'down')
                     {
                         --document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
+                        LAYERCOUNTEDITFORM{{item.Proect_ID}}SUBMIT();
                     }
                 }
                 else if (quantity.value == 1)
@@ -111,11 +112,14 @@
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
+                        LAYERCOUNTEDITFORM{{item.Proect_ID}}SUBMIT();
+
                     }
                 }
                 else
                 {
                     document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value=1;
+                    LAYERCOUNTEDITFORM{{item.Proect_ID}}SUBMIT();
                 }
             }
             function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {
@@ -161,10 +165,17 @@
                 document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value = origValue;
             }
 
-            function create_post()
-            {
-                console.log("create post is working!") // sanity check
-            }
+            function LAYERCOUNTEDITFORM{{item.Proect_ID}}SUBMIT(){
+                $('.ajaxProgress').show();
+                $.ajax({
+                    type:'POST',
+                    url:'{% url 'editprojects' %}',
+                    datatype:"json",
+                    async: true,
+                    data:{
+                        csrfmiddlewaretoken:{%csrf_token%},
+                        layers:$('DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(),
+                    }
         </script>
     </div>
 {% endfor %}

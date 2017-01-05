@@ -123,7 +123,6 @@
             }
 
             function LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
-                console.log('Ayyo what happened?');
                 $.ajax({
                     type:'POST',
                     url:'{% url 'editproject' %}',
@@ -134,7 +133,7 @@
                         layers:$('DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(),
 			        },
 			        success: function(json){
-			            console.log('Ayyo fam, it worked');
+			            console.log(json);
 			        }
                 });
             }

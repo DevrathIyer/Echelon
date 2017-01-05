@@ -131,7 +131,7 @@
                     datatype:"json",
                     async: true,
                     data:{
-                        csrfmiddlewaretoken:{{csrf_token}},
+                        csrfmiddlewaretoken:'{{csrf_token}}',
                         layers:$('DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(),
 			        },
 			        success: function(){

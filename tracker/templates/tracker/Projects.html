@@ -128,6 +128,9 @@
                     data:{
                         csrfmiddlewaretoken:{{csrf_token}},
                         layers:$('DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(),
+			        },
+			        success: function(){
+			            console.log('Ayyo fam, it worked');
 			        }
                 });
             }

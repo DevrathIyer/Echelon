@@ -98,10 +98,12 @@
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
+                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                     }
                     else if (upordown == 'down')
                     {
                         --document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
+                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                     }
                 }
                 else if (quantity.value == 1)
@@ -109,11 +111,13 @@
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
+                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                     }
                 }
                 else
                 {
                     document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value=1;
+                    LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
 
                 }
             }

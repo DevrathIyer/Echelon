@@ -70,14 +70,6 @@ def editproject(request):
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
     response = requests.get(url)
-    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
-        if response.json()['aud'] == GoogleID:
-            userid = response.json()['sub']
-            post_data = {'auth': os.environ['password'], 'uid': userid}
-            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserData', data=post_data)
-            if response.json()['error'] == "NA":
-                UserCredits = response.json()['credits']
-                return render(request, 'tracker/Credits.html', {'Credits':UserCredits})
 
 def credits(request):
     try:

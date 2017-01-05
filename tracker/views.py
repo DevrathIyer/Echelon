@@ -63,11 +63,9 @@ def signout(request):
     return redirect('login')
 
 def editproject(request):
-    try:
-        Layers = request.POST.get('layers')
-        return HttpResponse(json.dumps(Layers), content_type='application/json')
-    except:
-        return HttpResponse(json.dumps('nahhhh'),content_type='application/json')
+    Layers = request.POST.get('layers')
+    #return HttpResponse(json.dumps(Layers), content_type='application/json')
+    return HttpResponse(json.dumps('nahhhh'), content_type='application/json')
 
 def credits(request):
     try:

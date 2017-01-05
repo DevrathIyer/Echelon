@@ -1,10 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-OHHHHH SHIT WADDUP {{var}}!
-</body>
-</html>
+ <button id = "HIDEBUTTON{{item.Project_ID}}" value='hide/show'>{{item.Project_ID}}
+    </button>
+    <div id="DIV{{item.Project_ID}}">
+        <div id="DIVLAYERCOUNT{{item.ProjectID}}">
+            Layers: <input type="text" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
+                <form id = "LAYERCOUNTEDITFORM{{item.Project_ID}}" action="return false;" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" id="LayerCountNew{{item.Project_ID}}" name="LayerCountNew{{item.Project_ID}}" value="N/A">
+                    <input type="hidden" id="LayerCountOrig{{item.Project_ID}}" name="LayerCountOrig{{item.Project_ID}}" value="N/A">
+                </form>
+                <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
+                <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
+        </div>
+        Neurons Per Layer:
+            {% for x in item.Neurons_per_Layer %}
+                <div id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}">
+                    Layer {{forloop.counter}}: <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />
+                    <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('up');">+</button><button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
+                    Neurons
+                    <script>
+                        function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {
+                            var quantity = document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}");
+
+                            if (DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}.value > 1) {
+                                if (upordown == 'up')
+                                {
+                                    ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                }
+                                else if (upordown == 'down')
+                                {
+                                    --document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                }
+                            }
+                            else if (quantity.value == 1)
+                            {
+                                if (upordown == 'up')
+                                {
+                                    ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                }
+                            }
+                            else
+                            {
+                                document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value=1;
+                            }
+                        }
+                    </script>
+                </div>
+            {% endfor %}
+
+            <script>
+            jQuery(document).ready(function(){
+                jQuery("#DIV{{item.Project_ID}}").toggle('show');
+                jQuery("#HIDEBUTTON{{item.Project_ID}}").on('click', function(event) {
+                    jQuery("#DIV{{item.Project_ID}}").toggle('show');
+                });
+                $('LAYERCOUNTEDITFORM{{item.Proect_ID}}').on('submit', function(event){
+                    event.preventDefault();
+                    console.log("form submitted!")  // sanity check
+                    create_post();
+                });
+            });
+
+            function setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}(upordown) {
+                var quantity = document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}");
+
+                if (DIVLAYERCOUNTLABEL{{item.Project_ID}}.value > 1) {
+                    if (upordown == 'up')
+                    {
+                        ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
+                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                    }
+                    else if (upordown == 'down')
+                    {
+                        --document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
+                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                    }
+                }
+                else if (quantity.value == 1)
+                {
+                    if (upordown == 'up')
+                    {
+                        ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
+                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                    }
+                }
+                else
+                {
+                    document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value=1;
+                    LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+
+                }
+            }
+
+            function LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
+                $.ajax({
+                    type:'POST',
+                    url:'{% url 'editproject' %}',
+                    datatype:"json",
+                    async: true,
+                    data:{
+                        csrfmiddlewaretoken:'{{csrf_token}}',
+                        layers:$('#DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(),
+			        },
+			        success: function(json){
+			            console.log(json);
+			        }
+                });
+            }
+        </script>
+    </div>

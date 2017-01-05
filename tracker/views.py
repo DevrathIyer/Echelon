@@ -64,10 +64,9 @@ def signout(request):
 
 def editproject(request):
     try:
-        id_token = request.session['TokenID']
         Layers = request.POST.get('layers')
     except:
-        return Http404()
+        return HttpResponse(json.dumps('nahhhh'),content_type='application/json')
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
     response = requests.get(url)

@@ -99,12 +99,12 @@
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                        LAYERCOUNTEDITFORM{{item.Proect_ID}}SUBMIT();
+                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                     }
                     else if (upordown == 'down')
                     {
                         --document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                        LAYERCOUNTEDITFORM{{item.Proect_ID}}SUBMIT();
+                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                     }
                 }
                 else if (quantity.value == 1)
@@ -112,14 +112,14 @@
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                        LAYERCOUNTEDITFORM{{item.Proect_ID}}SUBMIT();
+                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
 
                     }
                 }
                 else
                 {
                     document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value=1;
-                    LAYERCOUNTEDITFORM{{item.Proect_ID}}SUBMIT();
+                    LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                 }
             }
             function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {
@@ -129,7 +129,6 @@
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
-                        document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").submit();
                     }
                     else if (upordown == 'down')
                     {
@@ -165,11 +164,11 @@
                 document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value = origValue;
             }
 
-            function LAYERCOUNTEDITFORM{{item.Proect_ID}}SUBMIT(){
+            function LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
                 $('.ajaxProgress').show();
                 $.ajax({
                     type:'POST',
-                    url:'{% url 'editprojects' %}',
+                    url:'{% url 'editproject' %}',
                     datatype:"json",
                     async: true,
                     data:{

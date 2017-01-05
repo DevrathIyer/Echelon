@@ -99,12 +99,10 @@
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-
                     }
                     else if (upordown == 'down')
                     {
                         --document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-
                     }
                 }
                 else if (quantity.value == 1)
@@ -112,8 +110,6 @@
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-
-
                     }
                 }
                 else
@@ -146,23 +142,6 @@
                     document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value=1;
                 }
             }
-            function openNav()
-            {
-                document.getElementById("DIVLAYERCOUNTEDIT{{item.Project_ID}}").style.height = "100%";
-            }
-
-            function closeNav()
-            {
-                document.getElementById("DIVLAYERCOUNTEDIT{{item.Project_ID}}").style.height = "0%";
-            }
-
-            function DIVLAYERCOUNTEDITCANCEL{{item.Project_ID}}()
-            {
-                closeNav();
-                origValue = document.getElementById('DIVLAYERCOUNTLABEL{{item.Project_ID}}').value;
-                console.log(origValue);
-                document.getElementById("DIVLAYERCOUNTEDITLABEL{{item.Project_ID}}").value = origValue;
-            }
 
             function LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
                 $('.ajaxProgress').show();
@@ -175,6 +154,7 @@
                         csrfmiddlewaretoken:{%csrf_token%},
                         layers:$('DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(),
                     }
+                }
         </script>
     </div>
 {% endfor %}

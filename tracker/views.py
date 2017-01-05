@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.db import models
 from django.http import HttpResponse,Http404
-from django import json
+import json
 from random import randint
 from Crypto.PublicKey import RSA
 from Crypto.Hash import SHA256

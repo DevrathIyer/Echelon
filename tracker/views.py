@@ -63,7 +63,7 @@ def signout(request):
     return redirect('login')
 
 def editproject(request):
-    Layers = request.POST.get()
+    Layers = request.POST['layers']
     return HttpResponse(json.dumps(Layers), content_type='application/json')
     #return HttpResponse(json.dumps('nahhhh'), content_type='application/json')
 

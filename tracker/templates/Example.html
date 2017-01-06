@@ -108,10 +108,11 @@
                 });
             }
         </script>
+        {{item.Layers}}
     </div>
 <script>
     function LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
-        console.log({{item.Layers}});
+        #console.log({{item.Layers}});
         $.ajax({
             type:'POST',
             url:'{% url 'editproject' %}',
@@ -122,7 +123,7 @@
                 layers:$('#DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(),
             },
 	        success: function(json){
-	            console.log(json);
+	            console.log(Hello);
 	        }
         });
     }

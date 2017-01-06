@@ -112,7 +112,7 @@
     </div>
 <script>
     function LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
-        #console.log({{item.Layers}});
+        if(
         $.ajax({
             type:'POST',
             url:'{% url 'editproject' %}',

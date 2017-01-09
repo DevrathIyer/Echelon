@@ -95,6 +95,7 @@
         for(i = 0; i <= {{item.NeuronLength}}; i++)
         {   var iString = i.toString()
             Neurons = Neurons.concat($('#DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}').val());
+            console.log('#DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}');
         }
         console.log(Neurons);
         $.ajax({

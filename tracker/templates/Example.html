@@ -55,11 +55,6 @@
                 jQuery("#HIDEBUTTON{{item.Project_ID}}").on('click', function(event) {
                     jQuery("#DIV{{item.Project_ID}}").toggle('show');
                 });
-                $('LAYERCOUNTEDITFORM{{item.Proect_ID}}').on('submit', function(event){
-                    event.preventDefault();
-                    console.log("form submitted!")  // sanity check
-                    create_post();
-                });
             });
 
             function setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}(upordown) {
@@ -98,7 +93,7 @@
 <script>
     function LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
         var Neurons = "";
-        for(i = 0; i < {{Neuron.forloop.counter}}; i++)
+        for(i = 0; i < {{NeuronLength.forloop.counter}}; i++)
         {   var iString = i.toString()
             console.log(iString)
         }

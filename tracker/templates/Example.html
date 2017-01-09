@@ -98,7 +98,7 @@
 <script>
     function LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
         var Neurons = "";
-        for(i = 0; i < 3; i++)
+        for(i = 0; i < {{Neuron.forloop.counter}}; i++)
         {   var iString = i.toString()
             console.log(iString)
         }

@@ -98,9 +98,10 @@
     function LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
         var Neurons = "";
         for(i = 0; i < {{NeuronLength}}; i++)
-        {
-            Neurons = Neurons.concat(document.getElementById("DIVNEURONLAYERLABEL"+i.toString()+"{{item.Project_ID}}").value);
-            console.log(Neurons);
+        {   var iString = i.toString()
+            console.log(iString())
+            #Neurons = Neurons.concat(document.getElementById("DIVNEURONLAYERLABEL"+i.toString()+"{{item.Project_ID}}").value);
+            #console.log(Neurons);
         }
         $.ajax({
             type:'POST',

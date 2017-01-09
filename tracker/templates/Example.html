@@ -100,13 +100,13 @@
             }
             if($('#DIVNEURONLAYERLABEL'+iString+'{{item.Project_ID}}').length)
             {
-                console.log('true');
+                Neurons = Neurons.concat($('#DIVNEURONLAYERLABEL'+iString+'{{item.Project_ID}}').val());
             }
             else
             {
-                console.log('false');
+                Neurons = Neurons.concat('1');
             }
-            Neurons = Neurons.concat($('#DIVNEURONLAYERLABEL'+iString+'{{item.Project_ID}}').val());
+
         }
         $.ajax({
             type:'POST',
@@ -120,7 +120,6 @@
                 neurons:Neurons,
             },
 	        success: function(json){
-	            console.log('hello world');
 	            $('#UAWAVYDUDE{{item.Project_ID}}').html(json);
 	        }
         });

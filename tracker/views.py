@@ -75,7 +75,8 @@ def editproject(request):
         if response.json()['aud'] == GoogleID:
             # response['auth'] = os.environ['password']
             userid = response.json()['sub']
-            return HttpResponse('<b>ayyo</b>', content_type='application/html')
+            return render(request, 'Example.html', {'Projects': ProjectList, 'UserName': UserName})
+            #return HttpResponse('<b>ayyo</b>', content_type='application/html')
     #return HttpResponse(json.dumps('nahhhh'), content_type='application/json')
 
 def credits(request):

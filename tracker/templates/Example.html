@@ -89,7 +89,10 @@
     </div>
 <script>
     function DELETEPROJECT{{item.Project_ID}}(){
-        if(confirm("Deleting this project will erase the connection between you and your data.\n This CANNOT be undone.\n Are you sure you want to continue?");
+        if(confirm("Deleting this project will erase the connection between you and your data.\n This CANNOT be undone.\n Are you sure you want to continue?"))
+        {
+            console.log("Ye");
+        }
     function PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
         var Neurons = "";
         for(i = 1; i <= $('#DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(); i++)

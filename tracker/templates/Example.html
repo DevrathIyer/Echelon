@@ -85,8 +85,11 @@
                 }
             }
         </script>
+        <button id = "DELETEBUTTON{{item.Project_ID}}" class = 'ButtonDelete' onclick="DELETEPROJECT{{item.Project_ID}}();">Delete</button>
     </div>
 <script>
+    function DELETEPROJECT{{item.Project_ID}}(){
+        if(confirm("Deleting this project will erase the connection between you and your data.\n This CANNOT be undone.\n Are you sure you want to continue?");
     function PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
         var Neurons = "";
         for(i = 1; i <= $('#DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(); i++)

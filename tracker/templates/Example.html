@@ -92,9 +92,9 @@
 <script>
     function LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
         var Neurons = "";
-        for(i = 0; i < {{item.NeuronLength}}; i++)
+        for(i = 0; i <= {{item.NeuronLength}}; i++)
         {   var iString = i.toString()
-            console.log(iString)
+            Neurons = Neurons.concat($('DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}').val()
         }
         $.ajax({
             type:'POST',

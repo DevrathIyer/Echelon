@@ -63,8 +63,19 @@ def signout(request):
     return redirect('login')
 
 def editproject(request):
-    Layers = request.POST.get('layers')
-    return HttpResponse('<b>ayyo</b>', content_type='application/html')
+    try:
+        id_token = request.session['TokenID']
+        Layers = request.POST.get('layers')
+    except:
+        return Http404()
+    GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
+    response = requests.get(url)
+    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
+        if response.json()['aud'] == GoogleID:
+            # response['auth'] = os.environ['password']
+            userid = response.json()['sub']
+            return HttpResponse('<b>ayyo</b>', content_type='application/html')
     #return HttpResponse(json.dumps('nahhhh'), content_type='application/json')
 
 def credits(request):

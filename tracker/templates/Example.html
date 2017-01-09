@@ -118,7 +118,7 @@
             },
 	        success: function(json){
 	            $('#projects').html(json);
-	            if("#DIV{{item.Project_ID}}" != "#DIV".concat({{ProjectID}}))
+	            if("#DIV{{item.Project_ID}}" != "#DIV".concat('{{ProjectID}}'))
                 {
                     jQuery("#DIV{{item.Project_ID}}").toggle('show');
                 }

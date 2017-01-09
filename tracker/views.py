@@ -77,6 +77,44 @@ def editproject(request):
         if response.json()['aud'] == GoogleID:
             # response['auth'] = os.environ['password']
             userid = response.json()['sub']
+            post_data = {'auth': os.environ['password'], 'projectid': projectid}
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/deleteProject', data=post_data)
+            post_data = {'auth': os.environ['password'], 'uid': userid}
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserProjects', data=post_data)
+            try:
+                Projects = response.json()['project_list'].split()
+            except:
+                Projects = ['']
+            ProjectNumber = len(Projects)
+            ProjectList = ['' for x in range(ProjectNumber)]
+            Neurons = ['' for x in range(ProjectNumber)]
+            NeuronLength = ['' for x in range(ProjectNumber)]
+            for x in range(ProjectNumber):
+                if (x != 0):
+                    post_data = {'auth': os.environ['password'], 'projectid': Projects[x]}
+                    response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
+                                             data=post_data)
+                    ProjectList[x] = response.json()
+                    ProjectList[x]['Neurons_per_Layer'] = response.json()['Neurons_per_Layer'].split(',')
+                    ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
+            ProjectList.pop(0)
+            return render(request, 'Example.html', {'Projects': ProjectList,'ProjectID':projectid})
+
+def editproject(request):
+    try:
+        id_token = request.session['TokenID']
+        layers = request.POST.get('layers')
+        projectid = request.POST.get('projectid')
+        neurons = request.POST.get('neurons')
+    except:
+        return Http404()
+    GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
+    response = requests.get(url)
+    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
+        if response.json()['aud'] == GoogleID:
+            # response['auth'] = os.environ['password']
+            userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers':layers, 'nodes':neurons}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/editProject', data=post_data)
             post_data = {'auth': os.environ['password'], 'uid': userid}

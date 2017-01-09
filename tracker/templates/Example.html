@@ -91,7 +91,19 @@
     function DELETEPROJECT{{item.Project_ID}}(){
         if(confirm("Deleting this project will erase the connection between you and your data.\n This CANNOT be undone.\n Are you sure you want to continue?"))
         {
-            console.log("Ye");
+            $.ajax({
+            type:'POST',
+            url:'{% url 'deleteproject' %}',
+            datatype:"json",
+            async: true,
+            data:{
+                csrfmiddlewaretoken:'{{csrf_token}}',
+                projectid:'{{item.Project_ID}}',
+            },
+	        success: function(json){
+	            $('#projects').html(json);
+	        }
+            });
         }
     }
     function PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){

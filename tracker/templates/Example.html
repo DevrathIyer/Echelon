@@ -100,6 +100,7 @@
         for(i = 0; i < {{NeuronLength}}; i++)
         {
             Neurons = Neurons.concat(document.getElementById("DIVNEURONLAYERLABEL"+i.toString()+"{{item.Project_ID}}").value);
+            console.log(Neurons);
         }
         $.ajax({
             type:'POST',

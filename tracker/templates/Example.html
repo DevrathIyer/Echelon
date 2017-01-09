@@ -96,6 +96,11 @@
     </div>
 <script>
     function LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
+        var Neurons = "";
+        for(i = 0; i < {{NeuronLength}}; i++)
+        {
+            Neurons = Neurons.concat(document.getElementById("DIVNEURONLAYERLABEL"+i.toString()+"{{item.Project_ID}}").value);
+        }
         $.ajax({
             type:'POST',
             url:'{% url 'editproject' %}',
@@ -104,6 +109,7 @@
             data:{
                 csrfmiddlewaretoken:'{{csrf_token}}',
                 layers:$('#DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(),
+                projectid:{{item.Project_ID}}
             },
 	        success: function(json){
 	            console.log('hello world');

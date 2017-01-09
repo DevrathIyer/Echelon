@@ -96,11 +96,11 @@
         {   var iString = i.toString();
             if(i != 1)
             {
-                Neurons = Neurons.concat(',')
+                Neurons = Neurons.concat(',');
             }
             if($('#DIVNEURONLAYERLABEL'+iString+'{{item.Project_ID}}').length)
             {
-                console.log('true'};
+                console.log('true');
             }
             Neurons = Neurons.concat($('#DIVNEURONLAYERLABEL'+iString+'{{item.Project_ID}}').val());
         }

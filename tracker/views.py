@@ -65,7 +65,9 @@ def signout(request):
 def editproject(request):
     try:
         id_token = request.session['TokenID']
-        Layers = request.POST.get('layers')
+        layers = request.POST.get('layers')
+        projectid = request.POST.get('projectid')
+        neurons = request.POST.get('neurons')
     except:
         return Http404()
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
@@ -75,7 +77,11 @@ def editproject(request):
         if response.json()['aud'] == GoogleID:
             # response['auth'] = os.environ['password']
             userid = response.json()['sub']
-            return render(request, 'Example.html', {'Projects': ProjectList, 'UserName': UserName})
+            post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers':layers, 'nodes':neurons}
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/editProject', data=post_data)
+            post_data = {'auth': os.environ['password'], 'projectid': projectid}
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
+            return render(request, 'Example.html', {})
             #return HttpResponse('<b>ayyo</b>', content_type='application/html')
     #return HttpResponse(json.dumps('nahhhh'), content_type='application/json')
 

@@ -29,7 +29,9 @@
     }
 </script>
 <div id="projects">
-    {% include 'Example.html' %}
+    {% for item in Projects %}
+        {% include 'Example.html' %}
+    {% endfor %}
 </div>
 <style>
 body {

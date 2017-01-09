@@ -1,8 +1,11 @@
-
- <button id = "HIDEBUTTON{{item.Project_ID}}" value='hide/show'>{{item.Project_ID}}
-    </button>
-    <div id="DIV{{item.Project_ID}}">
-        <div id="DIVLAYERCOUNT{{item.ProjectID}}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="DIVLAYERCOUNT{{item.ProjectID}}">
             Layers: <input type="text" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
                 <form id = "LAYERCOUNTEDITFORM{{item.Project_ID}}" action="return false;" method="post">
                     {% csrf_token %}
@@ -88,40 +91,5 @@
                 }
             }
         </script>
-    </div>
-<script>
-    function LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
-        var Neurons = "";
-        for(i = 1; i <= $('#DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(); i++)
-        {   var iString = i.toString();
-            if(i != 1)
-            {
-                Neurons = Neurons.concat(',');
-            }
-            if($('#DIVNEURONLAYERLABEL'+iString+'{{item.Project_ID}}').length)
-            {
-                Neurons = Neurons.concat($('#DIVNEURONLAYERLABEL'+iString+'{{item.Project_ID}}').val());
-            }
-            else
-            {
-                Neurons = Neurons.concat('1');
-            }
-
-        }
-        $.ajax({
-            type:'POST',
-            url:'{% url 'editproject' %}',
-            datatype:"json",
-            async: true,
-            data:{
-                csrfmiddlewaretoken:'{{csrf_token}}',
-                layers:$('#DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(),
-                projectid:'{{item.Project_ID}}',
-                neurons:Neurons,
-            },
-	        success: function(json){
-	            $('#DIV{{item.Project_ID}}').html(json);
-	        }
-        });
-    }
-</script>
+</body>
+</html>

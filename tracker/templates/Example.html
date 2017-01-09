@@ -109,7 +109,7 @@
             data:{
                 csrfmiddlewaretoken:'{{csrf_token}}',
                 layers:$('#DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(),
-                projectid:{{item.Project_ID}}
+                projectid:'{{item.Project_ID}}',
             },
 	        success: function(json){
 	            console.log('hello world');

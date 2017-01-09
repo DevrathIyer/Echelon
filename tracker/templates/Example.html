@@ -3,19 +3,15 @@
     <div id="DIV{{item.Project_ID}}">
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">
             Layers: <input type="text" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
-                <form id = "PROJECTCOUNTEDITFORM{{item.Project_ID}}" action="return false;" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" id="LayerCountNew{{item.Project_ID}}" name="LayerCountNew{{item.Project_ID}}" value="N/A">
-                    <input type="hidden" id="LayerCountOrig{{item.Project_ID}}" name="LayerCountOrig{{item.Project_ID}}" value="N/A">
-                </form>
-                <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
-                <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
+            <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
+            <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
         </div>
         Neurons Per Layer:
             {% for x in item.Neurons_per_Layer %}
                 <div id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}">
                     Layer {{forloop.counter}}: <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />
-                    <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('up');">+</button><button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
+                    <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('up');">+</button>
+                    <button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
                     Neurons
                     <script>
                         function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {

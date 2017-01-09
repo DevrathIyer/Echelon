@@ -92,15 +92,18 @@
 <script>
     function LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
         var Neurons = "";
-        for(i = 1; i <= {{item.NeuronLength}}; i++)
-        {   var iString = i.toString()
+        for(i = 1; i <= $('#DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(); i++)
+        {   var iString = i.toString();
             if(i != 1)
             {
                 Neurons = Neurons.concat(',')
             }
+            if($('#DIVNEURONLAYERLABEL'+iString+'{{item.Project_ID}}').val() =='undefined')
+            {
+                console.log('true'};
+            }
             Neurons = Neurons.concat($('#DIVNEURONLAYERLABEL'+iString+'{{item.Project_ID}}').val());
         }
-        console.log(Neurons);
         $.ajax({
             type:'POST',
             url:'{% url 'editproject' %}',
@@ -110,6 +113,7 @@
                 csrfmiddlewaretoken:'{{csrf_token}}',
                 layers:$('#DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(),
                 projectid:'{{item.Project_ID}}',
+                neurons:Neurons,
             },
 	        success: function(json){
 	            console.log('hello world');

@@ -148,6 +148,7 @@ def viewuserdata(request):
                         ProjectList[x]['Neurons_per_Layer'] = response.json()['Neurons_per_Layer'].split(',')
                         NeuronLength[x] = len(response.json()['Neurons_per_Layer'].split(','))
                 ProjectList.pop(0)
+                NeuronLength.pop(0)
                 return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'UserName':UserName,'NeuronLength':NeuronLength})
         else:
             return render(request, 'tracker/Faliure.html', {})

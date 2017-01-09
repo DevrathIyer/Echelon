@@ -49,7 +49,10 @@
 
             <script>
             jQuery(document).ready(function(){
-                jQuery("#DIV{{item.Project_ID}}").toggle('show');
+                if("#DIV{{item.Project_ID}}" != "#DIV".concat({{ProjectID}}))
+                {
+                    jQuery("#DIV{{item.Project_ID}}").toggle('show');
+                }
                 jQuery("#HIDEBUTTON{{item.Project_ID}}").on('click', function(event) {
                     jQuery("#DIV{{item.Project_ID}}").toggle('show');
                 });

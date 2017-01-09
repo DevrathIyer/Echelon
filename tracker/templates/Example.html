@@ -3,7 +3,7 @@
     <div id="DIV{{item.Project_ID}}">
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">
             Layers: <input type="text" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
-                <form id = "LAYERCOUNTEDITFORM{{item.Project_ID}}" action="return false;" method="post">
+                <form id = "PROJECTCOUNTEDITFORM{{item.Project_ID}}" action="return false;" method="post">
                     {% csrf_token %}
                     <input type="hidden" id="LayerCountNew{{item.Project_ID}}" name="LayerCountNew{{item.Project_ID}}" value="N/A">
                     <input type="hidden" id="LayerCountOrig{{item.Project_ID}}" name="LayerCountOrig{{item.Project_ID}}" value="N/A">
@@ -25,10 +25,12 @@
                                 if (upordown == 'up')
                                 {
                                     ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                    PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                                 }
                                 else if (upordown == 'down')
                                 {
                                     --document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                    PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                                 }
                             }
                             else if (quantity.value == 1)
@@ -36,11 +38,13 @@
                                 if (upordown == 'up')
                                 {
                                     ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                    PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                                 }
                             }
                             else
                             {
                                 document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value=1;
+                                PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                             }
                         }
                     </script>
@@ -62,12 +66,12 @@
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                        PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                     }
                     else if (upordown == 'down')
                     {
                         --document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                        PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                     }
                 }
                 else if (quantity.value == 1)
@@ -75,20 +79,20 @@
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                        PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                     }
                 }
                 else
                 {
                     document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value=1;
-                    LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                    PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
 
                 }
             }
         </script>
     </div>
 <script>
-    function LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
+    function PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
         var Neurons = "";
         for(i = 1; i <= $('#DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(); i++)
         {   var iString = i.toString();

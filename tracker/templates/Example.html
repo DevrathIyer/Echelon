@@ -12,6 +12,7 @@
                 <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
                 <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
         </div>
+        <div id="UAWAVYDUDE">Hello! Its not working...</div>
         Neurons Per Layer:
             {% for x in item.Neurons_per_Layer %}
                 <div id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}">
@@ -104,8 +105,8 @@
                 csrfmiddlewaretoken:'{{csrf_token}}',
                 layers:$('#DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(),
             },
-	        success: function(json){
-	            console.log(Hello);
+	        success: function(html){
+	            $('.UAWAVYDUDE').html(html);
 	        }
         });
     }

@@ -1,6 +1,5 @@
-
- <button id = "HIDEBUTTON{{item.Project_ID}}" value='hide/show'>{{item.Project_ID}}
-    </button>
+{% for item in Projects}
+    <button id = "HIDEBUTTON{{item.Project_ID}}" value='hide/show'>{{item.Project_ID}}</button>
     <div id="DIV{{item.Project_ID}}">
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">
             Layers: <input type="text" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
@@ -12,7 +11,6 @@
                 <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
                 <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
         </div>
-        <div id="UAWAVYDUDE{{item.Project_ID}}">Hello! Its not working...</div>
         Neurons Per Layer:
             {% for x in item.Neurons_per_Layer %}
                 <div id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}">
@@ -120,8 +118,9 @@
                 neurons:Neurons,
             },
 	        success: function(json){
-	            $('#DIV{{item.Project_ID}}').html(json);
+	            $('#projects').html(json);
 	        }
         });
     }
 </script>
+{% endfor %}

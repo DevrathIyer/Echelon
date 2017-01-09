@@ -79,9 +79,26 @@ def editproject(request):
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers':layers, 'nodes':neurons}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/editProject', data=post_data)
-            post_data = {'auth': os.environ['password'], 'projectid': projectid}
-            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
-            return render(request, 'Example.html', {})
+            post_data = {'auth': os.environ['password'], 'uid': userid}
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserProjects', data=post_data)
+            try:
+                Projects = response.json()['project_list'].split()
+            except:
+                Projects = ['']
+            ProjectNumber = len(Projects)
+            ProjectList = ['' for x in range(ProjectNumber)]
+            Neurons = ['' for x in range(ProjectNumber)]
+            NeuronLength = ['' for x in range(ProjectNumber)]
+            for x in range(ProjectNumber):
+                if (x != 0):
+                    post_data = {'auth': os.environ['password'], 'projectid': Projects[x]}
+                    response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
+                                             data=post_data)
+                    ProjectList[x] = response.json()
+                    ProjectList[x]['Neurons_per_Layer'] = response.json()['Neurons_per_Layer'].split(',')
+                    ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
+            ProjectList.pop(0)
+            return render(request, 'tracker/Example.html', {'Projects': ProjectList})
             #return HttpResponse('<b>ayyo</b>', content_type='application/html')
     #return HttpResponse(json.dumps('nahhhh'), content_type='application/json')
 

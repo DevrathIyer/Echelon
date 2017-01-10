@@ -62,12 +62,39 @@ def signout(request):
     request.session.flush()
     return redirect('login')
 
-def editproject(request):
+def checkprojectname(request):
+    try:
+        id_token = request.session['TokenID']
+        projectid = request.POST.get('projectid')
+    except:
+        return render(request, 'tracker/Faliure.html', {})
+
+def addproject(request):
     try:
         id_token = request.session['TokenID']
         layers = request.POST.get('layers')
         projectid = request.POST.get('projectid')
         neurons = request.POST.get('neurons')
+    except:
+        return Http404()
+    GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
+    response = requests.get(url)
+    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
+        if response.json()['aud'] == GoogleID:
+            # response['auth'] = os.environ['password']
+            userid = response.json()['sub']
+            post_data = {'auth': os.environ['password'], 'projectid': projectid}
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
+            if(response.json()['message'] == 'could not get project info'):
+                return HttpResponse(json.dumps({'status':'available'}),content_type ='application/json')
+            else:
+                return HttpResponse(json.dumps({'status': 'used'}), content_type='application/json')
+
+def deleteproject(request):
+    try:
+        id_token = request.session['TokenID']
+        projectid = request.POST.get('projectid')
     except:
         return Http404()
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"

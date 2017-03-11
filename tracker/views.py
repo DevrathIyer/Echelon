@@ -1,14 +1,11 @@
 from django.shortcuts import redirect, render
 from django.db import models
 from django.http import HttpResponse,Http404
-import json
-from random import randint
-from Crypto.PublicKey import RSA
-from Crypto.Hash import SHA256
-from Crypto import Random
 import base64
+import json
 import requests
 import os
+import bcrypt
 f = """-----BEGIN RSA PRIVATE KEY-----
 Proc-Type: 4,ENCRYPTED
 DEK-Info: DES-EDE3-CBC,2F5252FFFF575D73
@@ -67,13 +64,24 @@ def checkprojectname(request):
         id_token = request.session['TokenID']
         projectid = request.POST.get('projectid')
     except:
-        return render(request, 'tracker/Faliure.html', {})
+        return HttpResponse(json.dumps({'status': 'Failed'}), content_type='application/json')
+    GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
+    response = requests.get(url)
+    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
+        if response.json()['aud'] == GoogleID:
+            post_data = {'auth': os.environ['password'], 'projectid': projectid}
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
+            if (response.json()['message'] == 'could not get project info'):
+                return HttpResponse(json.dumps({'status': 'available'}), content_type='application/json')
+            else:
+                return HttpResponse(json.dumps({'status': 'used'}), content_type='application/json')
 
 def addproject(request):
     try:
         id_token = request.session['TokenID']
-        layers = request.POST.get('layers')
         projectid = request.POST.get('projectid')
+        layers = request.POST.get('layers')
         neurons = request.POST.get('neurons')
     except:
         return Http404()
@@ -84,12 +92,11 @@ def addproject(request):
         if response.json()['aud'] == GoogleID:
             # response['auth'] = os.environ['password']
             userid = response.json()['sub']
-            post_data = {'auth': os.environ['password'], 'projectid': projectid}
-            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
-            if(response.json()['message'] == 'could not get project info'):
-                return HttpResponse(json.dumps({'status':'available'}),content_type ='application/json')
-            else:
-                return HttpResponse(json.dumps({'status': 'used'}), content_type='application/json')
+            ApiKeyUnhashed = base64.urlsafe_b64encode(os.urandom(30))
+            ApiKeyFinal = bcrypt.hash(ApiKeyUnhashed)
+            post_data = {'auth': os.environ['password'], 'uid': userid, 'projectid': projectid, 'apikey': ApiKeyFinal, 'numlayers': layers, 'nodes': neurons}
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/createNewProject', data=post_data)
+
 
 def deleteproject(request):
     try:

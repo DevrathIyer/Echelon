@@ -31,19 +31,17 @@
 <div id="projects">
     {% include 'Example.html' %}
 </div>
-<div id="AddProjectOverlay" class="overlay">
-  <a href="javascript:void(0)" class="closebtn" onclick="a()">&times;</a>
-  <div class="overlay-content">
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
-  </div>
-</div>
-<button id="AddProjectButton" class="ButtonAddProject" onclick = 'OpenNav();'>Add Project</button>
+<button id="AddProject" class="ButtonAddProject" onclick = 'AddProject();'>Add Project</button>
 <script>
+    function AddProject() {
+
 </script>
 <style>
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+}
+
 .overlay {
     height: 0%;
     width: 100%;
@@ -72,8 +70,8 @@
     color: #818181;
     display: block;
     transition: 0.3s;
-}
 
+}
 .overlay a:hover, .overlay a:focus {
     color: #f1f1f1;
 }

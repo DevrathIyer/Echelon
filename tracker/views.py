@@ -36,13 +36,12 @@ YA3OpZujVRdQPeodBCqFocvEjEwWhPzpxN/Q3/bMX9gvEZNSjl2N5ms7EkxRqQmA
 2GwN4EvxUrfa+xUMXd1mPz0h2V5vY0RUhiZx08DcTE2yHw5jf3kf758tgUb/e3EH
 YZwZkOfXiUuP0/8ff94r4B23WE3kAxJXj09IiANe6aX9WJtcGNbhqCNU9hgRMu2h
 -----END RSA PRIVATE KEY-----"""
-"""
 r = RSA.importKey(f, passphrase=os.environ['ENCRYPTION_PASSWORD'])
 os.environ['ENCRYPTION_PASSWORD']
 string = 'hello'  # base64.b64encode(bytes('hello'))
 hash = SHA256.new(string).digest()
 data = r.sign(hash, 32)
-"""
+
 def home(request):
     return render(request, 'tracker/Homepage.html', {})
 

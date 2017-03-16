@@ -239,7 +239,7 @@ def viewuserdata(request):
                 ProjectList.pop(0)
                 return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'UserName':UserName})
             else:
-                return render(request, 'tracker/Projects.html', {'JSON':response.json['error']}) 
+                return render(request, 'tracker/Projects.html', {'JSON':response.json()['error']})
         else:
             return render(request, 'tracker/Faliure.html', {})
     else:

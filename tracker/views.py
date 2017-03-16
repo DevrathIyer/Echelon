@@ -197,7 +197,7 @@ def createnewuser(request):
             email = response.json()['email']
             post_data = {'auth': os.environ['password'], 'uid': userid, 'name': name , 'email': email}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/createUser', data=post_data)
-            return render(request, 'tracker/NewUser.html', {'JSON': response.json()})
+            return render(request, 'tracker/Faliure.html', {'JSON': response.json()})
         else:
             return render(request, 'tracker/Faliure.html', {})
     else:

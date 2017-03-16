@@ -51,9 +51,6 @@ def home(request):
 def login(request):
     return render(request, 'tracker/Login.html', {})
 
-def signup(request):
-    return render(request, 'tracker/NewUser.html', {})
-
 def signout(request):
     try:
         id_token = request.session['TokenID']
@@ -238,6 +235,8 @@ def viewuserdata(request):
                         ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
                 ProjectList.pop(0)
                 return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'UserName':UserName})
+            else:
+                return render(request, 'tracker/Projects.html', {'JSON':response.json['error']})
         else:
             return render(request, 'tracker/Faliure.html', {})
     else:

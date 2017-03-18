@@ -63,7 +63,7 @@ def signout(request):
     request.session.flush()
     return redirect('login')
 
-def checkprojectname(request):
+def checkproject(request):
     try:
         id_token = request.session['TokenID']
         projectid = request.POST.get('projectid')

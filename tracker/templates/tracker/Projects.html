@@ -51,7 +51,7 @@
             async: true,
             data:{
                 csrfmiddlewaretoken:'{{csrf_token}}',
-                projectid: document.getElementByID("projectID").text;,
+                projectid: document.getElementByID("projectID").text,
             },
 	        success: function(json){
 	            $('#projects').html(json);

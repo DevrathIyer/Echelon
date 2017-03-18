@@ -36,19 +36,34 @@
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="overlay-content">
     <form action="#" method="get">
-       User Name:<br />
-       <input type="text" pattern="[a-zA-Z0-9]{5,15}" /><br />
-       Password:<br />
-       <input type="password" /><br />
-       <input type="submit" value="Log In" />
+       Project ID:<br />
+       <input id = 'projectID' type="text" onchange ="CheckProject()"  pattern="[a-zA-Z0-9]{5,15}" /><br/>
    </form>
   </div>
 </div>
 <script>
-    function openNav() {
+    function Checkproject()
+    {
+        $.ajax({
+            type:'POST',
+            url:'{% url 'checkproject' %}',
+            datatype:"json",
+            async: true,
+            data:{
+                csrfmiddlewaretoken:'{{csrf_token}}',
+                projectid: document.getElementByID("projectID").text;,
+            },
+	        success: function(json){
+	            $('#projects').html(json);
+	        }
+            });
+    }
+    function openNav()
+    {
         document.getElementById("myNav").style.height = "100%";
     }
-    function closeNav() {
+    function closeNav()
+    {
         document.getElementById("myNav").style.height = "0%";
     }
     function AddProject()

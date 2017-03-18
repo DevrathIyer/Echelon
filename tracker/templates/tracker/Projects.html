@@ -35,10 +35,11 @@
 <div id="myNav" class="overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="overlay-content">
-    <form action="#" method="get">
+    <form onsubmit = 'return Checkproject()' method="get">
        Project ID:<br />
-       <input id = 'projectID' type="text" onchange ="CheckProject()"  pattern="[a-zA-Z0-9]{5,15}" /><br/>
+       <input id = 'projectID' type="text" onchange =""  pattern="[a-zA-Z0-9]{5,15}" /><br/>
    </form>
+
   </div>
 </div>
 <script>

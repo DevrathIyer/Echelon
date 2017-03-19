@@ -35,7 +35,7 @@
 <div id="myNav" class="overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="overlay-content">
-    <form onsubmit = 'return Checkproject()' method="get">
+    <form onsubmit = 'Checkproject()' method="get">
        Project ID:<br />
        <input id = 'projectID' type="text" onchange =""  pattern="[a-zA-Z0-9]{5,15}" /><br/>
    </form>
@@ -58,6 +58,7 @@
 	            $('#projects').html(json);
 	        }
             });
+         return false();
     }
     function openNav()
     {

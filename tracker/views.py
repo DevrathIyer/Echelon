@@ -74,6 +74,8 @@ def checkproject(request):
     response = requests.get(url)
     if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
         if response.json()['aud'] == GoogleID:
+            post_data = {'auth': os.environ['password'], 'projectid': projectid}
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
             if (response.json()['message'] == 'could not get project info'):
                 return render(request, 'ProjectCheckAvailable.html', {})
             else:
@@ -97,7 +99,6 @@ def addproject(request):
             post_data = {'auth': os.environ['password'], 'projectid': projectid}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
             return ''.join(random.choice(string.lowercase) for i in range(length))
-
             if (response.json()['message'] == 'could not get project info'):
                 post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers':layers, 'nodes': neurons, 'uid':userid, 'apikey':apikey}
 

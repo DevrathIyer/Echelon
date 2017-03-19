@@ -64,6 +64,8 @@ def signout(request):
     return redirect('login')
 
 def checkproject(request):
+    return HttpResponse(json.dumps({'status': 'NAH'}), content_type='application/json')
+    """
     try:
         id_token = request.session['TokenID']
         projectid = request.POST.get('projectid')
@@ -78,6 +80,7 @@ def checkproject(request):
                 return HttpResponse(json.dumps({'status': 'available'}), content_type='application/json')
             else:
                 return HttpResponse(json.dumps({'status': 'used'}), content_type='application/json')
+    """
 
 def addproject(request):
     try:

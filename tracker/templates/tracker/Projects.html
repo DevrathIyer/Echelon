@@ -6,8 +6,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
     <meta name="google-signin-client_id" content="867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com">
-
 </head>
+<style type="text/css">
+ span.bold-red {
+    color: red;
+    font-weight: bold;
+}
+</style>
 <body>
 <a href = "{% url 'credits' %}">Manage Credits</a>
 <a onclick="signOut();">Sign out</a>
@@ -37,6 +42,7 @@
   <div class="overlay-content">
        Project ID:<br/>
        <input id = 'projectID' type="text" onchange ="Checkproject();"  pattern="[a-zA-Z0-9]{5,15}"/><br/>
+      <span class="bold-red" id="ProjectStatus"></span>
   </div>
 </div>
 <script>
@@ -54,7 +60,7 @@
                 projectid: text,
             },
 	        success: function(json){
-	            console.log("Yeyey"+json[1]);
+	            $('#ProjectStatus').html(json);
 	        }
             });
     }

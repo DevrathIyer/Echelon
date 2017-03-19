@@ -42,7 +42,6 @@
 <script>
     function Checkproject()
     {
-        text = document.getElementByID("projectID").text;
         $.ajax({
             type:'POST',
             url:'{% url 'checkproject' %}',
@@ -50,7 +49,7 @@
             async: true,
             data:{
                 csrfmiddlewaretoken:'{{csrf_token}}',
-                projectid: text,
+                projectid: document.getElementById("projectID").text,
             },
 	        success: function(json){
 	            console.log("Yeyey"+json);

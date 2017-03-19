@@ -35,14 +35,14 @@
 <div id="myNav" class="overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="overlay-content">
-       Project ID:<br />
-       <input id = 'projectID' type="text" onchange ="Checkproject();"  pattern="[a-zA-Z0-9]{5,15}" /><br/>
-
+       Project ID:<br/>
+       <input id = 'projectID' type="text" onchange ="Checkproject();"  pattern="[a-zA-Z0-9]{5,15}"/><br/>
   </div>
 </div>
 <script>
     function Checkproject()
     {
+        text = document.getElementByID("projectID").text;
         $.ajax({
             type:'POST',
             url:'{% url 'checkproject' %}',
@@ -50,7 +50,7 @@
             async: true,
             data:{
                 csrfmiddlewaretoken:'{{csrf_token}}',
-                projectid: document.getElementByID("projectID").text,
+                projectid: text,
             },
 	        success: function(json){
 	            console.log("Yeyey"+json);

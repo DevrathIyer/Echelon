@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.db import models
 from django.http import HttpResponse,Http404
-import json
+from django.utils import simplejson
 from random import randint
 from Crypto.PublicKey import RSA
 from Crypto.Hash import SHA256
@@ -67,20 +67,17 @@ def checkproject(request):
     try:
         id_token = request.session['TokenID']
         projectid = request.POST.get('projectid')
-        return HttpResponse(json.dumps({'status': 'YUH'}), content_type='application/json')
     except:
         return HttpResponse(json.dumps({'status': 'NAH'}), content_type='application/json')
-    """
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
     response = requests.get(url)
     if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
         if response.json()['aud'] == GoogleID:
             if (response.json()['message'] == 'could not get project info'):
-                return HttpResponse(json.dumps({'status': 'available'}), content_type='application/json')
+                return render(request, 'ProjectCheckAvailable.html', {})
             else:
-                return HttpResponse(json.dumps({'status': 'used'}), content_type='application/json')
-    """
+                return render(request, 'ProjectCheckUsed.html', {})
 
 def addproject(request):
     try:
@@ -99,13 +96,10 @@ def addproject(request):
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'projectid': projectid}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
+            return ''.join(random.choice(string.lowercase) for i in range(length))
 
-            def randomword(length):
-                return ''.join(random.choice(string.lowercase) for i in range(length))
             if (response.json()['message'] == 'could not get project info'):
                 post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers':layers, 'nodes': neurons, 'uid':userid, 'apikey':apikey}
-            else:
-                return HttpResponse(json.dumps({'status': 'used'}), content_type='application/json')
 
 
 def deleteproject(request):

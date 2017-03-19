@@ -42,7 +42,7 @@
 <script>
     function Checkproject()
     {
-        console.log($('#projectID').val());
+        text = $('#projectID').val();
         $.ajax({
             type:'POST',
             url:'{% url 'checkproject' %}',
@@ -50,7 +50,7 @@
             async: true,
             data:{
                 csrfmiddlewaretoken:'{{csrf_token}}',
-                projectid: $('#projectID').val(),
+                projectid: text,
             },
 	        success: function(json){
 	            console.log("Yeyey"+json);

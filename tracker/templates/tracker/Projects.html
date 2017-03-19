@@ -43,6 +43,7 @@
     function Checkproject()
     {
         text = $('#projectID').val();
+        console.log(text);
         $.ajax({
             type:'POST',
             url:'{% url 'checkproject' %}',

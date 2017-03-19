@@ -42,7 +42,7 @@
 <script>
     function Checkproject()
     {
-        console.log(document.getElementById("projectID").text);
+        console.log($('#projectID').val());
         $.ajax({
             type:'POST',
             url:'{% url 'checkproject' %}',

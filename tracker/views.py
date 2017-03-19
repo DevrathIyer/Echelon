@@ -64,13 +64,13 @@ def signout(request):
     return redirect('login')
 
 def checkproject(request):
-    return HttpResponse(json.dumps({'status': 'NAH'}), content_type='application/json')
-    """
     try:
         id_token = request.session['TokenID']
         projectid = request.POST.get('projectid')
+        return HttpResponse(json.dumps({'status': 'YUH'}), content_type='application/json')
     except:
         return HttpResponse(json.dumps({'status': 'NAH'}), content_type='application/json')
+    """
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
     response = requests.get(url)

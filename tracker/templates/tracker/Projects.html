@@ -46,10 +46,17 @@
   </div>
 </div>
 <script>
+$(function(){
+  $('#txt').keypress(function(e){
+    if((47< e < 58)|| (100 < e < 133) || (96 < e < 123){
+    } else {
+      return false;
+    }
+  });
+});
     function Checkproject()
     {
         text = $('#projectID').val();
-        console.log(text);
         $.ajax({
             type:'POST',
             url:'{% url 'checkproject' %}',

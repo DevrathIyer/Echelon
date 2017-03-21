@@ -58,10 +58,16 @@
     </div>
     <!-- End navbar -->
 <style type="text/css">
- span.bold-red {
-    color: red;
-    font-weight: bold;
-}
+    span.bold-red
+    {
+        color: red;
+        font-weight: bold;
+    }
+    button.red-button
+    {
+        color: red;
+        font-weight: bold;
+    }
 </style>
 <body>
 <a href = "{% url 'credits' %}">Manage Credits</a>
@@ -93,6 +99,8 @@
        Project ID:<br/>
        <input id = 'projectID' type="text"/><br/>
       <span class="bold-red" id="ProjectStatus"></span>
+      <button onclick="AddProject();">Create Project</button>
+      <button class="red-button" onclick="closeNav">Create Project</button>
   </div>
 </div>
 <script>

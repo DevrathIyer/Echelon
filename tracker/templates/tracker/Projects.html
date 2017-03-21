@@ -48,9 +48,10 @@
 <script>
 $(function(){
   $('#projectID').keypress(function(e){
-    console.log($('#projectID').val().length);
-    if(((e.which > 47 && e.which < 58) || (e.which > 64 && e.which < 91) || (e.which > 96 && e.which < 123)))
+    console.log($('#projectID').val().length < 15);
+    if(((e.which > 47 && e.which < 58) || (e.which > 64 && e.which < 91) || (e.which > 96 && e.which < 123)) && ($('#projectID').val().length < 15))
     {
+        Checkproject();
     }
     else
     {

@@ -47,6 +47,38 @@
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
     <meta name="google-signin-client_id" content="867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com">
 </head>
+<div class="navbar navbar-custom" role="navigation">
+      <div class="container">
+        <!-- Navbar-header -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <i class="ion-navicon"></i>
+          </button>
+          <!-- LOGO -->
+          <a class="navbar-brand logo" href="index.html">
+              <span>Echelon</span>
+          </a>
+        </div>
+        <!-- end navbar-header -->
+
+        <!-- menu -->
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="#services">About Us</a>
+            </li>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="{% url 'login' %}">Log In</a></li>
+              </ul>
+            </li>
+
+          </ul>
+        </div>
+        <!--/Menu -->
+      </div>
+      <!-- end container -->
+    </div>
+    <!-- End navbar -->
 <style type="text/css">
  span.bold-red {
     color: red;

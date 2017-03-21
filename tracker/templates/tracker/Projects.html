@@ -8,29 +8,7 @@
     <meta name="author" content="Coderthemes">
 
     <title>Echelon</title>
-    {% load static %}
-    <!-- Favicon icon -->
-    <link rel="shortcut icon" href="{% static 'tracker/images/favicon.ico' %}">
 
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'tracker/css/bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- Animate -->
-    <link href="{% static 'tracker/css/animate.css' %}" rel="stylesheet">
-
-    <!-- Magnific-popup -->
-    <link rel="stylesheet" href="{% static 'tracker/css/magnific-popup.css' %}">
-
-    <!-- Icon-font -->
-    <link rel="stylesheet" type="text/css" href="{% static 'tracker/css/ionicons.min.css' %}">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static 'tracker/css/style.css' %}" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-    <!--[if lt IE 9]>
-      <script src="{% static 'tracker/js/html5shiv.js' %}"></script>
-      <script src="{% static 'tracker/js/respond.min.js' %}"></script>
     <![endif]-->
 
     <script>
@@ -233,7 +211,84 @@ body {
   }
 }
 </style>
+<section class="section bg-dark footer-cta">
+    <div class="container">
+      <div class="row text-center">
+         <div class="col-sm-10 col-sm-offset-1">
+          <h4 class="text-uppercase animated fadeInDown wow" data-wow-delay=".1s">Need help? Contact us.</h4>
+          <h1 class="animated fadeInDown wow" data-wow-delay=".3s">Our help desk will keep you running</h1>
+          <a href="" class="btn btn-custom btn-rnd animated fadeInDown wow" data-wow-delay=".5s">Submit a Ticket</a>
+         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- END FOOTER CTA -->
+
+
+  <!-- FOOTER -->
+  <footer class="section bg-gray footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6">
+          <h5>Echelon</h5>
+          <ul class="list-unstyled">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="">About Us</a></li>
+            <li><a href="">Documentation</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+          <h5>Social</h5>
+          <ul class="list-unstyled">
+            <li><a href="">Facebook</a></li>
+            <li><a href="">Twitter</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+          <h5>Support</h5>
+          <ul class="list-unstyled">
+            <li><a href="">Help & Support</a></li>
+            <li><a href="">Privacy Policy</a></li>
+            <li><a href="">Terms & Conditions</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+          <h5>Contact</h5>
+          <address>
+            2310 W. Maplewood St.<br>
+            Chandler, Arizona 85286<br>
+            <abbr title="Phone">P:</abbr> (480) 414-3912<br/>
+            E: <a href="mailto:echelon@echelon.com">echelon@echelon.com</a>
+          </address>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="footer-alt">
+            <p class="pull-right">2015 © Echelon</p>
+            <p class="logo">Echelon</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- END FOOTER -->
+
+
+
+
+    <!-- js placed at the end of the document so the pages load faster -->
 {% load static %}
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="{% static 'tracker/images/favicon.ico' %}">
+
     <!-- Bootstrap core CSS -->
     <link href="{% static 'tracker/css/bootstrap.min.css' %}" rel="stylesheet">
 

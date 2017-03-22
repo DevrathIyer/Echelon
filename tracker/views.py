@@ -3,9 +3,7 @@ from django.db import models
 from django.http import HttpResponse,Http404
 import json
 from random import randint
-from Crypto.PublicKey import RSA
-from Crypto.Hash import SHA256
-from Crypto import Random
+import bcrypt
 import base64
 import requests
 import os
@@ -98,9 +96,33 @@ def addproject(request):
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'projectid': projectid}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
-            return ''.join(random.choice(string.lowercase) for i in range(length))
+            #key = ''.join(random.choice(string.lowercase) for i in range(20))
+            key = 'hello'
+            salt = bcrypt.gensalt()
+            apikey = bcrypt.hashpw(key,salt)
             if (response.json()['message'] == 'could not get project info'):
                 post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers':layers, 'nodes': neurons, 'uid':userid, 'apikey':apikey}
+                response = requests.post('https://echelon-nn.herokuapp.com//admin/userops/createNewProject',data=post_data)
+                post_data = {'auth': os.environ['password'], 'uid': userid}
+                response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserProjects',data=post_data)
+                try:
+                    Projects = response.json()['project_list'].split()
+                except:
+                    Projects = ['']
+                ProjectNumber = len(Projects)
+                ProjectList = ['' for x in range(ProjectNumber)]
+                Neurons = ['' for x in range(ProjectNumber)]
+                NeuronLength = ['' for x in range(ProjectNumber)]
+                for x in range(ProjectNumber):
+                    if (x != 0):
+                        post_data = {'auth': os.environ['password'], 'projectid': Projects[x]}
+                        response = requests.post(
+                            'https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',data=post_data)
+                        ProjectList[x] = response.json()
+                        ProjectList[x]['Neurons_per_Layer'] = response.json()['Neurons_per_Layer'].split(',')
+                        ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
+                        ProjectList.pop(0)
+                        return render(request, 'Example.html', {'Projects': ProjectList, 'ProjectID': projectid})
 
 
 def deleteproject(request):

@@ -155,7 +155,7 @@ $(function(){
 	        success: function(json){
 	            $('#ProjectStatus').html(json);
 	        }
-            });
+         });
     }
     function openNav()
     {
@@ -167,21 +167,25 @@ $(function(){
     }
     function AddProject()
     {
-        $.ajax({
-            type:'POST',
-            url:'{% url 'addproject' %}',
-            datatype:"json",
-            async: true,
-            data:{
-                csrfmiddlewaretoken:'{{csrf_token}}',
-                projectid:'{{item.Project_ID}}',
-                layers:'1',
-                neurons:'1',
-            },
-	        success: function(json){
-	            $('#projects').html(json);
-	        }
-        });
+        if(($('#projectID').val().length < 15) && ($('#projectID').val().length > 4))
+        {
+            $.ajax({
+                type:'POST',
+                url:'{% url 'addproject' %}',
+                datatype:"json",
+                async: true,
+                data:{
+                    csrfmiddlewaretoken:'{{csrf_token}}',
+                    projectid:'{{item.Project_ID}}',
+                    layers:'1',
+                    neurons:'1',
+                },
+	            success: function(json){
+	                closeNav();
+	                $('#projects').html(json);
+	            }
+            });
+        }
     }
 
 </script>

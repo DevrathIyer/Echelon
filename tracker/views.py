@@ -65,9 +65,12 @@ def addproject(request):
             key = 'hello'
             salt = bcrypt.gensalt()
             apikey = bcrypt.hashpw(key,salt)
+            post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers': layers, 'nodes': neurons,
+                         'uid': userid, 'apikey': apikey}
+            response = requests.post('https://echelon-nn.herokuapp.com//admin/userops/createNewProject', data=post_data)
+            return render(request, 'Example.html', {})
+            """
             if (response.json()['message'] == 'could not get project info'):
-                post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers':layers, 'nodes': neurons, 'uid':userid, 'apikey':apikey}
-                response = requests.post('https://echelon-nn.herokuapp.com//admin/userops/createNewProject',data=post_data)
                 post_data = {'auth': os.environ['password'], 'uid': userid}
                 response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserProjects',data=post_data)
                 try:
@@ -88,6 +91,7 @@ def addproject(request):
                         ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
                         ProjectList.pop(0)
                         return render(request, 'Example.html', {'Projects': ProjectList, 'ProjectID': projectid})
+    """
 
 
 def deleteproject(request):

@@ -181,7 +181,7 @@ def editproject(request):
                     ProjectList[x]['Neurons_per_Layer'] = response.json()['Neurons_per_Layer'].split(',')
                     ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
             ProjectList.pop(0)
-            return render(request, 'Example.html', {'Projects': ProjectList,'ProjectID':projectid})
+            return render(request, 'Example.html', {'Projects': ProjectList,'ProjectID':projectid, 'Number': ProjectNumber})
             #return HttpResponse('<b>ayyo</b>', content_type='application/html')
     #return HttpResponse(json.dumps('nahhhh'), content_type='application/json')
 

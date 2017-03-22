@@ -39,10 +39,7 @@ def addcredits(request):
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'uid': userid, 'numcredits': 1000}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
-            if (response.json()['message'] == 'could not get project info'):
-                return render(request, 'ProjectCheckAvailable.html', {})
-            else:
-                return render(request, 'ProjectCheckUsed.html', {})
+            return HttpResponse(json.dumps({'message': response.json()['message']}), content_type='application/json')
 
 def checkproject(request):
     try:

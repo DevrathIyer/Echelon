@@ -26,7 +26,7 @@ def signout(request):
     request.session.flush()
     return redirect('login')
 
-def addCredits(request):
+def AddCredits(request):
     try:
         id_token = request.session['TokenID']
     except:

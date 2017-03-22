@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^editproject', views.editproject, name = 'editproject'),
     url(r'^checkproject', views.checkproject, name = 'checkproject'),
     url(r'^addproject', views.addproject, name = 'addproject'),
+    url(r'^addcredits', views.AddCredits, name = 'AddCredits'),
     url(r'^signout', views.signout, name = 'signout'),
     url(r'^credits', views.credits, name = 'credits'),
     url(r'^signup', views.signup, name = 'signup'),

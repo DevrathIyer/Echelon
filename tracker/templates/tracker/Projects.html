@@ -98,7 +98,6 @@
 <form id = "SignOutForm" action="{% url 'signout' %}" method="post">
 {% csrf_token %}
 </form>
-{{JSON}}
 <script>
 window.onbeforeunload = function(e){
   gapi.auth2.getAuthInstance().signOut();

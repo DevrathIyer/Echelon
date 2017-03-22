@@ -1,4 +1,5 @@
 {% for item in Projects %}
+    console.log({{item.Project_ID}});
     <button id = "HIDEBUTTON{{item.Project_ID}}" value='hide/show'>{{item.Project_ID}}</button>
     <div id="DIV{{item.Project_ID}}">
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">

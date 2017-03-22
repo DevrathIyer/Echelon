@@ -26,6 +26,24 @@ def signout(request):
     request.session.flush()
     return redirect('login')
 
+def addCredits(request):
+    try:
+        id_token = request.session['TokenID']
+    except:
+        return HttpResponse(json.dumps({'status': 'NAH'}), content_type='application/json')
+    GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
+    response = requests.get(url)
+    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
+        if response.json()['aud'] == GoogleID:
+            userid = response.json()['sub']
+            post_data = {'auth': os.environ['password'], 'uid': userid, 'numcredits': 1000}
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
+            if (response.json()['message'] == 'could not get project info'):
+                return render(request, 'ProjectCheckAvailable.html', {})
+            else:
+                return render(request, 'ProjectCheckUsed.html', {})
+
 def checkproject(request):
     try:
         id_token = request.session['TokenID']

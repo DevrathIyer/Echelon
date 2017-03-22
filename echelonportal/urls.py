@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^login', views.login, name = 'login'),
     url(r'^editproject', views.editproject, name = 'editproject'),
     url(r'^checkproject', views.checkproject, name = 'checkproject'),
+    url(r'^deleteproject', views.deleteproject, name = 'deleteproject'),
     url(r'^addproject', views.addproject, name = 'addproject'),
     url(r'^addcredits', views.addcredits, name = 'addcredits'),
     url(r'^signout', views.signout, name = 'signout'),

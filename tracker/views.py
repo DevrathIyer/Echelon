@@ -38,7 +38,7 @@ def addcredits(request):
         if response.json()['aud'] == GoogleID:
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'uid': userid, 'numcredits': 1000}
-            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/addCredits', data=post_data)
             return HttpResponse(json.dumps({'message': response.json()['message']}), content_type='application/json')
 
 def checkproject(request):

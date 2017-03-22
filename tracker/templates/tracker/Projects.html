@@ -169,6 +169,7 @@ $(function(){
     {
         if(($('#projectID').val().length < 15) && ($('#projectID').val().length > 4))
         {
+            text = $('#projectID').val();
             $.ajax({
                 type:'POST',
                 url:'{% url 'addproject' %}',
@@ -176,7 +177,7 @@ $(function(){
                 async: true,
                 data:{
                     csrfmiddlewaretoken:'{{csrf_token}}',
-                    projectid:'$('#projectID').val();',
+                    projectid:'text',
                     layers:'1',
                     neurons:'1',
                 },

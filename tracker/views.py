@@ -256,7 +256,7 @@ def viewuserdata(request):
                     return render(request, 'tracker/Projects.html', {'Projects': ProjectList, 'UserName': UserName})
                 except:
                     Projects = ['']
-                    return render(request, 'tracker/Projects.html', {'JSON': response.json()['error']})
+                    return render(request, 'tracker/Projects.html', {})
             else:
                 return render(request, 'tracker/Projects.html', {'JSON':response.json()['error']})
         else:

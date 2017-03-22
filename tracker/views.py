@@ -183,7 +183,7 @@ def editproject(request):
                               {'Projects': ProjectList, 'ProjectID': projectid, 'Number': ProjectNumber})
             except:
                 Projects = ['']
-            #return HttpResponse('<b>ayyo</b>', content_type='application/html')
+                return HttpResponse('<b>ayyo</b>', content_type='application/html')
     #return HttpResponse(json.dumps('nahhhh'), content_type='application/json')
 
 def credits(request):

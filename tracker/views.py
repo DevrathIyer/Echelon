@@ -67,7 +67,7 @@ def addproject(request):
             apikey = bcrypt.hashpw(key,salt)
             post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers': layers, 'nodes': neurons,
                          'uid': userid, 'apikey': apikey}
-            response = requests.post('https://echelon-nn.herokuapp.com//admin/userops/createNewProject', data=post_data)
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/createNewProject', data=post_data)
             return render(request, 'Example.html', {})
             """
             if (response.json()['message'] == 'could not get project info'):

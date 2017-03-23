@@ -245,20 +245,22 @@ def viewuserdata(request):
                     ProjectList = ['' for x in range(ProjectNumber)]
                     Neurons = ['' for x in range(ProjectNumber)]
                     NeuronLength = ['' for x in range(ProjectNumber)]
-                    for x in range(ProjectNumber):
-                        if (x != 0):
-                            post_data = {'auth': os.environ['password'], 'projectid': Projects[x]}
-                            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
-                                                     data=post_data)
-                            ProjectList[x]['Project_ID'] = response.json()['Project_ID']
-                            ProjectList[x]['Neurons_per_Layer'] = response.json()['Neurons_per_Layer'].split(',')
-                            ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
-                    ProjectList.pop(0)
-                    return render(request, 'tracker/Projects.html', {'Projects': ProjectList, 'UserName': UserName, 'number': ProjectNumber})
+
                 except:
                     Projects = ['']
                     return HttpResponse(json.dumps({'message': response.json()['message']}),
                                         content_type='application/json')
+                for x in range(ProjectNumber):
+                    if (x != 0):
+                        post_data = {'auth': os.environ['password'], 'projectid': Projects[x]}
+                        response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
+                                                 data=post_data)
+                        ProjectList[x]['Project_ID'] = response.json()['Project_ID']
+                        ProjectList[x]['Neurons_per_Layer'] = response.json()['Neurons_per_Layer'].split(',')
+                        ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
+                ProjectList.pop(0)
+                return render(request, 'tracker/Projects.html',
+                              {'Projects': ProjectList, 'UserName': UserName, 'number': ProjectNumber})
             else:
                 return render(request, 'tracker/Projects.html', {'JSON':response.json()['error']})
         else:

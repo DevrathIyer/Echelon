@@ -250,7 +250,7 @@ def viewuserdata(request):
                             post_data = {'auth': os.environ['password'], 'projectid': Projects[x]}
                             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
                                                      data=post_data)
-                            ProjectList[x] = response.json()
+                            ProjectList[x]['Project_ID'] = response.json()['Project_ID']
                             ProjectList[x]['Neurons_per_Layer'] = response.json()['Neurons_per_Layer'].split(',')
                             ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
                     ProjectList.pop(0)

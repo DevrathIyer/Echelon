@@ -254,7 +254,7 @@ def viewuserdata(request):
                             ProjectList[x]['Neurons_per_Layer'] = response.json()['Neurons_per_Layer'].split(',')
                             ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
                     ProjectList.pop(0)
-                    return render(request, 'tracker/Projects.html', {'Projects': ProjectList, 'UserName': UserName, 'message': response.json()['message']})
+                    return render(request, 'tracker/Projects.html', {'Projects': ProjectList, 'UserName': UserName, })
                 except:
                     Projects = ['']
                     return HttpResponse(json.dumps({'message': response.json()['message']}),

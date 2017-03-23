@@ -1,5 +1,6 @@
 {% for item in Projects %}
     {{forloop.counter}}
+    {{item}}
     <button id = "HIDEBUTTON{{item.Project_ID}}" value='hide/show'>{{item.Project_ID}}</button>
     <div id="DIV{{item.Project_ID}}">
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">

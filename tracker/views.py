@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.db import models
 from django.http import HttpResponse,Http404
-import json
+import simplejson
 from random import randint
 import bcrypt
 import base64
@@ -30,7 +30,7 @@ def addcredits(request):
     try:
         id_token = request.session['TokenID']
     except:
-        return HttpResponse(json.dumps({'status': 'NAH'}), content_type='application/json')
+        return HttpResponse(simplejson.dumps({'status': 'NAH'}), content_type='application/json')
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
     response = requests.get(url)
@@ -39,14 +39,14 @@ def addcredits(request):
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'uid': userid, 'numcredits': 1000}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/addCredits', data=post_data)
-            return HttpResponse(json.dumps({'message': response.json()['message']}), content_type='application/json')
+            return HttpResponse(simplejson.dumps({'message': response.json()['message']}), content_type='application/json')
 
 def checkproject(request):
     try:
         id_token = request.session['TokenID']
         projectid = request.POST.get('projectid')
     except:
-        return HttpResponse(json.dumps({'status': 'NAH'}), content_type='application/json')
+        return HttpResponse(simplejson.dumps({'status': 'NAH'}), content_type='application/json')
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
     response = requests.get(url)
@@ -83,7 +83,7 @@ def addproject(request):
                 post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers': layers, 'nodes': neurons,
                              'uid': userid, 'apikey': apikey}
                 response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/createNewProject', data=post_data)
-                return HttpResponse(json.dumps({'message': response.json()['message']}), content_type='application/json')
+                return HttpResponse(simplejson.dumps({'message': response.json()['message']}), content_type='application/json')
             """
             if (response.json()['message'] == 'could not get project info'):
                 post_data = {'auth': os.environ['password'], 'uid': userid}

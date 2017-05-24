@@ -76,14 +76,14 @@ def addproject(request):
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'projectid': projectid}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
-            key = ''.join(random.choice(string.lowercase) for i in range(20))
-            #key = 'hello'
-            salt = bcrypt.gensalt()
-            apikey = bcrypt.hashpw(key,salt)
-            post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers': layers, 'nodes': neurons,
-                         'uid': userid, 'apikey': apikey}
-            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/createNewProject', data=post_data)
-            return HttpResponse(json.dumps({'message': response.json()['message']}), content_type='application/json')
+            if (response.json()['message'] == 'could not get project info'):
+                key = ''.join(random.choice(string.lowercase) for i in range(20))
+                salt = bcrypt.gensalt()
+                apikey = bcrypt.hashpw(key,salt)
+                post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers': layers, 'nodes': neurons,
+                             'uid': userid, 'apikey': apikey}
+                response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/createNewProject', data=post_data)
+                return HttpResponse(json.dumps({'message': response.json()['message']}), content_type='application/json')
             """
             if (response.json()['message'] == 'could not get project info'):
                 post_data = {'auth': os.environ['password'], 'uid': userid}

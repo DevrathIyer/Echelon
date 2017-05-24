@@ -76,8 +76,8 @@ def addproject(request):
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'projectid': projectid}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
-            #key = ''.join(random.choice(string.lowercase) for i in range(20))
-            key = 'hello'
+            key = ''.join(random.choice(string.lowercase) for i in range(20))
+            #key = 'hello'
             salt = bcrypt.gensalt()
             apikey = bcrypt.hashpw(key,salt)
             post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers': layers, 'nodes': neurons,

@@ -172,6 +172,7 @@ $(function(){
             },
 	        success: function(json){
 	            $('#ProjectStatus').html(json);
+	            console.log('Checked');
 	        }
          });
     }
@@ -201,7 +202,7 @@ $(function(){
                 },
 	            success: function(json){
 	                closeNav();
-	                console.log(json['message']);
+	                console.log('HelloWorld');
 	            }
             });
         }

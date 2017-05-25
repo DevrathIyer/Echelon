@@ -247,8 +247,8 @@ def viewuserdata(request):
                     NeuronLength = ['' for x in range(ProjectNumber)]
                 except:
                     Projects = ['']
-                    return HttpResponse(json.dumps({'message': response.json()['error']}),
-                                        content_type='application/json')
+                    #return HttpResponse(json.dumps({'message': response.json()['error']}),
+                     #                   content_type='application/json')
                 for x in range(ProjectNumber):
                     if (x != 0):
                         post_data = {'auth': os.environ['password'], 'projectid': Projects[x]}

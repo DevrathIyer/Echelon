@@ -247,6 +247,8 @@ def viewuserdata(request):
                     NeuronLength = ['' for x in range(ProjectNumber)]
                 except:
                     Projects = ['']
+                    ProjectNumber = len(Projects)
+                    ProjectList = ['' for x in range(ProjectNumber)]
                     #return HttpResponse(json.dumps({'message': response.json()['error']}),
                      #                   content_type='application/json')
                 for x in range(ProjectNumber):

@@ -18,12 +18,14 @@ from django.contrib import admin
 from tracker import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.home, name = 'home'),
-    url(r'^login', views.login, name = 'login'),
-    url(r'^editproject', views.editproject, name = 'editproject'),
-    url(r'^signout', views.signout, name = 'signout'),
-    url(r'^credits', views.credits, name = 'credits'),
-    url(r'^signup', views.signup, name = 'signup'),
-    url(r'^newuser', views.createnewuser, name = 'createnewuser'),
-    url(r'^signedin', views.viewuserdata, name = 'viewuserdata'),
+    url(r'^$', views.home, name='home'),
+    url(r'^login', views.login, name='login'),
+    url(r'^editproject', views.editproject, name='editproject'),
+    url(r'^checkproject', views.checkproject, name='checkproject'),
+    url(r'^addproject', views.addproject, name='addproject'),
+    url(r'^signout', views.signout, name='signout'),
+    url(r'^credits', views.credits, name='credits'),
+    url(r'^signup', views.signup, name='signup'),
+    url(r'^newuser', views.createnewuser, name='createnewuser'),
+    url(r'^signedin', views.viewuserdata, name='viewuserdata'),
 ]

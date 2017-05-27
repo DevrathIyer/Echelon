@@ -31,10 +31,58 @@
 <div id="projects">
     {% include 'Example.html' %}
 </div>
-<button id="AddProject" class="ButtonAddProject" onclick = 'AddProject();'>Add Project</button>
+<button id="AddProject" class="ButtonAddProject" onclick = 'openNav()'>Add Project</button>
+<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+       Project ID:<br/>
+       <input id = 'projectID' type="text" onchange ="Checkproject();"  pattern="[a-zA-Z0-9]{5,15}"/><br/>
+  </div>
+</div>
 <script>
-    function AddProject() {
-
+     function Checkproject()
+    {
+        $.ajax({
+            type:'POST',
+            url:'{% url 'checkproject' %}',
+            datatype:"json",
+            async: true,
+            data:{
+                csrfmiddlewaretoken:'{{csrf_token}}',
+                projectid: document.getElementById("projectID").text,
+            },
+	        success: function(json){
+	            console.log("Yeyey"+json);
+	        }
+            });
+         return false();
+    }
+    function openNav()
+    {
+        document.getElementById("myNav").style.height = "100%";
+    }
+    function closeNav()
+    {
+        document.getElementById("myNav").style.height = "0%";
+    }
+    function AddProject()
+    {
+        $.ajax({
+            type:'POST',
+            url:'{% url 'addproject' %}',
+            datatype:"json",
+            async: true,
+            data:{
+                csrfmiddlewaretoken:'{{csrf_token}}',
+                projectid:'{{item.Project_ID}}',
+                layers:'1',
+                neurons:'1',
+            },
+	        success: function(json){
+	            $('#projects').html(json);
+	        }
+            });
+    }
 </script>
 <style>
 body {

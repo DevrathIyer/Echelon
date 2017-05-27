@@ -93,7 +93,7 @@
         font-weight: bold;
     }
 </style>
-<body>
+<body onload="HideDIV()">
 <a onclick = "AddCredits();">Manage Credits</a>
 <a onclick = "signOut();">Sign out</a>
 <form id = "SignOutForm" action="{% url 'signout' %}" method="post">
@@ -131,18 +131,22 @@ window.onbeforeunload = function(e){
   </div>
 </div>
 <script>
-$(function(){
-  $('#projectID').keypress(function(e){
-    if(((e.which > 47 && e.which < 58) || (e.which > 64 && e.which < 91) || (e.which > 96 && e.which < 123)) && ($('#projectID').val().length < 15))
+    funtion HideDIV()
     {
-        Checkproject();
+        $('.ProjectDIV').hide(); // hides
     }
-    else
-    {
-      return false;
-    }
-  });
-});
+    $(function(){
+        $('#projectID').keypress(function(e){
+            if(((e.which > 47 && e.which < 58) || (e.which > 64 && e.which < 91) || (e.which > 96 && e.which < 123)) && ($('#projectID').val().length < 15))
+            {
+                Checkproject();
+            }
+            else
+            {
+                return false;
+            }
+        });
+    });
     function AddCredits()
     {
         $.ajax({

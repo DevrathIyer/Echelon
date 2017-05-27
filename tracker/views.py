@@ -62,12 +62,21 @@ def signout(request):
     request.session.flush()
     return redirect('login')
 
-def checkprojectname(request):
+def checkproject(request):
     try:
         id_token = request.session['TokenID']
         projectid = request.POST.get('projectid')
     except:
         return render(request, 'tracker/Faliure.html', {})
+    GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
+    response = requests.get(url)
+    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
+        if response.json()['aud'] == GoogleID:
+            if (response.json()['message'] == 'could not get project info'):
+                return HttpResponse(json.dumps({'status': 'available'}), content_type='application/json')
+            else:
+                return HttpResponse(json.dumps({'status': 'used'}), content_type='application/json')
 
 def addproject(request):
     try:

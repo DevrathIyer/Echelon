@@ -3,9 +3,7 @@ from django.db import models
 from django.http import HttpResponse,Http404
 import json
 from random import randint
-from Crypto.PublicKey import RSA
-from Crypto.Hash import SHA256
-from Crypto import Random
+import bcrypt
 import base64
 import requests
 import os
@@ -82,19 +80,18 @@ def checkproject(request):
         id_token = request.session['TokenID']
         projectid = request.POST.get('projectid')
     except:
-        return render(request, 'tracker/Faliure.html', {})
+        return HttpResponse(json.dumps({'status': 'NAH'}), content_type='application/json')
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
     response = requests.get(url)
     if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
         if response.json()['aud'] == GoogleID:
             post_data = {'auth': os.environ['password'], 'projectid': projectid}
-            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
-                                     data=post_data)
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
             if (response.json()['message'] == 'could not get project info'):
-                return HttpResponse(json.dumps({'status': 'available'}), content_type='application/json')
+                return render(request, 'ProjectCheckAvailable.html', {})
             else:
-                return HttpResponse(json.dumps({'status': 'used'}), content_type='application/json')
+                return render(request, 'ProjectCheckUsed.html', {})
 
 def addproject(request):
     try:
@@ -114,7 +111,11 @@ def addproject(request):
             post_data = {'auth': os.environ['password'], 'projectid': projectid}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo', data=post_data)
             if(response.json()['message'] == 'could not get project info'):
-                return HttpResponse(json.dumps({'status':'available'}),content_type ='application/json')
+                key = ''.join(random.choice(string.lowercase) for i in range(20))
+                salt = bcrypt.gensalt()
+                apikey = bcrypt.hashpw(key, salt)
+                post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers': layers,
+                             'nodes': neurons, 'uid': userid, 'apikey': apikey}
             else:
                 return HttpResponse(json.dumps({'status': 'used'}), content_type='application/json')
 

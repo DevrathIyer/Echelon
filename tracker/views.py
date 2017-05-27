@@ -7,6 +7,8 @@ import bcrypt
 import base64
 import requests
 import os
+import random, string
+
 
 def home(request):
     return render(request, 'tracker/Homepage.html', {})

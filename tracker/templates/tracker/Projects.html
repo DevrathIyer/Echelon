@@ -173,6 +173,7 @@ $(function(){
 	        success: function(json){
 	            $('#ProjectStatus').html(json);
 	            console.log('Checked');
+
 	        }
          });
     }
@@ -203,6 +204,7 @@ $(function(){
 	            success: function(json){
 	                closeNav();
 	                console.log('HelloWorld');
+	                console.log(json['message']);
 	            }
             });
         }

@@ -88,6 +88,9 @@ def checkproject(request):
     response = requests.get(url)
     if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
         if response.json()['aud'] == GoogleID:
+            post_data = {'auth': os.environ['password'], 'projectid': projectid}
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getProjectInfo',
+                                     data=post_data)
             if (response.json()['message'] == 'could not get project info'):
                 return HttpResponse(json.dumps({'status': 'available'}), content_type='application/json')
             else:

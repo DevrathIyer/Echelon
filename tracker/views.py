@@ -83,6 +83,7 @@ def addproject(request):
                 apikey = bcrypt.hashpw(key, salt)
                 post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers': layers,
                              'nodes': neurons, 'uid': userid, 'apikey': apikey}
+                return HttpResponse(json.dumps({'message': response.json()['message']}), content_type='application/json')
             else:
                 return HttpResponse(json.dumps({'status': 'used'}), content_type='application/json')
 

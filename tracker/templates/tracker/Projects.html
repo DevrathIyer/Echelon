@@ -1,20 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+{{number}}
 <head>
     <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Coderthemes">
+
     <title>Echelon</title>
+
+    <![endif]-->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-64308715-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
     <meta name="google-signin-client_id" content="867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com">
-
 </head>
+<div class="navbar navbar-custom" role="navigation">
+      <div class="container">
+        <!-- Navbar-header -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <i class="ion-navicon"></i>
+          </button>
+          <!-- LOGO -->
+          <a class="navbar-brand logo" href="index.html">
+              <span>Echelon</span>
+          </a>
+        </div>
+        <!-- end navbar-header -->
+
+        <!-- menu -->
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="#services">About Us</a>
+            </li>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="{% url 'login' %}">Log In</a></li>
+              </ul>
+            </li>
+
+          </ul>
+        </div>
+        <!--/Menu -->
+      </div>
+      <!-- end container -->
+    </div>
+    <!-- End navbar -->
+<style type="text/css">
+    span.bold-red
+    {
+        color: red;
+        font-weight: bold;
+    }
+    button.red-button
+    {
+        background-color: #db0a0a;
+        border: none;
+        border-radius: 18px;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;~margin: 4px 2px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    button.blue-button
+    {
+        background-color: #db0a0a;
+        border: none;
+        border-radius: 12px;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;~margin: 4px 2px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+</style>
 <body>
-<a href = "{% url 'credits' %}">Manage Credits</a>
-<a onclick="signOut();">Sign out</a>
+<a onclick = "AddCredits();">Manage Credits</a>
+<a onclick = "signOut();">Sign out</a>
 <form id = "SignOutForm" action="{% url 'signout' %}" method="post">
 {% csrf_token %}
 </form>
 <script>
+window.onbeforeunload = function(e){
+  gapi.auth2.getAuthInstance().signOut();
+};
     function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
@@ -36,12 +124,43 @@
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="overlay-content">
        Project ID:<br/>
-       <input id = 'projectID' type="text" onchange ="Checkproject();"  pattern="[a-zA-Z0-9]{5,15}"/><br/>
+       <input id = 'projectID' type="text"/><br/>
+      <span class="bold-red" id="ProjectStatus"></span>
+      <button class="red-button" onclick="closeNav()">Cancel</button>
+      <button onclick="AddProject()">Create Project</button>
   </div>
 </div>
 <script>
-     function Checkproject()
+$(function(){
+  $('#projectID').keypress(function(e){
+    if(((e.which > 47 && e.which < 58) || (e.which > 64 && e.which < 91) || (e.which > 96 && e.which < 123)) && ($('#projectID').val().length < 15))
     {
+        Checkproject();
+    }
+    else
+    {
+      return false;
+    }
+  });
+});
+    function AddCredits()
+    {
+        $.ajax({
+            type:'POST',
+            url:'{% url 'addcredits' %}',
+            datatype:"json",
+            async: true,
+            data:{
+                csrfmiddlewaretoken:'{{csrf_token}}',
+            },
+	        success: function(json){
+	            console.log(json['message']);
+	        }
+         });
+    }
+    function Checkproject()
+    {
+        text = $('#projectID').val();
         $.ajax({
             type:'POST',
             url:'{% url 'checkproject' %}',
@@ -49,13 +168,13 @@
             async: true,
             data:{
                 csrfmiddlewaretoken:'{{csrf_token}}',
-                projectid: document.getElementById("projectID").text,
+                projectid: text,
             },
 	        success: function(json){
-	            console.log("Yeyey"+json);
+	            $('#ProjectStatus').html(json);
+	            console.log('Checked');
 	        }
-            });
-         return false();
+         });
     }
     function openNav()
     {
@@ -67,22 +186,28 @@
     }
     function AddProject()
     {
-        $.ajax({
-            type:'POST',
-            url:'{% url 'addproject' %}',
-            datatype:"json",
-            async: true,
-            data:{
-                csrfmiddlewaretoken:'{{csrf_token}}',
-                projectid:'{{item.Project_ID}}',
-                layers:'1',
-                neurons:'1',
-            },
-	        success: function(json){
-	            $('#projects').html(json);
-	        }
+        if(($('#projectID').val().length < 15) && ($('#projectID').val().length > 4))
+        {
+            text = $('#projectID').val();
+            $.ajax({
+                type:'POST',
+                url:'{% url 'addproject' %}',
+                datatype:"json",
+                async: true,
+                data:{
+                    csrfmiddlewaretoken:'{{csrf_token}}',
+                    projectid:'text',
+                    layers:'1',
+                    neurons:'1',
+                },
+	            success: function(json){
+	                closeNav();
+	                console.log('HelloWorld');
+	            }
             });
+        }
     }
+
 </script>
 <style>
 body {
@@ -141,7 +266,73 @@ body {
   }
 }
 </style>
+
+  <!-- END FOOTER CTA -->
+
+
+  <!-- FOOTER -->
+  <footer class="section bg-gray footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6">
+          <h5>Echelon</h5>
+          <ul class="list-unstyled">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="">About Us</a></li>
+            <li><a href="">Documentation</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+          <h5>Social</h5>
+          <ul class="list-unstyled">
+            <li><a href="">Facebook</a></li>
+            <li><a href="">Twitter</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+          <h5>Support</h5>
+          <ul class="list-unstyled">
+            <li><a href="">Help & Support</a></li>
+            <li><a href="">Privacy Policy</a></li>
+            <li><a href="">Terms & Conditions</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+          <h5>Contact</h5>
+          <address>
+            2310 W. Maplewood St.<br>
+            Chandler, Arizona 85286<br>
+            <abbr title="Phone">P:</abbr> (480) 414-3912<br/>
+            E: <a href="mailto:support@echelon.com">support@echelon.com</a>
+          </address>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="footer-alt">
+            <p class="pull-right">2015 © Echelon</p>
+            <p class="logo">Echelon</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- END FOOTER -->
+
+
+
+
+    <!-- js placed at the end of the document so the pages load faster -->
 {% load static %}
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="{% static 'tracker/images/favicon.ico' %}">
+
     <!-- Bootstrap core CSS -->
     <link href="{% static 'tracker/css/bootstrap.min.css' %}" rel="stylesheet">
 

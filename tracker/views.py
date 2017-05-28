@@ -121,7 +121,7 @@ def deleteproject(request):
         if response.json()['aud'] == GoogleID:
             # response['auth'] = os.environ['password']
             userid = response.json()['sub']
-            post_data = {'auth': os.environ['password'], 'projectid': projectid}
+            post_data = {'auth': os.environ['password'],'uid': userid, 'projectid': projectid}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/deleteProject', data=post_data)
             post_data = {'auth': os.environ['password'], 'uid': userid}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/getUserProjects', data=post_data)

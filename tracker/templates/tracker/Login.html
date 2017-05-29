@@ -43,8 +43,6 @@
 
     </script>
 </head>
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
-
 <form id = "SignInForm" action="{% url 'viewuserdata' %}" method="post">
 {% csrf_token %}
     <input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">
@@ -111,8 +109,9 @@ function onLoad() {
       <div class="row">
         <div class="col-sm-6 text-left">
           <div class="home-wrapper" id="backgroundFun">
-              <h1 class="animated fadeInDown wow home-title" data-wow-delay=".1s">Machine learning made easy</h1>
-            <h4 class="animated fadeInDown wow" data-wow-delay=".2s">We combine the power of Java with the simplicity of a REST API to give your application a scalable neural network dev platform. </h4>
+              <h1 class="animated fadeInDown wow home-title" data-wow-delay=".1s">Log In</h1>
+              <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <h4 class="animated fadeInDown wow" data-wow-delay=".2s"> Don't have an account? <a>Sign up</a> using Google.</h4>
             <a href="" class="btn btn-custom btn-rnd animated fadeInDown wow" data-wow-delay=".4s">Get Started</a>
             <div class="clearfix"></div>
           </div>
@@ -120,20 +119,6 @@ function onLoad() {
     </div>
     </div>
   </section>
-
-  <!-- FOOTER CTA -->
-  <section class="section bg-gray2 footer-cta">
-    <div class="container">
-      <div class="row text-center">
-         <div class="col-sm-10 col-sm-offset-1">
-          <h4 class="text-uppercase animated fadeInDown wow" data-wow-delay=".1s">Need help? Contact us.</h4>
-          <h1 class="animated fadeInDown wow" data-wow-delay=".3s">Our help desk will keep you running</h1>
-          <a href="" class="btn btn-custom btn-rnd animated fadeInDown wow" data-wow-delay=".5s">Submit a Ticket</a>
-         </div>
-      </div>
-    </div>
-  </section>
-
   <!-- END FOOTER CTA -->
 
 

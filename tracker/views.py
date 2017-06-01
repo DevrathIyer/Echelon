@@ -226,8 +226,8 @@ def viewuserdata(request):
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+id_token
     response = requests.get(url)
-    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
-        if response.json()['aud'] == GoogleID:
+    try:
+        if (response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com')) and (response.json()['aud'] == GoogleID):
             #response['auth'] = os.environ['password']
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'uid': userid}
@@ -255,7 +255,9 @@ def viewuserdata(request):
                         ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
                 ProjectList.pop(0)
                 return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'UserName':UserName})
+            else:
+                return redirect('login')
         else:
-            return render(request, 'tracker/Faliure.html', {})
-    else:
-        return render(request, 'tracker/UserPortal.html', {})
+            return redirect('login')
+    except:
+        return redirect('login')

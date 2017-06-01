@@ -1,4 +1,6 @@
+<ol>
 {% for item in Projects %}
+    <li class = "nostyle">
     <button id = "HIDEBUTTON{{item.Project_ID}}" value='hide/show'>{{item.Project_ID}}</button>
     <div id="DIV{{item.Project_ID}}" class = "ProjectDIV">
         <div id="DIVLAYERCOUNT{{item.ProjectID}}">
@@ -145,4 +147,6 @@
         });
     }
 </script>
-{% endfor %}
+        </li>
+    {% endfor %}
+</ol>

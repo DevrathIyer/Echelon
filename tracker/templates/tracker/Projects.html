@@ -25,38 +25,24 @@
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
     <meta name="google-signin-client_id" content="867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com">
 </head>
-<div class="navbar navbar-custom" role="navigation">
-      <div class="container">
-        <!-- Navbar-header -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <i class="ion-navicon"></i>
-          </button>
-          <!-- LOGO -->
-          <a class="navbar-brand logo" href="index.html">
-              <span>Echelon</span>
-          </a>
+<body>
+    <ul id="dropdown1" class="dropdown-content" style="width:200px !important; top:25px; !important" data-beloworigin="true">
+        <li><a href="#!">Account Settings</a></li>
+        <li><a href="#!">Manage Credits</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">Log Out</a></li>
+    </ul>
+    <nav class = "#5e35b1 deep-purple darken-1 z-depth-2">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Echelon</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#About.html">About</a></li>
+                <li><a href="#Doc.html">Documentation</a></li>
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1" data-below-origin="true"><i class="material-icons right">perm_identity</i></a></li>
+            </ul>
         </div>
-        <!-- end navbar-header -->
-
-        <!-- menu -->
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="#services">About Us</a>
-            </li>
-            <li><a href="#">Documentation</a></li>
-            <li><a href="{% url 'login' %}">Log In</a></li>
-              </ul>
-            </li>
-
-          </ul>
-        </div>
-        <!--/Menu -->
-      </div>
-      <!-- end container -->
-    </div>
-    <!-- End navbar -->
+    </nav>
+</body>
 <style type="text/css">
     span.bold-red
     {
@@ -334,18 +320,6 @@ body {
 {% load static %}
     <!-- Favicon icon -->
     <link rel="shortcut icon" href="{% static 'tracker/images/favicon.ico' %}">
-
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'tracker/css/bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- Animate -->
-    <link href="{% static 'tracker/css/animate.css' %}" rel="stylesheet">
-
-    <!-- Magnific-popup -->
-    <link rel="stylesheet" href="{% static 'tracker/css/magnific-popup.css' %}">
-
-    <!-- Icon-font -->
-    <link rel="stylesheet" type="text/css" href="{% static 'tracker/css/ionicons.min.css' %}">
 
     <!-- Custom styles for this template -->
     <link href="{% static 'tracker/css/style.css' %}" rel="stylesheet">

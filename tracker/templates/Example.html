@@ -1,4 +1,16 @@
-<ol>
+<table  class="bordered z-depth-0">
+    <tbody>
+        {% for item in Projects %}
+            <tr class =  "row">
+                <td class = "nopad">
+                   <a class = "waves-effect btn-flat" onclick="HideProject2DIV();">{{item.Project_ID}}</a>
+               </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!--
 {% for item in Projects %}
     <li class = "nostyle">
     <button id = "HIDEBUTTON{{item.Project_ID}}" value='hide/show'>{{item.Project_ID}}</button>
@@ -150,3 +162,5 @@
         </li>
     {% endfor %}
 </ol>
+
+-->

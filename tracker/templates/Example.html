@@ -1,15 +1,33 @@
-<table  class="bordered z-depth-0">
+<table id = "ProjectTable"class="bordered z-depth-0">
     <tbody>
         {% for item in Projects %}
             <tr class =  "row">
                 <td class = "nopad">
-                   <a class = "waves-effect btn-flat" onclick="HideProject2DIV();">{{item.Project_ID}}</a>
+                   <a class = "waves-effect btn-flat" onclick="TOGGLEDIV{{item.Project_ID}}();">{{item.Project_ID}}</a>
                </td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
+{% for item in Projects %}
+    <script>
+        function TOGGLEDIV{{item.Project_ID}}()
+        {
+            $("#ProjectTable").slideUp("slow", function()
+            {
+                $('#BreadNav').html('<a id="ProjectBreadcrumb" href="#!" class="breadcrumb">My Projects</a><a href="#!" id = "NewBread" class="breadcrumb">Planter</a>');
+                $('#Project2').slideDown(1000);
+                $('ul.tabs').tabs();
+            });
+        }
+    </script>
+{% endfor %}
 
+<script>
+    $( document ).ready(function(){
+            $(".dropdown-button").dropdown({ hover: false, constrainWidth: false,});
+        });
+</script>
 <!--
 {% for item in Projects %}
     <li class = "nostyle">

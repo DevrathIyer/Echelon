@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-{{number}}
 <head>
 
     <title>Echelon</title>
@@ -96,9 +95,7 @@
         font-weight: bold;
     }
 </style>
-<body onload= "HideDIV();">
-<a onclick = "AddCredits();">Manage Credits</a>
-<a onclick = "signOut();">Sign out</a>
+<body>
 <form id = "SignOutForm" action="{% url 'signout' %}" method="post">
 {% csrf_token %}
 </form>

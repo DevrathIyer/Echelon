@@ -50,6 +50,7 @@ li.nostyle {
 }
 
 .addIcon{
+    position: absolute !important;
     line-height: 162.5% !important;
     height: 40px !important;
     /*padding-right: 60px !important;*/

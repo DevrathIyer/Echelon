@@ -1,4 +1,5 @@
-<table id = "ProjectTable"class="bordered z-depth-0">
+<div id = "ProjectTable">
+    <table id = class="bordered z-depth-0">
     <tbody>
         {% for item in Projects %}
             <tr class =  "row">
@@ -9,6 +10,8 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
+
 {% for item in Projects %}
     <script>
         function TOGGLEDIV{{item.Project_ID}}()

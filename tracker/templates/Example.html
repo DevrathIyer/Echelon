@@ -1,13 +1,18 @@
 <div id = "ProjectTable">
-    <table id = class="bordered z-depth-0">
+    <table class="bordered z-depth-0">
     <tbody>
-        {% for item in Projects %}
+        <tr class =  "row">
+             <td class = "nopad">
+                  <a class = "waves-effect btn-flat" onclick="TOGGLEDIV{{item.Project_ID}}();">{{item.Project_ID}}</a>
+             </td>
+        </tr>
+        <!--{% for item in Projects %}
             <tr class =  "row">
                 <td class = "nopad">
                    <a class = "waves-effect btn-flat" onclick="TOGGLEDIV{{item.Project_ID}}();">{{item.Project_ID}}</a>
                </td>
             </tr>
-        {% endfor %}
+        {% endfor %}-->
     </tbody>
 </table>
 </div>

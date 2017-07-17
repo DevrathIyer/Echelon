@@ -57,7 +57,7 @@ li.nostyle {
 
 .addButton{
     margin-top: 10px !important;
-    position: absolute !important;
+    position: fixed !important;
     top: 64px !important;
 }
 

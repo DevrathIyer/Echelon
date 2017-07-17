@@ -29,13 +29,13 @@
             <div class="col s12" >
                 <ul class="tabs" style="color:#5e35b1">
                     <div class="indicator #5e35b1 deep-purple darken-1" style="z-index:1"></div>
-                    <li class="tab active" style = "color:#5e35b1 !important;"><a href="#Structure">Structure</a></li>
-                    <li class="tab"><a href="#Data">Data</a></li>
-                    <li class="tab"><a href="#Stats">Stats</a></li>
-                    <li class="tab"><a href="#Settings">Settings</a></li>
+                    <li class="tab active" style = "color:#5e35b1 !important;"><a href="#Structure{{item.Project_ID}}">Structure</a></li>
+                    <li class="tab"><a href="#Data{{item.Project_ID}}">Data</a></li>
+                    <li class="tab"><a href="#Stats{{item.Project_ID}}">Stats</a></li>
+                    <li class="tab"><a href="#Settings{{item.Project_ID}}">Settings</a></li>
                 </ul>
             </div>
-            <div id="Structure" class="col s12">
+            <div id="Structure{{item.Project_ID}}" class="col s12">
                 Layers: 3
                 <ul class = "nostyle">
                     <li>Layer 1: 2</li>
@@ -43,7 +43,7 @@
                     <li>Layer 1: 1</li>
                 </ul>
             </div>
-            <div id="Settings" class="col s12">
+            <div id="Settings{{item.Project_ID}}" class="col s12">
                 <a class = "btn-large red hoverable">Delete</a>
             </div>
         </div>

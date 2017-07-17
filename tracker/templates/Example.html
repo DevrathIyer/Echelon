@@ -16,11 +16,36 @@
             $("#ProjectTable").slideUp("slow", function()
             {
                 $('#BreadNav').html('<a id="ProjectBreadcrumb" href="#!" class="breadcrumb">My Projects</a><a href="#!" id = "NewBread" class="breadcrumb">Planter</a>');
-                $('#Project2').slideDown(1000);
+                $('#DIV{{item.Project_ID}}').slideDown(1000);
                 $('ul.tabs').tabs();
             });
         }
     </script>
+    <div id = "Project2" class = "ProjectDiv">
+        <div class="divider #5e35b1 deep-purple darken-1" style="z-index:1"></div>
+        <div class="row z-depth-0">
+            <div class="col s12" >
+                <ul class="tabs" style="color:#5e35b1">
+                    <div class="indicator #5e35b1 deep-purple darken-1" style="z-index:1"></div>
+                    <li class="tab active" style = "color:#5e35b1 !important;"><a href="#Structure">Structure</a></li>
+                    <li class="tab"><a href="#Data">Data</a></li>
+                    <li class="tab"><a href="#Stats">Stats</a></li>
+                    <li class="tab"><a href="#Settings">Settings</a></li>
+                </ul>
+            </div>
+            <div id="Structure" class="col s12">
+                Layers: 3
+                <ul class = "nostyle">
+                    <li>Layer 1: 2</li>
+                    <li>Layer 2: 4</li>
+                    <li>Layer 1: 1</li>
+                </ul>
+            </div>
+            <div id="Settings" class="col s12">
+                <a class = "btn-large red hoverable">Delete</a>
+            </div>
+        </div>
+    </div>
 {% endfor %}
 
 <script>

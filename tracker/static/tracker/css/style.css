@@ -71,9 +71,3 @@ body{
     min-height: 100% !important;
     position: relative !important;
 }
-
-.page-footer{
-    position: fixed !important;
-    bottom: 00px !important;
-    width: 100% !important;
-}

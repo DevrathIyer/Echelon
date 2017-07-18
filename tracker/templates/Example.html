@@ -113,7 +113,7 @@
                 </script>
             </div>
             <div id="Settings{{item.Project_ID}}" class="col s12">
-                <a class = "btn-large red hoverable" onclick = "">Delete</a>
+                <a class = "btn-large red hoverable" onclick = "DELETEPROJECT{{item.Project_ID}}();">Delete</a>
             </div>
         </div>
     </div>
@@ -170,7 +170,7 @@
 	            if("#DIV{{item.Project_ID}}" != "#DIV".concat('{{ProjectID}}'))
                 {
                     console.log('Hello');
-                    jQuery("#DIV{{item.Project_ID}}").toggle('show');
+                    //jQuery("#DIV{{item.Project_ID}}").toggle('show');
                 }
 	        }
         });

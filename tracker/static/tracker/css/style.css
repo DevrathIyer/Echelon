@@ -72,7 +72,8 @@ body{
     position: relative !important;
 }
 
-footer{
+.page-footer{
     position: fixed !important;
     bottom: 00px !important;
+    width: 100% !important;
 }

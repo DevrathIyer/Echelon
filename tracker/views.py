@@ -157,12 +157,12 @@ def editproject(request):
     response = requests.get(url)
     if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
         if response.json()['aud'] == GoogleID:
-            # response['auth'] = os.environ['password']
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers':layers, 'nodes':neurons}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/editProject', data=post_data)
-            Project['Neurons_per_Layer'] = layers
-            Project['NeuronLength'] = neurons
+            Project = {}
+            Project['Neurons_per_Layer'] = neurons
+            Project['NeuronLength'] = layers
             return render(request, 'ProjectDiv.html', {'item': Project})
             #return HttpResponse('<b>ayyo</b>', content_type='application/html')
     #return HttpResponse(json.dumps('nahhhh'), content_type='application/json')

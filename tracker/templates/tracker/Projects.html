@@ -98,8 +98,8 @@
     }
 </style>
 <!-- onload= "HideDIV();"-->
-
-<!--<a onclick = "AddCredits();">Manage Credits</a>
+<main>
+    <!--<a onclick = "AddCredits();">Manage Credits</a>
 <a onclick = "signOut();">Sign out</a>-->
 <form id = "SignOutForm" action="{% url 'signout' %}" method="post">
 {% csrf_token %}
@@ -270,6 +270,8 @@ window.onbeforeunload = function(e){
   }
 }
 </style>
+
+</main>
 
   <!-- END FOOTER CTA -->
 

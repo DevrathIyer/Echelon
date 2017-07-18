@@ -177,8 +177,6 @@ window.onbeforeunload = function(e){
             },
 	        success: function(json){
 	            $('#ProjectStatus').html(json);
-	            console.log('Checked');
-
 	        }
          });
     }
@@ -208,8 +206,6 @@ window.onbeforeunload = function(e){
                 },
 	            success: function(json){
 	                closeNav();
-	                console.log('HelloWorld');
-	                console.log(json['message']);
 	                $('#projects').html(json);
 	            }
             });

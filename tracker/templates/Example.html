@@ -130,6 +130,7 @@
             },
 	        success: function(json){
 	            $('#projects').html(json);
+	            $('#BreadNav').html('<a id="ProjectBreadcrumb" href="#!" class="breadcrumb">My Projects</a>');
 	        }
             });
         }

@@ -7,14 +7,18 @@
                 </ul>
             </div>
 
-            <div id="Structure{{item.Project_ID}}" class="col s12">
-                <div id="DIVLAYERCOUNT{{item.Project_ID}}">
+            <div id="Structure{{Project_ID}}" class="col s12">
+                <div id="DIVLAYERCOUNT{{Project_ID}}">
+                    Hello
+                    </div>
+                </div>
+                    <!--
                     Layers: <input type="text" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
                     <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
                     <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
                 </div>
                 </div>
-                <!--
+
                 {% for x in item.Neurons_per_Layer %}
                 <div id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}">
                     Layer {{forloop.counter}}: <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />

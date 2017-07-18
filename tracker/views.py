@@ -160,10 +160,7 @@ def editproject(request):
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers':layers, 'nodes':neurons}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/editProject', data=post_data)
-            Project = {}
-            Project['Neurons_per_Layer'] = neurons
-            Project['NeuronLength'] = layers
-            return render(request, 'ProjectDiv.html', {'item': Project})
+            return render(request, 'ProjectDiv.html', {'Project_ID': projectid,'Neurons_Per_Layer':neurons})
             #return HttpResponse('<b>ayyo</b>', content_type='application/html')
     #return HttpResponse(json.dumps('nahhhh'), content_type='application/json')
 

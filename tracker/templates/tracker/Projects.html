@@ -32,6 +32,7 @@
     <meta name="google-signin-client_id" content="867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com">
 </head>
 <body>
+<header>
     <ul id="dropdown1" class="dropdown-content" style="width:200px !important; top:25px; !important" data-beloworigin="true">
         <li><a href="#!">Account Settings</a></li>
         <li><a href="#!">Manage Credits</a></li>
@@ -60,7 +61,7 @@
             </div>
         </div>
   </nav>
-</body>
+</header>
 <style type="text/css">
     span.bold-red
     {
@@ -97,7 +98,7 @@
     }
 </style>
 <!-- onload= "HideDIV();"-->
-<body>
+
 <!--<a onclick = "AddCredits();">Manage Credits</a>
 <a onclick = "signOut();">Sign out</a>-->
 <form id = "SignOutForm" action="{% url 'signout' %}" method="post">

@@ -14,15 +14,7 @@
 
 {% for item in Projects %}
     <script>
-        function TOGGLEDIV{{item.Project_ID}}()
-        {
-            $("#ProjectTable").slideUp("slow", function()
-            {
-                $('#BreadNav').html('<a id="ProjectBreadcrumb" href="#!" class="breadcrumb">My Projects</a><a href="#!" id = "NewBread" class="breadcrumb">{{item.Project_ID}}</a>');
-                $('#DIV{{item.Project_ID}}').slideDown(1000);
-                $('ul.tabs').tabs();
-            });
-        }
+
     </script>
     <div id = "DIV{{item.Project_ID}}" class = "ProjectDiv">
         <div class="row z-depth-0">
@@ -118,6 +110,15 @@
         </div>
     </div>
     <script>
+    function TOGGLEDIV{{item.Project_ID}}()
+        {
+            $("#ProjectTable").slideUp("slow", function()
+            {
+                $('#BreadNav').html('<a id="ProjectBreadcrumb" href="#!" class="breadcrumb">My Projects</a><a href="#!" id = "NewBread" class="breadcrumb">{{item.Project_ID}}</a>');
+                $('#DIV{{item.Project_ID}}').slideDown(1000);
+                $('ul.tabs').tabs();
+            });
+        }
     function DELETEPROJECT{{item.Project_ID}}(){
         if(confirm("Deleting this project will erase the connection between you and your data.\n This CANNOT be undone.\n Are you sure you want to continue?"))
         {
@@ -166,7 +167,7 @@
                 neurons:Neurons,
             },
 	        success: function(json){
-	            $('#projects').html(json);
+	            $('#projects').html(json );
 	            if("#DIV{{item.Project_ID}}" != "#DIV".concat('{{ProjectID}}'))
                 {
                     console.log('Hello');

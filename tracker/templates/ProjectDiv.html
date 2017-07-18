@@ -1,19 +1,23 @@
-<div id="DIVLAYERCOUNT{{item.ProjectID}}">
-            Layers: <input type="text" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
-                <form id = "LAYERCOUNTEDITFORM{{item.Project_ID}}" action="return false;" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" id="LayerCountNew{{item.Project_ID}}" name="LayerCountNew{{item.Project_ID}}" value="N/A">
-                    <input type="hidden" id="LayerCountOrig{{item.Project_ID}}" name="LayerCountOrig{{item.Project_ID}}" value="N/A">
-                </form>
-                <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
-                <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
-        </div>
-        <div id="UAWAVYDUDE{{item.Project_ID}}">Hello! Its not working...</div>
-        Neurons Per Layer:
-            {% for x in item.Neurons_per_Layer %}
+<div id = "DIV{{item.Project_ID}}" class = "ProjectDiv" style ="display: none;">
+        <div class="row z-depth-0">
+            <div class="col s12" >
+                <ul class="tabs" style="color:#5e35b1">
+                    <div class="indicator #5e35b1 deep-purple darken-1" style="z-index:1"></div>
+                    <li class="tab active" style = "color:#5e35b1 !important;"><a href="#Structure{{item.Project_ID}}">Structure</a></li>
+                    <li class="tab"><a href="#Settings{{item.Project_ID}}">Settings</a></li>
+                </ul>
+            </div>
+            <div id="Structure{{item.Project_ID}}" class="col s12">
+                <div id="DIVLAYERCOUNT{{item.ProjectID}}">
+                    Layers: <input type="text" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value={{item.Layers}} readonly="readonly" />
+                    <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
+                    <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
+                </div>
+                {% for x in item.Neurons_per_Layer %}
                 <div id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}">
                     Layer {{forloop.counter}}: <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />
-                    <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('up');">+</button><button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
+                    <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('up');">+</button>
+                    <button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
                     Neurons
                     <script>
                         function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {
@@ -23,10 +27,12 @@
                                 if (upordown == 'up')
                                 {
                                     ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                    PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                                 }
                                 else if (upordown == 'down')
                                 {
                                     --document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                    PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                                 }
                             }
                             else if (quantity.value == 1)
@@ -34,24 +40,19 @@
                                 if (upordown == 'up')
                                 {
                                     ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                    PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                                 }
                             }
                             else
                             {
                                 document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value=1;
+                                PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                             }
                         }
                     </script>
                 </div>
             {% endfor %}
-
-            <script>
-            jQuery(document).ready(function(){
-                jQuery("#DIV{{item.Project_ID}}").toggle('show');
-                jQuery("#HIDEBUTTON{{item.Project_ID}}").on('click', function(event) {
-                    jQuery("#DIV{{item.Project_ID}}").toggle('show');
-                });
-            });
+                <script>
 
             function setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}(upordown) {
                 var quantity = document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}");
@@ -60,12 +61,12 @@
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                        PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                     }
                     else if (upordown == 'down')
                     {
                         --document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                        PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                     }
                 }
                 else if (quantity.value == 1)
@@ -73,16 +74,20 @@
                     if (upordown == 'up')
                     {
                         ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                        LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                        PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
                     }
                 }
                 else
                 {
                     document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value=1;
-                    LAYERCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                    PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
 
                 }
             }
-        </script>
-</body>
-</html>
+                </script>
+            </div>
+            <div id="Settings{{item.Project_ID}}" class="col s12">
+                <a class = "btn-large red hoverable" onclick = "DELETEPROJECT{{item.Project_ID}}();">Delete</a>
+            </div>
+        </div>
+    </div>

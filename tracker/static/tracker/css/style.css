@@ -67,7 +67,12 @@ li.nostyle {
     width: 100% !important;
 }
 
-.body{
+body{
     min-height: 100% !important;
     position: relative !important;
+}
+
+footer{
+    position: fixed !important;
+    bottom: 00px !important;
 }

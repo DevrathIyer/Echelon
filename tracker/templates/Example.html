@@ -34,12 +34,45 @@
                 </ul>
             </div>
             <div id="Structure{{item.Project_ID}}" class="col s12">
-                Layers: 3
-                <ul class = "nostyle">
-                    <li>Layer 1: 2</li>
-                    <li>Layer 2: 4</li>
-                    <li>Layer 1: 1</li>
-                </ul>
+                {% for x in item.Neurons_per_Layer %}
+                <div id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}">
+                    Layer {{forloop.counter}}: <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />
+                    <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('up');">+</button>
+                    <button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
+                    Neurons
+                    <script>
+                        function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown) {
+                            var quantity = document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}");
+
+                            if (DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}.value > 1) {
+                                if (upordown == 'up')
+                                {
+                                    ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                    PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                                }
+                                else if (upordown == 'down')
+                                {
+                                    --document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                    PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                                }
+                            }
+                            else if (quantity.value == 1)
+                            {
+                                if (upordown == 'up')
+                                {
+                                    ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
+                                    PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                                }
+                            }
+                            else
+                            {
+                                document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value=1;
+                                PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT();
+                            }
+                        }
+                    </script>
+                </div>
+            {% endfor %}
             </div>
             <div id="Settings{{item.Project_ID}}" class="col s12">
                 <a class = "btn-large red hoverable">Delete</a>

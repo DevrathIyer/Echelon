@@ -79,11 +79,6 @@
                 </div>
             {% endfor %}
                 <script>
-            jQuery(document).ready(function(){
-                jQuery("#HIDEBUTTON{{item.Project_ID}}").on('click', function(event) {
-                    jQuery("#DIV{{item.Project_ID}}").toggle('show');
-                });
-            });
 
             function setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}(upordown) {
                 var quantity = document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}");
@@ -174,7 +169,8 @@
 	            $('#projects').html(json);
 	            if("#DIV{{item.Project_ID}}" != "#DIV".concat('{{ProjectID}}'))
                 {
-                    //jQuery("#DIV{{item.Project_ID}}").toggle('show');
+                    console.log('Hello');
+                    jQuery("#DIV{{item.Project_ID}}").toggle('show');
                 }
 	        }
         });

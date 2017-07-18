@@ -13,9 +13,6 @@
 </div>
 
 {% for item in Projects %}
-    <script>
-
-    </script>
     <div id = "DIV{{item.Project_ID}}" class = "ProjectDiv">
         <div class="row z-depth-0">
             <div class="col s12" >
@@ -167,7 +164,7 @@
                 neurons:Neurons,
             },
 	        success: function(json){
-	            $('#projects').html(json );
+	            $('#DIV{{item.Project_ID}}').html(json );
 	            if("#DIV{{item.Project_ID}}" != "#DIV".concat('{{ProjectID}}'))
                 {
                     console.log('Hello');

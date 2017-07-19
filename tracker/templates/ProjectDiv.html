@@ -1,13 +1,4 @@
-<div class="row z-depth-0">
-            <div class="col s12" >
-                <ul class="tabs" style="color:#5e35b1">
-                    <div class="indicator #5e35b1 deep-purple darken-1" style="z-index:1"></div>
-                    <li class="tab active" style = "color:#5e35b1 !important;"><a href="#Structure{{Project_ID}}">Structure</a></li>
-                    <li class="tab"><a href="#Settings{{Project_ID}}">Settings</a></li>
-                </ul>
-            </div>
 
-            <div id="Structure{{Project_ID}}" class="col s12">
                 <div id="DIVLAYERCOUNT{{Project_ID}}">
                     Layers: <input type="text" id="DIVLAYERCOUNTLABEL{{Project_ID}}" value={{Layers}} readonly="readonly" />
                     <button id="DIVLAYERCOUNTUP{{Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{Project_ID}}('up');">+</button>
@@ -91,4 +82,3 @@
             <div id="Settings{{Project_ID}}" class="col s12">
                 <a class = "btn-large red hoverable" onclick = "DELETEPROJECT{{Project_ID}}();">Delete</a>
             </div>
-        </div>

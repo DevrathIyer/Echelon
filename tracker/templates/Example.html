@@ -165,10 +165,9 @@
                 neurons:Neurons,
             },
 	        success: function(json){
-	            $('#DIV{{item.Project_ID}}').html(json );
+	            $('#Structure{{item.Project_ID}}').html(json );
 	            if("#DIV{{item.Project_ID}}" != "#DIV".concat('{{ProjectID}}'))
                 {
-                    console.log('Hello');
                     //jQuery("#DIV{{item.Project_ID}}").toggle('show');
                 }
 	        }

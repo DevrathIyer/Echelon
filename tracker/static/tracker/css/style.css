@@ -32,8 +32,11 @@ li.nostyle {
     display: none;
     padding-top:10px;
     margin-left:100px;
-    padding-left:30px;
     width:100%;
+}
+
+.ProjectDivMain{
+    padding-left:30px;
 }
 
 .nav-wrapper{

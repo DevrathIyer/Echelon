@@ -31,7 +31,8 @@ li.nostyle {
 .ProjectDiv{
     display: none;
     padding-top:10px;
-    padding-left:130px;
+    margin-left:100px
+    padding-left:30px;
     width:100%;
 }
 

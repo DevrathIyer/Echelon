@@ -19,10 +19,10 @@ def login(request):
 def signout(request):
     try:
         id_token = request.session['TokenID']
+        request.session.flush()
+        return redirect('login')
     except:
-        return Http404()
-    request.session.flush()
-    return redirect('login')
+        return redirect('login')
 
 def addcredits(request):
     try:

@@ -10,27 +10,16 @@
     <link rel="shortcut icon" href="images/favicon.ico">
 
     <title>Echelon</title>
+	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     {% load static %}
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'tracker/css/bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- Animate -->
-    <link href="{% static 'tracker/css/animate.css' %}" rel="stylesheet">
-
-    <!-- Magnific-popup -->
-    <link rel="stylesheet" href="{% static 'tracker/css/magnific-popup.css' %}">
-
-    <!-- Icon-font -->
-    <link rel="stylesheet" type="text/css" href="{% static 'tracker/css/ionicons.min.css' %}">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static 'tracker/css/style.css' %}" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-    <!--[if lt IE 9]>
-      <script src="{% static 'tracker/js/html5shiv.js' %}"></script>
-      <script src="{% static 'tracker/js/respond.min.js' %}"></script>
-    <![endif]-->
+	  <script src="{% static 'tracker/Home/jquery.min.js' %}"></script>
+			<script src="{% static 'tracker/Home/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'tracker/Home/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'tracker/Home/skel.min.js' %}"></script>
+			<script src="{% static 'tracker/Home/util.js' %}"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="{% static 'tracker/Home/main.js' %}"></script>
+	  <link rel = "stylesheet" href="{% static 'tracker/Home/main.css' %}">
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -42,18 +31,31 @@
       ga('send', 'pageview');
 
     </script>
-</head>
-<form id = "SignInForm" action="{% url 'viewuserdata' %}" method="post">
+  <form id = "SignInForm" action="{% url 'viewuserdata' %}" method="post">
 {% csrf_token %}
     <input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">
 </form>
-<script>
+  <form id = "SignUpForm" action="{% url 'createnewuser' %}" method="post">
+{% csrf_token %}
+    <input type="hidden" id = "TokenIDUp" name="TokenID" value="Not Logged In">
+    <input type="hidden" id = "Email" name="Email" value="Not Logged In">
+</form>
+  <script>
   function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     var id_token = googleUser.getAuthResponse().id_token;
     document.getElementById("TokenID").value = id_token;
     document.getElementById("SignInForm").submit();
 }
+
+function onSignUp(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    var id_token = googleUser.getAuthResponse().id_token;
+    document.getElementById("TokenIDUp").value = id_token;
+    document.getElementById("Email").value = profile.getEmail();
+    document.getElementById("SignUpForm").submit();
+}
+
 function onLoad() {
       gapi.load('auth2', function() {
         gapi.auth2.init();
@@ -61,120 +63,10 @@ function onLoad() {
       });
     }
 </script>
+  </head>
+
 
 <body>
-
-  <!-- Pre-loader
-  <div class="preloader">
-     <div class="status">&nbsp;</div>
-  </div>-->
-
-
-  <!-- HOME -->
-  <section class="home bg-dark" >
-
-    <div class="navbar navbar-custom" role="navigation">
-      <div class="container">
-        <!-- Navbar-header -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <i class="ion-navicon"></i>
-          </button>
-          <!-- LOGO -->
-          <a class="navbar-brand logo" href="index.html">
-              <span>Echelon</span>
-          </a>
-        </div>
-        <!-- end navbar-header -->
-
-        <!-- menu -->
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="#services">About Us</a>
-            </li>
-            <li><a href="#">Documentation</a></li>
-            <li><a href="#">Log In</a></li>
-              </ul>
-            </li>
-
-          </ul>
-        </div>
-        <!--/Menu -->
-      </div>
-      <!-- end container -->
-    </div>
-    <!-- End navbar -->
-
-    <div class="container" >
-      <div class="row">
-        <div class="col-sm-6 text-left">
-          <div class="home-wrapper" id="backgroundFun">
-              <h1 class="animated fadeInDown wow home-title" data-wow-delay=".1s">Log In</h1>
-              <div class="g-signin2" data-onsuccess="onSignIn"></div>
-            <h4 class="animated fadeInDown wow" data-wow-delay=".2s"> Don't have an account? <a href="{% url 'signup' %}">Sign up</a> using Google.</h4>
-            <div class="clearfix"></div>
-          </div>
-        </div>
-    </div>
-    </div>
-  </section>
-  <!-- END FOOTER CTA -->
-
-
-  <!-- FOOTER -->
-  <footer class="section bg-gray footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3 col-sm-6">
-          <h5>Echelon</h5>
-          <ul class="list-unstyled">
-            <li><a href="">Home</a></li>
-            <li><a href="">About Us</a></li>
-            <li><a href="">Documentation</a></li>
-          </ul>
-        </div>
-
-        <div class="col-md-3 col-sm-6">
-          <h5>Social</h5>
-          <ul class="list-unstyled">
-            <li><a href="">Facebook</a></li>
-            <li><a href="">Twitter</a></li>
-          </ul>
-        </div>
-
-        <div class="col-md-3 col-sm-6">
-          <h5>Support</h5>
-          <ul class="list-unstyled">
-            <li><a href="">Help & Support</a></li>
-            <li><a href="">Privacy Policy</a></li>
-            <li><a href="">Terms & Conditions</a></li>
-          </ul>
-        </div>
-
-        <div class="col-md-3 col-sm-6">
-          <h5>Contact</h5>
-          <address>
-            2310 W. Maplewood St.<br>
-            Chandler, Arizona 85286<br>
-            <abbr title="Phone">P:</abbr> (480) 414-3912<br/>
-            E: <a href="mailto:echelon@echelon.com">echelon@echelon.com</a>
-          </address>
-        </div>
-
-      </div>
-
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="footer-alt">
-            <p class="pull-right">2015 © Echelon</p>
-            <p class="logo">Echelon</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-
   <!-- END FOOTER -->
 
 
@@ -182,16 +74,77 @@ function onLoad() {
 
     <!-- js placed at the end of the document so the pages load faster -->
 
-    {% load static %}
-    <script src="{% static 'tracker/js/jquery.js' %}"></script>
-    <script src="{% static 'tracker/js/bootstrap.min.js' %}"></script>
-    <!-- Jquery easing -->
-    <script type="text/javascript" src="{% static 'tracker/js/jquery.easing.1.3.min.js' %}"></script>
-    <script src="{% static 'tracker/js/SmoothScroll.js' %}"></script>
-    <script src="{% static 'tracker/js/wow.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'tracker/js/jquery.magnific-popup.min.js' %}"></script>
-    <!--common script for all pages-->
-    <script src="{% static 'tracker/js/jquery.app.js' %}"></script>
-
   </body>
+
+
+
+
+<body>
+
+  <!-- Pre-loader
+  <div class="preloader">
+     <div class="status">&nbsp;</div>
+  </div>-->
+	<head>
+		<title>Echelon Lab - Cloud-based Machine Learning</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Log In</a></li>
+							<li><a href="#two">Sign Up</a></li>
+<!--							<li><a href="#one">Team</a></li>-->
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Log In</h1>
+							<ul class="actions">
+                                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+								<li><a href="#SignUp" class="button scrolly">Sign Up</a></li>
+							</ul>
+						</div>
+					</section>
+
+
+				<!-- Two -->
+					<section id="two" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Sign Up</h2>
+							<p>Connect your google account to get started.</p>
+                            <div class="g-signin2" data-onsuccess="onSignUp"></div>
+<!--
+							<ul class="actions">
+								<li><a href="#" class="button">Learn more</a></li>
+							</ul>
+-->
+						</div>
+					</section>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; 2017 Echelon Lab LLC. All rights reserved.</li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+
+
+
+	</body>
 </html>

@@ -16,9 +16,6 @@ def home(request):
 def login(request):
     return render(request, 'tracker/Login.html', {})
 
-def signup(request):
-    return render(request, 'tracker/NewUser.html', {})
-
 def signout(request):
     try:
         id_token = request.session['TokenID']

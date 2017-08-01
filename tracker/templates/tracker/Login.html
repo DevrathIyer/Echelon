@@ -104,7 +104,21 @@ function onLoad() {
 						<div class="inner">
 							<h2>Sign Up</h2>
 							<p>Connect your google account to get started.</p>
-                            <div class="g-signin2" data-onsuccess="onSignUp"></div>
+                            <div id="my-signin2"></div>
+							<script>
+    							function renderButton() {
+      								gapi.signin2.render('my-signin2', {
+        								'scope': 'profile email',
+        								'width': 240,
+        								'height': 50,
+        								'longtitle': true,
+        								'theme': 'dark',
+        								'onsuccess': onSuccess,
+        								'onfailure': onFailure
+      								});
+    							}
+ 							</script>
+
 <!--
 							<ul class="actions">
 								<li><a href="#" class="button">Learn more</a></li>

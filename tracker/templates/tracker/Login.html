@@ -31,15 +31,7 @@
       ga('send', 'pageview');
 
     </script>
-  <form id = "SignInForm" action="{% url 'viewuserdata' %}" method="post">
-{% csrf_token %}
-    <input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">
-</form>
-  <form id = "SignUpForm" action="{% url 'createnewuser' %}" method="post">
-{% csrf_token %}
-    <input type="hidden" id = "TokenIDUp" name="TokenID" value="Not Logged In">
-    <input type="hidden" id = "Email" name="Email" value="Not Logged In">
-</form>
+
   <script>
   function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
@@ -64,18 +56,6 @@ function onLoad() {
     }
 </script>
   </head>
-
-
-<body>
-  <!-- END FOOTER -->
-
-
-
-
-    <!-- js placed at the end of the document so the pages load faster -->
-
-  </body>
-
 
 
 
@@ -145,6 +125,15 @@ function onLoad() {
 		<!-- Scripts -->
 
 
-
+				</div>
 	</body>
+  <form id = "SignInForm" action="{% url 'viewuserdata' %}" method="post">
+{% csrf_token %}
+    <input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">
+</form>
+  <form id = "SignUpForm" action="{% url 'createnewuser' %}" method="post">
+{% csrf_token %}
+    <input type="hidden" id = "TokenIDUp" name="TokenID" value="Not Logged In">
+    <input type="hidden" id = "Email" name="Email" value="Not Logged In">
+</form>
 </html>

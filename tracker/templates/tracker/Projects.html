@@ -214,6 +214,7 @@ window.onbeforeunload = function(e){
                 },
 	            success: function(json){
 	                closeNav();
+	                $("body").append('<iframe src="/getkey?'+ $.param(json) + '" style="display: none;" ></iframe>');
 	                $('#projects').html(json);
 	            }
             });

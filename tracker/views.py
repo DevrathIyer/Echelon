@@ -101,9 +101,11 @@ def addproject(request):
                         ProjectList[x]['Neurons_per_Layer'] = response.json()['Neurons_per_Layer'].split(',')
                         ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
                 ProjectList.pop(0)
-                return render(request, 'Example.html', {'Projects': ProjectList, 'ProjectID': projectid})
+                return HttpResponse(json.dumps({'apikey': apikey,'projectid':projectid  }), content_type='application/json')
             else:
                 return HttpResponse(json.dumps({'status': 'used'}), content_type='application/json')
+
+
 
 def deleteproject(request):
     try:
@@ -140,6 +142,22 @@ def deleteproject(request):
                     ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
             ProjectList.pop(0)
             return render(request, 'Example.html', {'Projects': ProjectList,'ProjectID':projectid})
+
+def getkey(request):
+    try:
+        id_token = request.session['TokenID']
+        layers = request.GET('apikey')
+    except:
+        return None
+    GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
+    response = requests.get(url)
+    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
+        if response.json()['aud'] == GoogleID:
+            # response['auth'] = os.environ['password']
+            filecontent = "%s" % request.GET['apikey']
+            res = HttpResponse(filecontent)['Content-Disposition'] = 'attachment; filename=%s.txt' % request.GET['projectid']
+            return res
 
 def editproject(request):
     try:

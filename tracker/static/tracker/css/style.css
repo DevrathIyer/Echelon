@@ -84,3 +84,7 @@ body{
 dropdown-content{
     top: 200px !important;
 }
+
+ProjectTabs{
+    padding: 100px;
+}

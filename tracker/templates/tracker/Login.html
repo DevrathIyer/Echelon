@@ -49,6 +49,17 @@ function onSignUp(googleUser) {
     document.getElementById("SignUpForm").submit();
 }
 
+function onSuccess(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    var id_token = googleUser.getAuthResponse().id_token;
+    document.getElementById("TokenIDUp").value = id_token;
+    document.getElementById("Email").value = profile.getEmail();
+    document.getElementById("SignUpForm").submit();
+}
+function onFaliure(googleUser) {
+     console.log(':(');
+}
+
 function onLoad() {
       gapi.load('auth2', function() {
         gapi.auth2.init();
@@ -99,7 +110,7 @@ function onLoad() {
 
 
 				<!-- Two -->
-					<section id="two" class="wrapper style3 fade-up">
+					<section id="two" class="wrapper style3 fullscreen fade-up">
 						<div class="inner">
 							<h2>Sign Up</h2>
 							<p>Connect your google account to get started.</p>
@@ -112,6 +123,8 @@ function onLoad() {
         								'height': 50,
         								'longtitle': true,
         								'theme': 'dark',
+        								'onsuccess': onSuccess,
+        								'onfailure': onFailure
       								});
     							}
  							</script>

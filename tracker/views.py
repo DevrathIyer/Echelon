@@ -101,7 +101,7 @@ def addproject(request):
                         ProjectList[x]['Neurons_per_Layer'] = response.json()['Neurons_per_Layer'].split(',')
                         ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
                 ProjectList.pop(0)
-                return HttpResponse(json.dumps({'apikey': apikey,'projectid':projectid  }), content_type='application/json')
+                return HttpResponse(json.dumps({'apikey': key,'projectid':projectid  }), content_type='application/json')
             else:
                 return HttpResponse(json.dumps({'status': 'used'}), content_type='application/json')
 

@@ -157,7 +157,7 @@ def getkey(request):
         if response.json()['aud'] == GoogleID:
             # response['auth'] = os.environ['password']
             filecontent = "%s" % request.GET['apikey']
-            res = HttpResponse(filecontent)['Content-Disposition'] = 'attachment; filename=%s.txt' % request.GET['projectid']
+            res = HttpResponse(filecontent, content_type='application/text/plain')['Content-Disposition'] = 'attachment; filename=%s.txt' % request.GET['projectid']
             return res
 
 def editproject(request):

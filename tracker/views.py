@@ -199,10 +199,10 @@ def createnewuser(request):
         return redirect('login')
 
 def viewuserdata(request):
-    if(request.POST.get('TokenID') != none):
+    if(request.POST.get('TokenID') != None):
         id_token = request.POST.get('TokenID')
         request.session['TokenID'] = id_token
-    elif(request.session['TokenID'] != none):
+    elif(request.session['TokenID'] != None):
         id_token = request.session['TokenID']
     else:
         return redirect('login')

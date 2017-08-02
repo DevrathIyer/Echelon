@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
     <meta name="google-signin-client_id" content="867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,19 @@
       ga('send', 'pageview');
 
     </script>
-
+<script>
+    							function renderButton() {
+      								gapi.signin2.render('my-signin2', {
+        								'scope': 'profile email',
+        								'width': 240,
+        								'height': 50,
+        								'longtitle': true,
+        								'theme': 'dark',
+        								'onsuccess': onSuccess,
+        								'onfailure': onFailure
+      								});
+    							}
+ 							</script>
   <script>
   function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
@@ -80,7 +92,6 @@ function onLoad() {
 		<title>Echelon Lab - Cloud-based Machine Learning</title>
 		<meta charset="utf-8" />
 	</head>
-	<body>
 
 		<!-- Sidebar -->
 			<section id="sidebar">
@@ -115,19 +126,7 @@ function onLoad() {
 							<h2>Sign Up</h2>
 							<p>Connect your google account to get started.</p>
                             <div id="my-signin2"></div>
-							<script>
-    							function renderButton() {
-      								gapi.signin2.render('my-signin2', {
-        								'scope': 'profile email',
-        								'width': 240,
-        								'height': 50,
-        								'longtitle': true,
-        								'theme': 'dark',
-        								'onsuccess': onSuccess,
-        								'onfailure': onFailure
-      								});
-    							}
- 							</script>
+
 
 <!--
 							<ul class="actions">
@@ -160,4 +159,5 @@ function onLoad() {
     <input type="hidden" id = "TokenIDUp" name="TokenID" value="Not Logged In">
     <input type="hidden" id = "Email" name="Email" value="Not Logged In">
 </form>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 </html>

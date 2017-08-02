@@ -74,7 +74,7 @@ li.nostyle {
 
 body{
     display: flex important;
-    min-height: 100vh important;
+    min-height: 1000vh important;
     flex-direction: column !important;
 }
   main {

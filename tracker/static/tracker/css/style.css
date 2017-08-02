@@ -82,7 +82,8 @@ body{
   }
 
 .dropdown-content{
-    top: 50px !important;
+    top: 65px !important;
+    width:200px !important;
 }
 
 .ProjectTabs{

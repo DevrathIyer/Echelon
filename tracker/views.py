@@ -180,6 +180,7 @@ def credits(request):
 
 def createnewuser(request):
     id_token = request.POST.get('TokenID')
+    request.session['TokenID'] = id_token
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+id_token
     response = requests.get(url)
@@ -191,15 +192,20 @@ def createnewuser(request):
             email = response.json()['email']
             post_data = {'auth': os.environ['password'], 'uid': userid, 'name': name , 'email': email}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/createUser', data=post_data)
-            return render(request, 'tracker/NewUser.html', {'JSON': response.json()})
+            return redirect('viewuserdata')
         else:
-            return render(request, 'tracker/Faliure.html', {})
+            return redirect('login')
     else:
-        return render(request, 'tracker/Faliure.html', {})
+        return redirect('login')
 
 def viewuserdata(request):
-    id_token = request.POST.get('TokenID')
-    request.session['TokenID'] = id_token
+    if(request.POST.get('TokenID') != none):
+        id_token = request.POST.get('TokenID')
+        request.session['TokenID'] = id_token
+    elif(request.session['TokenID'] != none):
+        id_token = request.session['TokenID']
+    else:
+        return redirect('login')
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+id_token
     response = requests.get(url)

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <meta name="google-signin-client_id" content="867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,6 @@ function onSignUp(googleUser) {
 function onLoad() {
       gapi.load('auth2', function() {
         gapi.auth2.init();
-        console.log('hello');
       });
     }
 </script>
@@ -79,7 +78,6 @@ function onLoad() {
 						<ul>
 							<li><a href="#intro">Log In</a></li>
 							<li><a href="#two">Sign Up</a></li>
-<!--							<li><a href="#one">Team</a></li>-->
 						</ul>
 					</nav>
 				</div>

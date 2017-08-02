@@ -81,10 +81,10 @@ body{
     flex: 1 0 auto important;
   }
 
-dropdown-content{
+.dropdown-content{
     top: 200px !important;
 }
 
-ProjectTabs{
+.ProjectTabs{
     padding: 100px;
 }

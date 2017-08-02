@@ -63,7 +63,6 @@ li.nostyle {
 
 .addButton{
     margin-top: 10px !important;
-    position: relative !important;
     top: 64px !important;
 }
 
@@ -82,7 +81,7 @@ body{
   }
 
 .dropdown-content{
-    top: 65px !important;
+    top: 64px !important;
     width:200px !important;
 }
 

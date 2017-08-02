@@ -158,7 +158,7 @@ def getkey(request):
             # response['auth'] = os.environ['password']
             filecontent = "%s" % request.GET['apikey']
             res = HttpResponse(filecontent)['Content-Disposition'] = 'attachment; filename=%s.txt' % request.GET['projectid']
-            return res
+            return HttpResponse(filecontent)['Content-Disposition'] = 'attachment; filename=%s.txt' % request.GET['projectid']
 
 def editproject(request):
     try:

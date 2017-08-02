@@ -146,7 +146,8 @@ def deleteproject(request):
 def getkey(request):
     try:
         id_token = request.session['TokenID']
-        layers = request.GET('apikey')
+        apikey = request.GET['apikey']
+        prijectid = request.GET['projectid']
     except:
         return None
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"

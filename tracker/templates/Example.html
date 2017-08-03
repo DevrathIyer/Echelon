@@ -9,8 +9,9 @@
                 </ul>
             </div>
             <div id="Structure{{item.Project_ID}}" class="col s12 ProjectDivMain"> {% include 'ProjectDiv.html' %} </div>
-            <div id="Settings{{item.Project_ID}}" class="col s12">
+            <div id="Settings{{item.Project_ID}}" class="col s12 ProjectDivMain">
                 <a class = "btn-large red hoverable" onclick = "DELETEPROJECT{{item.Project_ID}}();">Delete</a>
+                <a class = "btn green hoverable" onclick = "DELETEPROJECT{{item.Project_ID}}();">Request New Key</a>
             </div>
         </div>
     </div>

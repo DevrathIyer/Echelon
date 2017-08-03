@@ -128,6 +128,19 @@ window.onbeforeunload = function(e){
     }
 </script>
 <div id="projects" class = "col s12 nopad">
+    <div id = "ProjectTable">
+        <table class="bordered z-depth-0">
+            <tbody>
+                {% for item in Projects %}
+                    <tr class =  "row">
+                        <td class = "nopad">
+                            <a class = "waves-effect btn-flat" onclick="TOGGLEDIV{{item.Project_ID}}();">{{item.Project_ID}}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     {% include 'Example.html' %}
 </div>
 <div id="myNav" class="overlay">

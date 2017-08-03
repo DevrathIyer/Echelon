@@ -1,16 +1,4 @@
-<div id = "ProjectTable">
-    <table class="bordered z-depth-0">
-    <tbody>
-        {% for item in Projects %}
-            <tr class =  "row">
-                <td class = "nopad">
-                   <a class = "waves-effect btn-flat" onclick="TOGGLEDIV{{item.Project_ID}}();">{{item.Project_ID}}</a>
-               </td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
-</div>
+
 
 {% for item in Projects %}
     <div id = "DIV{{item.Project_ID}}" class = "ProjectDiv">

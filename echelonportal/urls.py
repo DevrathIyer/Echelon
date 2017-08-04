@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^deleteproject', views.deleteproject, name='deleteproject'),
     url(r'^addproject', views.addproject, name='addproject'),
     url(r'^getkey', views.getkey, name='getkey'),
+    url(r'^newkey', views.newkey, name='newkey'),
     url(r'^addcredits', views.addcredits, name='addcredits'),
     url(r'^signout', views.signout, name='signout'),
     url(r'^credits', views.credits, name='credits'),

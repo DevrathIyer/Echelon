@@ -105,7 +105,43 @@ def addproject(request):
             else:
                 return HttpResponse(json.dumps({'status': 'used'}), content_type='application/json')
 
+def getkey(request):
+    try:
+        id_token = request.session['TokenID']
+        apikey = request.GET['apikey']
+        prijectid = request.GET['projectid']
+    except:
+        return None
+    GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
+    response = requests.get(url)
+    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
+        if response.json()['aud'] == GoogleID:
+            filecontent = "%s" % request.GET['apikey']
+            res = HttpResponse(filecontent, content_type='application/text/plain')
+            res['Content-Disposition'] = 'attachment; filename=%s.txt' % request.GET['projectid']
+            return res
 
+def newkey(request):
+    try:
+        id_token = request.session['TokenID']
+        projectid = request.GET['projectid']
+    except:
+        return None
+    GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
+    response = requests.get(url)
+    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
+        if response.json()['aud'] == GoogleID:
+            key = ''.join(random.choice(string.lowercase + string.uppercase + string.digits) for i in range(40))
+            salt = bcrypt.gensalt()
+            apikey = bcrypt.hashpw(key, salt)
+            post_data = {'auth': os.environ['password'], 'projectid': projectid,'apikey': key}
+            response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/ChangeAPIKey', data=post_data)
+            filecontent = "%s" % key
+            res = HttpResponse(filecontent, content_type='application/text/plain')
+            res['Content-Disposition'] = 'attachment; filename=%s.txt' % projectid
+            return res
 
 def deleteproject(request):
     try:
@@ -143,23 +179,6 @@ def deleteproject(request):
             ProjectList.pop(0)
             return render(request, 'Example.html', {'Projects': ProjectList,'ProjectID':projectid})
 
-def getkey(request):
-    try:
-        id_token = request.session['TokenID']
-        apikey = request.GET['apikey']
-        prijectid = request.GET['projectid']
-    except:
-        return None
-    GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
-    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
-    response = requests.get(url)
-    if response.json()['iss'] in ('accounts.google.com', 'https://accounts.google.com'):
-        if response.json()['aud'] == GoogleID:
-            # response['auth'] = os.environ['password']
-            filecontent = "%s" % request.GET['apikey']
-            res = HttpResponse(filecontent, content_type='application/text/plain')
-            res['Content-Disposition'] = 'attachment; filename=%s.txt' % request.GET['projectid']
-            return res
 
 def editproject(request):
     try:

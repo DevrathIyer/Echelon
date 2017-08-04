@@ -10,7 +10,7 @@
             </div>
             <div id="Structure{{item.Project_ID}}" class="col s12 ProjectDivMain"> {% include 'ProjectDiv.html' %} </div>
             <div id="Settings{{item.Project_ID}}" class="col s12 ProjectDivMain">
-                <a class = "btn green hoverable" onclick = "console.log('I got pressed!');">Request New Key</a>
+                <a class = "btn green hoverable" onclick = "REQUESTKEY{{item.Project_ID}}();">Request New Key</a>
                 <a class = "btn-large red hoverable" onclick = "DELETEPROJECT{{item.Project_ID}}();">Delete</a>
             </div>
         </div>
@@ -81,6 +81,21 @@
                 }
 	        }
         });
+    }
+    function REQUESTKEY{{item.Project_ID}}(){
+            $.ajax({
+            type:'POST',
+            url:'{% url 'newkey' %}',
+            datatype:"json",
+            async: true,
+            data:{
+                csrfmiddlewaretoken:'{{csrf_token}}',
+                projectid:'{{item.Project_ID}}',
+            },
+	        success: function(json){
+	            $("body").append('<iframe src="/newkey?'+ $.param(json) + '" style="display: none;" ></iframe>');
+	        }
+            });
     }
 </script>
 

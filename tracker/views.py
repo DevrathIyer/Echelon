@@ -125,7 +125,7 @@ def getkey(request):
 def newkey(request):
     try:
         id_token = request.session['TokenID']
-        projectid = request.POST.get['projectid']
+        projectid = request.POST.get('projectid')
     except:
         return None
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"

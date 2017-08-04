@@ -3,7 +3,7 @@
     <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
     <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
 </div>
-{% for x in item.Neurons_per_Layer %}
+{% for x in item.Neurons_Per_Layer %}
     <div id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}" class = "ProjectDivMain">
         Layer {{forloop.counter}}: <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />
         <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('up');">+</button>

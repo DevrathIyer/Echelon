@@ -177,9 +177,11 @@ def editproject(request):
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers':layers, 'nodes':neurons}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/editProject', data=post_data)
-            return render(request, 'ProjectDiv.html', {'Project_ID': projectid,'Neurons_Per_Layer':neurons.split(","),'Layers':layers})
-            #return HttpResponse('<b>ayyo</b>', content_type='application/html')
-    #return HttpResponse(json.dumps('nahhhh'), content_type='application/json')
+            item = ['' for x in range(3)]
+            item['Project_ID'] = projectid
+            item['Neurons_Per_Layer'] = neurons.split(",")
+            item['NeuronLength'] = layers
+            return render(request, 'ProjectDiv.html', {'item': item})
 
 def credits(request):
     try:

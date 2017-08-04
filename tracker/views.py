@@ -177,7 +177,6 @@ def editproject(request):
             userid = response.json()['sub']
             post_data = {'auth': os.environ['password'], 'projectid': projectid, 'numlayers':layers, 'nodes':neurons}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/editProject', data=post_data)
-            item = ['' for x in range(3)]
             item['Project_ID'] = projectid
             item['Neurons_Per_Layer'] = neurons.split(",")
             item['NeuronLength'] = layers

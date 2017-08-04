@@ -138,10 +138,7 @@ def newkey(request):
             apikey = bcrypt.hashpw(key, salt)
             post_data = {'auth': os.environ['password'], 'projectid': projectid,'apikey': key}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/ChangeAPIKey', data=post_data)
-            filecontent = "%s" % key
-            res = HttpResponse(filecontent, content_type='application/text/plain')
-            res['Content-Disposition'] = 'attachment; filename=%s.txt' % projectid
-            return res
+            return HttpResponse(json.dumps({'apikey': key, 'projectid': projectid}), content_type='application/json')
 
 def deleteproject(request):
     try:

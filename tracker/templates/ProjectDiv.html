@@ -1,13 +1,14 @@
-<div id="DIVLAYERCOUNT{{item.Project_ID}}">
-    <p class="range-field">
-        Layers: <input type="range" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value="{{item.NeuronLength}}" min = "0" readonly="readonly" />
-    </p>
-    <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
-    <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
-</div>
-<div>
+<ul class = "collection with-header">
+    <li id="DIVLAYERCOUNT{{item.Project_ID}}" class ="collection-item">
+        <p class="range-field">
+            Layers: <input type="range" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value="{{item.NeuronLength}}" min = "0" readonly="readonly" />
+        </p>
+        <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
+        <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
+    </li>
 
-</div>
+</ul>
+
 {% for x in item.Neurons_Per_Layer %}
     <div id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}" class = "ProjectDivMain">
         Layer {{forloop.counter}}: <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />

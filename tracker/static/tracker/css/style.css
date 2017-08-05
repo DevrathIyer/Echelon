@@ -20,14 +20,6 @@ li.nostyle {
     margin: 0px !important;
 }
 
-.tab a.active {
-  color:#5e35b1!important;
-}
-
-.tab a {
-  color:#5e35b1 !important;
-}
-
 .ProjectDiv{
     display: none;
     padding-top:0px;

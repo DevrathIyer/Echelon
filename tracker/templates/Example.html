@@ -77,11 +77,8 @@
                 neurons:Neurons,
             },
 	        success: function(json){
-	            $('#Structure{{item.Project_ID}}').html(json );
-	            if("#DIV{{item.Project_ID}}" != "#DIV".concat('{{ProjectID}}'))
-                {
-                    //jQuery("#DIV{{item.Project_ID}}").toggle('show');
-                }
+	            $('#Structure{{item.Project_ID}}').html(json);
+	            $('.collapsible').collapsible();
 	        }
         });
     }

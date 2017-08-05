@@ -97,6 +97,16 @@ body{
 
 .collapsible-header
 {
+    padding-left: 120px !important;
+}
+
+.collapsible-body
+{
+    padding-left: 140px !important;
+}
+
+.mainheader
+{
     padding-left: 100px !important;
 }
 

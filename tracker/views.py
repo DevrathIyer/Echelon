@@ -136,7 +136,7 @@ def newkey(request):
             key = ''.join(random.choice(string.lowercase + string.uppercase + string.digits) for i in range(40))
             salt = bcrypt.gensalt()
             apikey = bcrypt.hashpw(key, salt)
-            post_data = {'auth': os.environ['password'], 'projectid': projectid,'apikey': key}
+            post_data = {'auth': os.environ['password'], 'projectid': projectid,'apikey': apikey}
             response = requests.post('https://echelon-nn.herokuapp.com/admin/userops/ChangeAPIKey', data=post_data)
             return HttpResponse(json.dumps({'apikey': key, 'projectid': projectid}), content_type='application/json')
 

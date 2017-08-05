@@ -33,6 +33,7 @@ li.nostyle {
     padding-top:0px;
     padding-left: 0px;
     width:100%;
+    overflow: hidden;
 }
 
 .nav-wrapper{
@@ -52,6 +53,7 @@ li.nostyle {
 
 .ProjectDivMain{
     padding: 00px !important;
+    overflow-y: scroll !important;
 }
 .addIcon{
     line-height: 162.5% !important;

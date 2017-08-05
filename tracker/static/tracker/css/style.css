@@ -83,4 +83,11 @@ body{
 
 .ProjectTabs{
     padding-left: 100px !important;
+    margin:0px !important;
 }
+
+.collapsible
+{
+    margin: 0px !important;
+}
+

@@ -32,6 +32,7 @@ li.nostyle {
     display: none;
     padding-top:0px;
     padding-left: 0px;
+    width:100%;
 
 }
 
@@ -66,15 +67,15 @@ li.nostyle {
 }
 
 .tabs .tab a{
-            color:#5e35b1;
+            color:#5e35b1 !important;
         } /*Black color to the text*/
 
         .tabs .tab a:hover {
-            color:#b39ddb;
+            color:#b39ddb !important;
         } /*Text color on hover*/
 
         .tabs .indicator {
-            background-color:#5e35b1;
+            background-color:#5e35b1 !important;
         }
 
 body{
@@ -97,8 +98,6 @@ body{
 .ProjectTabs{
     padding-left: 100px !important;
     margin:0px !important;
-    margin-right:200px !important;
-    width:75% !important;
 }
 
 .collapsible

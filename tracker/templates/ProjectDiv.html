@@ -1,10 +1,13 @@
-<ul class ="collection-item" data-collapsible="accordion">
-    <li id="DIVLAYERCOUNT{{item.Project_ID}}" class ="collection-item" data-collapsible="accordion">
-        <p class="range-field">
-            Layers: <input type="range" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value="{{item.NeuronLength}}" min = "0" readonly="readonly" />
-        </p>
-        <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
-        <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
+<ul class ="collapsible" data-collapsible="accordion">
+    <li id="DIVLAYERCOUNT{{item.Project_ID}}">
+        <div class = "collabsible-header"><h4>Layers: {{item.NeuronLength}}</h4></div>
+        <div class = "collabsible-body">
+            <p class="range-field">
+                <input type="range" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value="{{item.NeuronLength}}" min = "0" readonly="readonly" />
+                <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
+                <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
+            </p>
+        </div>
     </li>
     {% for x in item.Neurons_Per_Layer %}
         <li id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}">

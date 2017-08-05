@@ -66,10 +66,17 @@ li.nostyle {
     top: 62px !important;
 }
 
-.divider{
-    color: rgba(208,208,208,1) !important;
-    width: 100% !important;
-}
+.tabs .tab a{
+            color:#5e35b1;
+        } /*Black color to the text*/
+
+        .tabs .tab a:hover {
+            color:#b39ddb;
+        } /*Text color on hover*/
+
+        .tabs .indicator {
+            background-color:#5e35b1;
+        }
 
 body{
     display: flex important;

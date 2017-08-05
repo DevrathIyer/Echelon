@@ -91,6 +91,7 @@ body{
 .ProjectTabs{
     /*padding-left: 100px !important;*/
     margin:0px !important;
+    overflow-x: hidden !important;
 }
 
 .collapsible

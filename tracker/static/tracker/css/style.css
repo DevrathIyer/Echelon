@@ -50,6 +50,9 @@ li.nostyle {
     -webkit-animation-duration: 3s;
 }
 
+.ProjectDivMain{
+    padding: 00px !important;
+}
 .addIcon{
     line-height: 162.5% !important;
     height: 40px !important;
@@ -88,8 +91,12 @@ body{
 
 .collapsible
 {
-    padding-left: 100px !important;
     width: 100% !important;
     margin: 0px !important;
+}
+
+.collapsible-header
+{
+    padding-left: 100px !important;
 }
 

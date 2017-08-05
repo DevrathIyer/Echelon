@@ -1,7 +1,7 @@
 <ul class ="collapsible" data-collapsible="accordion">
     <li id="DIVLAYERCOUNT{{item.Project_ID}}">
-        <div class = "collabsible-header"><h4>Layers: {{item.NeuronLength}}</h4></div>
-        <div class = "collabsible-body">
+        <div class = "collapsible-header"><h3>Layers: {{item.NeuronLength}}</h3></div>
+        <div class = "collapsible-body">
             <p class="range-field">
                 <input type="range" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value="{{item.NeuronLength}}" min = "0" readonly="readonly" />
                 <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>

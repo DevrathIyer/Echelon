@@ -273,8 +273,6 @@ def viewuserdata(request):
                         ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
                 ProjectList.pop(0)
                 return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'UserName':UserName})
-            else:
-                return redirect('login')
         else:
             return redirect('login')
     except:

@@ -82,9 +82,6 @@ body{
     display: flex important;
     min-height: 1000vh important;
     flex-direction: column !important;
-    width: 100% !important;
-    height: 99% !important;
-    overflow: auto !important;
 }
   main {
     flex: 1 0 auto important;

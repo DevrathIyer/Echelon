@@ -2,11 +2,13 @@
     <li id="DIVLAYERCOUNT{{item.Project_ID}}">
         <div class = "collapsible-header mainheader"><h5>Layers: {{item.NeuronLength}}</h5></div>
         <div class = "collapsible-body">
-            <p class="range-field">
-                <input type="range" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value="{{item.NeuronLength}}" min = "0" readonly="readonly" />
-                <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
-                <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
-            </p>
+            <form action="#">
+                <p class="range-field">
+                    <input type="range" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value="{{item.NeuronLength}}" min = "0" readonly="readonly" />
+                    <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
+                    <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
+                </p>
+            </form>
         </div>
     </li>
     {% for x in item.Neurons_Per_Layer %}

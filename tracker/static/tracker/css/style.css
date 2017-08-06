@@ -45,6 +45,7 @@ li.nostyle {
 
 .ProjectDivMain{
     padding: 00px !important;
+    height: 500px !important;
     overflow-y: auto !important;
 }
 .addIcon{

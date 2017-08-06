@@ -64,7 +64,7 @@
     </div>
   </div>
 <body>
-<div class = "doit">
+<div class = "doit" id = "it">
     <header>
     <ul id="dropdown1" class="dropdown-content" data-beloworigin="true">
         <li><a href="#!">Account Settings</a></li>
@@ -358,7 +358,7 @@ window.onbeforeunload = function(e){
     }
     $(window).load(function() {
   // When the page has loaded
-  $(".doit").fadeIn(2000);
+  $("#it").fadeIn(2000);
   console.log("Hello World");
 });
 </script>

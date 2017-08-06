@@ -76,8 +76,12 @@ li.nostyle {
             background-color:#5e35b1 !important;
         }
 
-body{
+.doit
+{
     display: none !important;
+}
+body{
+
     min-height: 1000vh !important;
     flex-direction: column !important;
     overflow-y: hidden !important;

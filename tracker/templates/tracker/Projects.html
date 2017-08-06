@@ -64,7 +64,8 @@
     </div>
   </div>
 <body>
-<header>
+<div class = "doit">
+    <header>
     <ul id="dropdown1" class="dropdown-content" data-beloworigin="true">
         <li><a href="#!">Account Settings</a></li>
         <li><a onclick = "AddCredits();">Get Credits</a></li>
@@ -128,10 +129,10 @@
         cursor: pointer;
         font-weight: bold;
     }
-    
+
     #projectID
     {
-        color: white; 
+        color: white;
         font-weight: bold;
         width: 25%;
         display: inline-block;
@@ -347,7 +348,9 @@ window.onbeforeunload = function(e){
 </style>
 
 </main>
+    </div>
 </body>
+
 <script>
     function HideDIV()
     {
@@ -355,7 +358,7 @@ window.onbeforeunload = function(e){
     }
     $(window).load(function() {
   // When the page has loaded
-  $("body").fadeIn(2000);
+  $(".doit").fadeIn(2000);
   console.log("Hello World");
 });
 </script>

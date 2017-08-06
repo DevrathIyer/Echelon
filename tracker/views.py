@@ -239,8 +239,6 @@ def viewuserdata(request):
         request.session['TokenID'] = id_token
     elif(request.session['TokenID'] != None):
         id_token = request.session['TokenID']
-    else:
-        return redirect('login')
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+id_token
     response = requests.get(url)

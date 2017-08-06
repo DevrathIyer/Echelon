@@ -24,7 +24,7 @@
             $("#ProjectTable").slideUp("slow", function()
             {
                 $('#BreadNav').html('<a id="ProjectBreadcrumb" onclick = "HOME{{item.Project_ID}}();" class="breadcrumb">My Projects</a><a href="#!" id = "NewBread" class="breadcrumb">{{item.Project_ID}}</a>');
-                $('#DIV{{item.Project_ID}}').slideDown();
+                $('#DIV{{item.Project_ID}}').slideDown("slow");
                 $('ul.tabs').tabs();
             });
         }

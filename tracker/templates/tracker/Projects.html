@@ -248,7 +248,24 @@ window.onbeforeunload = function(e){
 {% for item in Projects %}
     <script>
         function HOME{{item.Project_ID}}(){
-            $('#DIV{{item.Project_ID}}').slideUp();
+            $('#DIV{{item.Project_ID}}').slideUp("slow", function(){
+
+                $.ajax({
+                type:'POST',
+                url:'{% url 'addproject' %}',
+                datatype:"json",
+                async: true,
+                data:{
+                    csrfmiddlewaretoken:'{{csrf_token}}',
+                },
+	            success: function(json){
+	                $('#BreadNav').html('<a id="ProjectBreadcrumb" class="breadcrumb">My Projects</a>');
+	                $('#projects').html(json);
+	                $('#projects').slideDown();
+	            }
+            });
+
+            });
         }
     </script>
 {% endfor %}

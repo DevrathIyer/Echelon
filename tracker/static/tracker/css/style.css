@@ -77,7 +77,7 @@ li.nostyle {
         }
 
 body{
-    display: flex !important;
+    display: none !important;
     min-height: 1000vh !important;
     flex-direction: column !important;
     overflow-y: hidden !important;

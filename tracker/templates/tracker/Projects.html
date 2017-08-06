@@ -94,7 +94,7 @@
     }
     button.blue-button
     {
-        background-color: #db0a0a;
+        background-color: #0070FE;
         border: none;
         border-radius: 12px;
         color: white;
@@ -146,11 +146,11 @@ window.onbeforeunload = function(e){
 <div id="myNav" class="overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="overlay-content">
-       Project ID:<br/>
+       <span style="color:white, font-weight: bold">Project ID:</span><br/>
        <input id = 'projectID' type="text"/><br/>
       <span class="bold-red" id="ProjectStatus"></span>
       <button class="red-button" onclick="closeNav()">Cancel</button>
-      <button onclick="AddProject()">Create Project</button>
+      <button class="blue-button" onclick="AddProject()">Create Project</button>
   </div>
 </div>
 <script>

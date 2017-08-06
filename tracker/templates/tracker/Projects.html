@@ -252,7 +252,7 @@ window.onbeforeunload = function(e){
 
                 $.ajax({
                 type:'POST',
-                url:'{% url 'reviewviewuserdata' %}',
+                url:'{% url 'reviewuserdata' %}',
                 datatype:"json",
                 async: true,
                 data:{

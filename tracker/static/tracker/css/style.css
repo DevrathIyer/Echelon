@@ -135,44 +135,44 @@ body{
 }
 
 .cssCircle {
-  -webkit-border-radius: 999px;
-  -moz-border-radius: 999px;
-  border-radius: 999px;
+  -webkit-border-radius: 999px  !important;
+  -moz-border-radius: 999px !important;
+  border-radius: 999px  !important;
   
   
-  width: 13px;
-  height: 13px;
-  padding: 0px;
+  width: 13px !important;
+  height: 13px !important;
+  padding: 0px !important;
   
-  background: #779BCA;
-  border: 1px solid #003580;
-  color: #003580;
-  text-align: center;
-  -webkit-transition: background 0.2s linear;
-  -moz-transition: background 0.2s linear;
-  -ms-transition: background 0.2s linear;
-  -o-transition: background 0.2s linear;
-  transition: background 0.2s linear;
-  transition: color 0.2s linear;
+  background: #779BCA !important;
+  border: 1px solid #003580 !important;
+  color: #003580 !important;
+  text-align: center !important;
+  -webkit-transition: background 0.2s linear !important;
+  -moz-transition: background 0.2s linear !important;
+  -ms-transition: background 0.2s linear !important;
+  -o-transition: background 0.2s linear !important;
+  transition: background 0.2s linear !important;
+  transition: color 0.2s linear !important;
   
-  font: 13px Arial, sans-serif
+  font: 13px Arial, sans-serif  !important;
 }
 
 .cssCircle:hover {
-  background: #3F69A0 ;
-  cursor: pointer;
+  background: #3F69A0  !important;
+  cursor: pointer !important;
 }
 
 .minusSign {
-  line-height: 0.9em;
-  margin-bottom: 1px;
+  line-height: 0.9em !important;
+  margin-bottom: 1px !important;
 }
 
 .plusSign {
-  line-height: 1.1em;
+  line-height: 1.1em !important;
 }
 
 .minusSign:hover,
 .plusSign:hover {
-  color: white;
+  color: white  !important;
 }

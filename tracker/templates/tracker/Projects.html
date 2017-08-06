@@ -85,6 +85,7 @@
         border-radius: 18px;
         color: white;
         padding: 15px 32px;
+        margin: 10px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -94,10 +95,11 @@
     }
     button.blue-button
     {
-        background-color: #db0a0a;
+        background-color: #0070FE;
         border: none;
         border-radius: 12px;
         color: white;
+        margin: 10px;
         padding: 15px 32px;
         text-align: center;
         text-decoration: none;
@@ -105,6 +107,16 @@
         font-size: 16px;~margin: 4px 2px;
         cursor: pointer;
         font-weight: bold;
+    }
+    
+    #projectID
+    {
+        color: white; 
+        font-weight: bold;
+        width: 25%;
+        display: inline-block;
+        margin-left: 10px;
+        padding: 0px;
     }
 </style>
 <!-- onload= "HideDIV();"-->
@@ -146,11 +158,12 @@ window.onbeforeunload = function(e){
 <div id="myNav" class="overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="overlay-content">
-       Project ID:<br/>
-       <input id = 'projectID' type="text"/><br/>
+       <h4 style="color:white; font-weight: bold">Create a Project</h4>
+      <h6 style="color:white; font-weight: bold; margin-right:2px; display: inline-block;">Choose a Project ID:</h6>
+      <input id = 'projectID' type="text" /><br/>
       <span class="bold-red" id="ProjectStatus"></span>
       <button class="red-button" onclick="closeNav()">Cancel</button>
-      <button onclick="AddProject()">Create Project</button>
+      <button class="blue-button" onclick="AddProject()">Create Project</button>
   </div>
 </div>
 <script>
@@ -243,7 +256,7 @@ window.onbeforeunload = function(e){
     top: 0;
     left: 0;
     background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0, 0.9);
+    background-color: rgba(135, 96, 214,0.5);
     overflow-y: hidden;
     transition: 0.5s;
 }
@@ -251,7 +264,11 @@ window.onbeforeunload = function(e){
 .overlay-content {
     position: relative;
     top: 25%;
-    width: 100%;
+    margin: auto;
+    border-radius: 25px;
+    padding: 10px;
+    width: 50%;
+    background-color: rgba(135, 96, 214,1);
     text-align: center;
     margin-top: 30px;
 }
@@ -260,13 +277,13 @@ window.onbeforeunload = function(e){
     padding: 8px;
     text-decoration: none;
     font-size: 36px;
-    color: #818181;
+    color: #E1E1E1;
     display: block;
     transition: 0.3s;
 
 }
 .overlay a:hover, .overlay a:focus {
-    color: #f1f1f1;
+    color: #FFFFFF;
 }
 
 .overlay .closebtn {

@@ -78,6 +78,7 @@ body{
     display: flex important;
     min-height: 1000vh important;
     flex-direction: column !important;
+    overflow: hidden !important;
 }
   main {
     flex: 1 0 auto important;
@@ -91,6 +92,10 @@ body{
 .ProjectTabs{
     /*padding-left: 100px !important;*/
     margin:0px !important;
+}
+
+.tabs
+{
     overflow-x: hidden !important;
 }
 
@@ -98,6 +103,7 @@ body{
 {
     width: 100% !important;
     margin: 0px !important;
+    overflow-y: auto !important;
 }
 
 .collapsible-header

@@ -273,8 +273,8 @@ def viewuserdata(request):
                 return render(request, 'tracker/Projects.html', {'Projects': ProjectList,'UserName':UserName})
         else:
             return redirect('login')
-
-
+    except:
+        return redirect('home')
 
 def reviewuserdata(request):
     if(request.POST.get('TokenID') != None):

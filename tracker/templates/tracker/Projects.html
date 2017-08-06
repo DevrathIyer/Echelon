@@ -45,11 +45,7 @@
 		.delay(1700)
 		.fadeOut();
 });
-$(window).load(function() {
-  // When the page has loaded
-  $("body").fadeIn(2000);
-  console.log("Hello World");
-});
+
     </script>
     <form id = "SignOutForm" action="{% url 'signout' %}" method="post">
 {% csrf_token %}
@@ -357,6 +353,11 @@ window.onbeforeunload = function(e){
     {
         $('.ProjectDIV').hide(); // hides
     }
+    $(window).load(function() {
+  // When the page has loaded
+  $("body").fadeIn(2000);
+  console.log("Hello World");
+});
 </script>
 
 <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>

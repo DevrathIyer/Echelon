@@ -111,7 +111,6 @@
     
     #projectID
     {
-        text-align: center;
         color: white; 
         font-weight: bold;
         width: 25%;
@@ -156,9 +155,8 @@ window.onbeforeunload = function(e){
 <div id="myNav" class="overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="overlay-content">
-       <h2 style="color:white; font-weight: bold">Create a Project</h2>
-      <span style="color:white; font-weight: bold">Select Project ID:</span>
-       <input id = 'projectID' type="text" /><br/>
+       <h4 style="color:white; font-weight: bold">Create a Project</h4>
+      <span style="color:white; font-weight: bold">Select Project ID:</span> <input id = 'projectID' type="text" /><br/>
       <span class="bold-red" id="ProjectStatus"></span>
       <button class="red-button" onclick="closeNav()">Cancel</button>
       <button class="blue-button" onclick="AddProject()">Create Project</button>

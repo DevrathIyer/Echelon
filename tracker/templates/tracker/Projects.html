@@ -45,6 +45,10 @@
 		.delay(1700)
 		.fadeOut();
 });
+$(window).load(function() {
+  // When the page has loaded
+  $("body").fadeIn(2000);
+});
     </script>
     <form id = "SignOutForm" action="{% url 'signout' %}" method="post">
 {% csrf_token %}

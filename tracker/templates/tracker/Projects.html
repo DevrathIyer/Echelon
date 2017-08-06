@@ -106,6 +106,14 @@
         cursor: pointer;
         font-weight: bold;
     }
+    
+    #projectID
+    {
+        text-align: center;
+        color: white; 
+        font-weight: bold
+        width: 50%
+    }
 </style>
 <!-- onload= "HideDIV();"-->
 <main>
@@ -147,7 +155,7 @@ window.onbeforeunload = function(e){
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="overlay-content">
        <span style="color:white; font-weight: bold">Project ID:</span><br/>
-       <input id = 'projectID' type="text" style="color: white; font-weight: bold"/><br/>
+       <input id = 'projectID' type="text" /><br/>
       <span class="bold-red" id="ProjectStatus"></span>
       <button class="red-button" onclick="closeNav()">Cancel</button>
       <button class="blue-button" onclick="AddProject()">Create Project</button>

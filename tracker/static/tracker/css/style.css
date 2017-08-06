@@ -78,7 +78,7 @@ li.nostyle {
 
 .doit
 {
-    display: none !important;
+    visibility:hidden !important;
 }
 body{
 

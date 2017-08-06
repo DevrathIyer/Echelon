@@ -45,6 +45,7 @@ li.nostyle {
 
 .ProjectDivMain{
     padding: 00px !important;
+    overflow-y: auto !important;
 }
 .addIcon{
     line-height: 162.5% !important;
@@ -102,7 +103,6 @@ body{
 {
     width: 100% !important;
     margin: 0px !important;
-    overflow-y: auto !important;
 }
 
 .collapsible-header

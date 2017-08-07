@@ -139,7 +139,7 @@ body{
 }
 
 .btn-dark{
-    border-radius:20% !important;
+    border-radius:5px !important;
     background: mediumpurple !important;
     color: white !important;
     border: none;

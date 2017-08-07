@@ -52,7 +52,7 @@
     <input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">
 </form>
 </head>
-<div class="preloader-wrapper big active">
+<div id = "preloader" class="preloader-wrapper big active">
     <div class="spinner-layer spinner-blue-only">
       <div class="circle-clipper left">
         <div class="circle"></div>
@@ -360,6 +360,10 @@ window.onbeforeunload = function(e){
   // When the page has loaded
   $('#it').fadeIn("slow");
   console.log("Hello World");
+});
+
+$( '#preloader' ).unload(function() {
+  return "Bye now!";
 });
 </script>
 

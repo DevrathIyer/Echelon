@@ -1,6 +1,6 @@
 <ul class ="collapsible" data-collapsible="accordion">
     <li id="DIVLAYERCOUNT{{item.Project_ID}}">
-        <div class = "collapsible-header mainheader"><h5>Layers: {{item.NeuronLength}}</h5></div>
+        <div id="DIVLAYERCOUNT{{item.Project_ID}}HEADER" class = "collapsible-header mainheader"><h5>Layers: {{item.NeuronLength}}</h5></div>
         <div class = "collapsible-body">
             <form action="#">
                 <p class="range-field">
@@ -14,7 +14,7 @@
     </li>
     {% for x in item.Neurons_Per_Layer %}
         <li id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}">
-            <div class = "collapsible-header">Layer {{forloop.counter}}</div>
+            <div id="DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER" class = "collapsible-header">Layer {{forloop.counter}}</div>
             <div class = "collapsible-body">
                             Neurons
                 <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />
@@ -30,12 +30,12 @@
                         if (upordown == 'up')
                         {
                             ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
-                            PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}");
+                            PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
                         }
                         else if (upordown == 'down')
                         {
                             --document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
-                            PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}");
+                            PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
                         }
                     }
                     else if (quantity.value == 1)
@@ -43,13 +43,13 @@
                         if (upordown == 'up')
                         {
                             ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
-                            PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}");
+                            PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
                         }
                     }
                     else
                     {
                         document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value=1;
-                        PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}");
+                        PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
                     }
                 }
             </script>
@@ -68,12 +68,12 @@
             if (upordown == 'up')
             {
                 ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}");
+                PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}HEADER");
             }
             else if (upordown == 'down')
             {
                 --document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}");
+                PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}HEADER");
             }
         }
         else if (quantity.value == 1)
@@ -81,13 +81,13 @@
             if (upordown == 'up')
             {
                 ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}");
+                PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}HEADER");
             }
         }
         else
         {
             document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value=1;
-            PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}");
+            PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}HEADER");
         }
     }
 </script>

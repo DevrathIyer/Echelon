@@ -115,10 +115,8 @@ body{
   width: 2em !important;
   overflow: show !important;
   margin: auto !important;
-  top: 0 !important;
-  left: 0 !important;
-  bottom: 0 !important;
-  right: 0 !important;
+  bottom: 0px!important;
+  left: 0px !important;
 }
 
 

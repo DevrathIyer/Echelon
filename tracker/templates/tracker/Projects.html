@@ -356,7 +356,9 @@ window.onbeforeunload = function(e){
         $('.ProjectDIV').hide(); // hides
     }
     $(window).load(function() {
+        $('#preloader').fadeOut("slow",function(){
         $('#it').fadeIn("slow");
+        });
         console.log("Hello World");
     });
 

@@ -6,7 +6,7 @@
                 <p class="range-field">
                     <input type="range" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value = "{{item.NeuronLength}}"  min = "0"  max="100"/>
                     <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" class="btn-dark" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
-                    <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" class="btn-light" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
+                    <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" class="btn-dark" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
                 </p>
             </form>
         </div>
@@ -17,7 +17,7 @@
             <div class = "collapsible-body">
                 <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />
             <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" class="btn-dark" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('up');">+</button>
-            <button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" class="btn-light" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
+            <button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" class="btn-dark" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
             Neurons
             <script>
                 function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown)

@@ -148,12 +148,3 @@ body{
     font-size: large;
 }
 
-.btn-light{
-    border-radius:20% !important;
-    background: lavender !important;
-    color: white !important;
-    border: none;
-    margin-right: 10px;
-    font-weight: bold;
-    font-size: large;
-}

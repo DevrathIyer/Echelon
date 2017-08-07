@@ -85,7 +85,7 @@
                 csrfmiddlewaretoken:'{{csrf_token}}',
             },
 	        success: function(json){
-                document.getElementById("credits").innerHTML = json['message'];
+                document.getElementById("credits").innerHTML = "You have " + json['message'].split(" ")[3]+" credits.";
 	            console.log(json['message']);
 	        }
          });

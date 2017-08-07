@@ -32,4 +32,5 @@ urlpatterns = [
     url(r'^newuser', views.createnewuser, name='createnewuser'),
     url(r'^review', views.reviewuserdata, name='reviewuserdata'),
     url(r'^signedin', views.viewuserdata, name='viewuserdata'),
+    url(r'^credits', views.credits, name='credits'),
 ]

@@ -52,26 +52,52 @@
     <input type="hidden" id = "TokenID" name="TokenID" value="Not Logged In">
 </form>
 </head>
-    <body>
-        <div class = "doit" id = "it">
-            <header>
-            <ul id="dropdown1" class="dropdown-content" data-beloworigin="true">
-                <li><a href="#!">Account Settings</a></li>
-                <li><a href = "{% url 'credits' %}">Manage Credits</a></li>
-                <li class="divider"></li>
-                <li><a onclick="SignOut();">Log Out</a></li>
+<body>
+<header>
+    <ul id="dropdown1" class="dropdown-content" data-beloworigin="true">
+        <li><a href="#!">Account Settings</a></li>
+        <li><a href = "{% url 'credits' %}">Manage Credits</a></li>
+        <li class="divider"></li>
+        <li><a onclick="SignOut();">Log Out</a></li>
+    </ul>
+    <nav class = "#5e35b1 deep-purple darken-1 z-depth-2">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Echelon</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#About.html">About</a></li>
+                <li><a href="#Doc.html">Documentation</a></li>
+                <li><a class="dropdown-button" data-activates="dropdown1" data-below-origin="true"><i class="material-icons">perm_identity</i></a></li>
             </ul>
-            <nav class = "#5e35b1 deep-purple darken-1 z-depth-2">
-                <div class="nav-wrapper">
-                    <a href="#" class="brand-logo">Echelon</a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="#About.html">About</a></li>
-                        <li><a href="#Doc.html">Documentation</a></li>
-                        <li><a class="dropdown-button" data-activates="dropdown1" data-below-origin="true"><i class="material-icons">perm_identity</i></a></li>
-                    </ul>
-                </div>
-            </nav>
-            </header>
         </div>
-    </body>
+    </nav>
+    <nav class = "z-depth-0">
+        <div class="nav-wrapper breadnav #b39ddb deep-purple lighten-3 z-depth-0">
+            <div class = "row">
+                <div id = "BreadNav" class="col s11">
+                    <a id="ProjectBreadcrumb" class="breadcrumb">My Projects</a>
+                </div>
+                <a class="btn-floating waves-effect waves-light #5e35b1 deep-purple darken-1 addbutton" onclick="openNav();"><i class="material-icons addIcon">add</i></a>
+            </div>
+        </div>
+  </nav>
+</header>
+    <button onclick="AddCredits()" class = "btn green hoverable" style="margin:10px">Get 1,000 FREE Credits</button>
+<script>
+    function AddCredits()
+    {
+        $.ajax({
+            type:'POST',
+            url:'{% url 'addcredits' %}',
+            datatype:"json",
+            async: true,
+            data:{
+                csrfmiddlewaretoken:'{{csrf_token}}',
+            },
+	        success: function(json){
+	            console.log(json['message']);
+	        }
+         });
+    }
+</script>
+</body>
 </html>

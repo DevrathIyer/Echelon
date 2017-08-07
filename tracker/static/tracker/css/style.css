@@ -139,8 +139,11 @@ body{
 }
 
 .btn{
-    border-radius:10% !important;
+    border-radius:20% !important;
     background: mediumpurple !important;
     color: white !important;
     border: none;
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: large;
 }

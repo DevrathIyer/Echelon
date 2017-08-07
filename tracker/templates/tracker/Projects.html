@@ -356,13 +356,12 @@ window.onbeforeunload = function(e){
         $('.ProjectDIV').hide(); // hides
     }
     $(window).load(function() {
-  // When the page has loaded
-  $('#it').fadeIn("slow");
-  console.log("Hello World");
-});
+        $('#it').fadeIn("slow");
+        console.log("Hello World");
+    });
 
 $( '#preloader' ).unload(function() {
-  return "Bye now!";
+  console.log("Bye now!");
 });
 </script>
 

@@ -341,7 +341,7 @@ def reviewuserdata(request):
                         ProjectList[x]['Neurons_Per_Layer'] = response.json()['Neurons_per_Layer'].split(',')
                         ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
                 ProjectList.pop(0)
-                return render(request, 'tracker/ProjectTable.html', {'Projects': ProjectList,'UserName':UserName,'divid':divid})
+                return render(request, 'tracker/ProjectTable.html', {'Projects': ProjectList,'UserName':UserName})
         else:
             return redirect('login')
     except:

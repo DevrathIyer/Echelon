@@ -46,7 +46,7 @@
             });
         }
     }
-    function PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT(){
+    function PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT(divid){
         var Neurons = "";
         for(i = 1; i <= $('#DIVLAYERCOUNTLABEL{{item.Project_ID}}').val(); i++)
         {   var iString = i.toString();
@@ -78,6 +78,7 @@
 	        success: function(json){
 	            $('#Structure{{item.Project_ID}}').html(json);
 	            $('.collapsible').collapsible();
+	            $(divid).addClass("active");
 	        }
         });
     }

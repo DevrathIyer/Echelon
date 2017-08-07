@@ -107,6 +107,20 @@ body{
 	right: 0 !important;
 	bottom: 0 !important;
 }
+
+.loading {
+  position: fixed !important;
+  z-index: 999 !important;
+  height: 2em !important;
+  width: 2em !important;
+  overflow: show !important;
+  margin: auto !important;
+  bottom: 0px!important;
+  left: 0px !important;
+}
+
+
+
 .ProjectTabs{
     /*padding-left: 100px !important;*/
     margin:0px !important;

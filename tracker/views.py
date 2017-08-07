@@ -297,6 +297,7 @@ def reviewuserdata(request):
         id_token = request.session['TokenID']
     else:
         return redirect('login')
+    divid = request.POST.get('divid')
     GoogleID = "867858739826-0j8s1vplsccuqcha9tng77pmrpc49mam.apps.googleusercontent.com"
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+id_token
     response = requests.get(url)
@@ -328,7 +329,7 @@ def reviewuserdata(request):
                         ProjectList[x]['Neurons_Per_Layer'] = response.json()['Neurons_per_Layer'].split(',')
                         ProjectList[x]['NeuronLength'] = len(response.json()['Neurons_per_Layer'].split(','))
                 ProjectList.pop(0)
-                return render(request, 'tracker/ProjectTable.html', {'Projects': ProjectList,'UserName':UserName})
+                return render(request, 'tracker/ProjectTable.html', {'Projects': ProjectList,'UserName':UserName,'divid':divid})
         else:
             return redirect('login')
     except:

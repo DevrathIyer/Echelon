@@ -63,32 +63,12 @@
         <div class="nav-wrapper">
             <a href="{% url 'viewuserdata'  %}" class="brand-logo">Echelon</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-
                 <li><a href="{% url 'documentation'  %}">Documentation</a></li>
                 <li><a class="dropdown-button" data-activates="dropdown1" data-below-origin="true"><i class="material-icons">perm_identity</i></a></li>
             </ul>
         </div>
     </nav>
 </header>
-    <h3 id="credits" style="margin: 10px">You have {{Credits}} credits.</h3>
-    <button onclick="AddCredits()" class = "btn green hoverable" style="margin:10px">Get 1,000 FREE Credits</button>
-<script>
-    function AddCredits()
-    {
-        $.ajax({
-            type:'POST',
-            url:'{% url 'addcredits' %}',
-            datatype:"json",
-            async: true,
-            data:{
-                csrfmiddlewaretoken:'{{csrf_token}}',
-            },
-	        success: function(json){
-                document.getElementById("credits").innerHTML = "You have " + json['message'].split(" ")[3]+" credits.";
-	            console.log(json['message']);
-	        }
-         });
-    }
-</script>
+    <h3 style="margin: 10px">API Documentation</h3>
 </body>
 </html>

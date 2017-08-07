@@ -141,5 +141,5 @@ body{
 .plusbtn{
     border-radius:50% !important;
     background-color: mediumpurple !important;
-    text-decoration-color: white !important;
+    color: white !important;
 }

@@ -138,8 +138,8 @@ body{
     padding-left: 100px !important;
 }
 
-.plusbtn{
-    border-radius:50% !important;
+.btn{
+    border-radius:10% !important;
     background: mediumpurple !important;
     color: white !important;
     border: none;

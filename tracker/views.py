@@ -20,9 +20,9 @@ def signout(request):
     try:
         id_token = request.session['TokenID']
         request.session.flush()
-        return redirect('login')
+        return redirect('home')
     except:
-        return redirect('login')
+        return redirect('home')
 
 def addcredits(request):
     try:

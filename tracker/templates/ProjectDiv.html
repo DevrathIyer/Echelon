@@ -18,10 +18,11 @@
             <div class = "collapsible-body">
                             Neurons
                 <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />
+            <div style="display: inline-block">
             <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" class="btn-dark" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('up');">+</button>
             <button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" class="btn-dark" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
              <button class="btn-green" onclick="save{{forloop.counter}}{{item.Project_ID}}()">Save</button>
-
+            </div>
                 <script>
                 function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown)
                 {

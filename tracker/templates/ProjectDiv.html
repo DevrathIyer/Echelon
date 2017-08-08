@@ -20,7 +20,6 @@
                 <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />
             <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" class="btn-dark" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('up');">+</button>
             <button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" class="btn-dark" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
-
             <script>
                 function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown)
                 {
@@ -30,12 +29,12 @@
                         if (upordown == 'up')
                         {
                             ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
-                            PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
+                            //PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
                         }
                         else if (upordown == 'down')
                         {
                             --document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
-                            PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
+                           //PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
                         }
                     }
                     else if (quantity.value == 1)
@@ -43,13 +42,13 @@
                         if (upordown == 'up')
                         {
                             ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
-                            PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
+                            //PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
                         }
                     }
                     else
                     {
                         document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value=1;
-                        PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
+                        //PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
                     }
                 }
             </script>

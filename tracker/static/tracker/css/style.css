@@ -75,7 +75,18 @@ li.nostyle {
         .tabs .indicator {
             background-color:#5e35b1 !important;
         }
-
+#preloader{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 10001;
+    top: 0;
+    left: 0;
+    background-color: #b39ddb;
+    overflow-x: hidden;
+    transition: 0.5s;
+    opacity: 100%;
+}
 .doit
 {
     display: none;

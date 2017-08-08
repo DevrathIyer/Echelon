@@ -20,7 +20,7 @@
                 <input type="text" id="DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}" value={{x}} readonly="readonly" />
             <button id="DIVNEURONLAYERUP{{forloop.counter}}{{item.Project_ID}}" class="btn-dark" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('up');">+</button>
             <button id="DIVNEURONLAYERDOWN{{forloop.counter}}{{item.Project_ID}}" class="btn-dark" onclick="setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}('down');">-</button>
-             <button style="background: green; color:white; width:auto;" onclick="save{{forloop.counter}}{{item.Project_ID}}()">Save</button>
+             <button class="btn-green" onclick="save{{forloop.counter}}{{item.Project_ID}}()">Save</button>
 
                 <script>
                 function setQuantityDIVNEURONLAYER{{forloop.counter}}{{item.Project_ID}}(upordown)

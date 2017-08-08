@@ -32,12 +32,10 @@
                         if (upordown == 'up')
                         {
                             ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
-                            //PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
                         }
                         else if (upordown == 'down')
                         {
                             --document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
-                           //PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
                         }
                     }
                     else if (quantity.value == 1)
@@ -45,13 +43,11 @@
                         if (upordown == 'up')
                         {
                             ++document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value;
-                            //PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
                         }
                     }
                     else
                     {
                         document.getElementById("DIVNEURONLAYERLABEL{{forloop.counter}}{{item.Project_ID}}").value=1;
-                        //PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVNEURONSPERLAYER{{forloop.counter}}{{item.Project_ID}}HEADER");
                     }
                 }
 

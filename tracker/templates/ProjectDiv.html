@@ -8,6 +8,8 @@
                     <input type="text" id="DIVLAYERCOUNTLABEL{{item.Project_ID}}" value="{{item.NeuronLength}}" readonly="readonly"/>
                     <button id="DIVLAYERCOUNTUP{{item.Project_ID}}" class="btn-dark" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('up');">+</button>
                     <button id="DIVLAYERCOUNTDOWN{{item.Project_ID}}" class="btn-dark" onclick="setQuantityDIVLAYERCOUNTLABEL{{item.Project_ID}}('down');">-</button>
+                    <br> <button class="btn-dark" style="margin-top: 10px; background: green !important; width: auto; font-weight: normal !important; font-size: medium !important;" onclick="savelayercount{{item.Project_ID}}()">Save</button>
+
                 </p>
             </form>
         </div>
@@ -72,12 +74,12 @@
             if (upordown == 'up')
             {
                 ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}HEADER");
+                //PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}HEADER");
             }
             else if (upordown == 'down')
             {
                 --document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}HEADER");
+                //PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}HEADER");
             }
         }
         else if (quantity.value == 1)
@@ -85,13 +87,18 @@
             if (upordown == 'up')
             {
                 ++document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value;
-                PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}HEADER");
+              //  PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}HEADER");
             }
         }
         else
         {
             document.getElementById("DIVLAYERCOUNTLABEL{{item.Project_ID}}").value=1;
-            PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}HEADER");
+            //PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}HEADER");
         }
+    }
+
+    function savelayercount{{ item.Project_ID }}()
+    {
+        PROJECTCOUNTEDITFORM{{item.Project_ID}}SUBMIT("#DIVLAYERCOUNT{{item.Project_ID}}HEADER");
     }
 </script>

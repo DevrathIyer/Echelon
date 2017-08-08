@@ -75,7 +75,7 @@ li.nostyle {
         .tabs .indicator {
             background-color:#5e35b1 !important;
         }
-#preloader{
+/*.preloader{
     height: 100%;
     width: 100%;
     position: fixed;
@@ -86,7 +86,7 @@ li.nostyle {
     overflow-x: hidden;
     transition: 0.5s;
     opacity: 100%;
-}
+}*/
 .doit
 {
     display: none;
@@ -109,7 +109,9 @@ body{
 	display: flex !important;
 	align-items: center !important;
 	justify-content: center !important;
-	background-color: #eee !important;
+	background-color: #b39ddb!important;
+	height: 100%!important;
+    width: 100%!important;
 
 	position: fixed !important;
 	z-index: 100 !important;

@@ -71,12 +71,14 @@
     </nav>
 </header>
 
-    <div id="wrapper">
+    <div id="wrapper" style="margin-left:20px">
         <h3 >API Documentation</h3>
 
 
         <section id="gettingstarted" class="wrapper style1 fade-up">
+             <hr>
             <h4 style="color:rebeccapurple"> Getting Started </h4>
+             <hr>
             <h5 style="color:mediumpurple">Step 1: Create your project</h5>
             <p>Log on to your portal and create your project. You will need to remember both the project name and the project-specific API key in order to interact with your cloud model.</p>
             <h5 style="color:mediumpurple">Step 2: Add data to your project</h5>
@@ -90,8 +92,11 @@
             <h5 style="color:mediumpurple">Step 4: Pull your weights</h5>
             <p>Calling <em>Pull Weights</em> will return an array of weights for the connections in your model. We also provide the error value from the last training.</p>
         </section>
+
         <section id="troubleshooting" class="wrapper style2 fade-up">
+             <hr>
             <h4 style="color:rebeccapurple">Troubleshooting</h4>
+             <hr>
             <p>Here are some of the most common errors you might encounter and some possible solutions</p>
             <ul>
                 <li>“Project Not Found” – Check that you are providing the Project Name correctly in the [‘projectid’] field</li>
@@ -108,7 +113,9 @@
             </ol>
         </section>
         <section id="apidocs" class="wrapper style3 fade-up">
+             <hr>
              <h4 style="color:rebeccapurple"> Documentation Summary </h4>
+             <hr>
              <img style="width:80%" src="{% static "tracker/images/docs.png" %}" alt="My image"/>
         </section>
     </div>

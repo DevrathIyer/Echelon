@@ -71,28 +71,27 @@
     </nav>
 </header>
 
-    <div id="wrapper" style="margins:20px">
+    <div id="wrapper">
+        <h3 >API Documentation</h3>
 
-        <h3 style="background: darkmagenta; width:100%" >API Documentation</h3>
 
-
-        <section id="gettingstarted" style="background: darkblue; width:100%">
-            <h4 style="color:white"> Getting Started </h4>
-            <h5 style="color:white">Step 1: Create your project</h5>
+        <section id="gettingstarted" class="wrapper style1 fade-up">
+            <h4 style="color:rebeccapurple"> Getting Started </h4>
+            <h5 style="color:mediumpurple">Step 1: Create your project</h5>
             <p>Log on to your portal and create your project. You will need to remember both the project name and the project-specific API key in order to interact with your cloud model.</p>
-            <h5 style="color:white">Step 2: Add data to your project</h5>
+            <h5 style="color:mediumpurple">Step 2: Add data to your project</h5>
             <p>The proper format for training data is a single, comma separated list that starts with the inputs first, followed by the targets. (Ex. (x,x,x,y,y) where x’s represent sample inputs and y’s represent target values). Push data using the <em>Submit Training Data</em> call. You will need to provide Echelon with a unique Sample ID of your own choosing. This makes it possible for you to delete data points from your training set. You can only push one sample per request.
-            <h6 style="color:white">Optional: View your data</h6>
+            <h6 style="color:mediumpurple">Optional: View your data</h6>
             <p>It is not currently possible to view your data from within EchelonPortal. However, you may call <em>View Data</em> for no charge from within your application.</p>
-            <h6 style="color:white">Optional: Remove a sample</h6>
+            <h6 style="color:mediumpurple">Optional: Remove a sample</h6>
             <p>You may remove a sample by calling <em>Remove Sample</em> and providing the corresponding sample ID. Note: This action deletes the data point from your project’s repository. If you wish to add the sample back to the training set, you will need to push that data back up to the repository using <em>Submit Training Data.</em></p>
-            <h5 style="color:white">Step 3: Train your data</h5>
+            <h5 style="color:mediumpurple">Step 3: Train your data</h5>
             <p>You can call the <em>Train</em> function to train your model on all the data currently in your project’s repository. Currently, Echelon provides 3 training algorithms for use: set the [‘algo’] parameter to 1 for Backprop, 2 for R-prop, and 3 for Scaled Conjugate Gradient training. You should also provide the number of training cycles to execute through the [‘epochs’] parameter.</p>
-            <h5 style="color:white">Step 4: Pull your weights</h5>
+            <h5 style="color:mediumpurple">Step 4: Pull your weights</h5>
             <p>Calling <em>Pull Weights</em> will return an array of weights for the connections in your model. We also provide the error value from the last training.</p>
         </section>
-        <section id="troubleshooting" style="background:darkmagenta;width:100%">
-            <h4 style="color:white">Troubleshooting</h4>
+        <section id="troubleshooting" class="wrapper style2 fade-up">
+            <h4 style="color:rebeccapurple">Troubleshooting</h4>
             <p>Here are some of the most common errors you might encounter and some possible solutions</p>
             <ul>
                 <li>“Project Not Found” – Check that you are providing the Project Name correctly in the [‘projectid’] field</li>
@@ -108,8 +107,8 @@
                 <li> Contact the Echelon Help Desk </li>
             </ol>
         </section>
-        <section id="apidocs" style="background:darkblue;width:100%">
-             <h4 style="color:white"> Documentation Summary </h4>
+        <section id="apidocs" class="wrapper style3 fade-up">
+             <h4 style="color:rebeccapurple"> Documentation Summary </h4>
              <img style="width:80%" src="{% static "tracker/images/docs.png" %}" alt="My image"/>
         </section>
     </div>

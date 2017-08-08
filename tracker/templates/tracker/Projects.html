@@ -37,7 +37,6 @@
     $('#SignOutForm').submit();
     });
   }
-
     </script>
     <form id = "SignOutForm" action="{% url 'signout' %}" method="post">
 {% csrf_token %}
@@ -350,8 +349,8 @@ window.onbeforeunload = function(e){
     $(window).load(function() {
         $('#preloader').fadeOut("slow",function(){
         $('#it').fadeIn("slow");
-        });
         console.log("Hello World");
+        });
     });
 
 $( '#preloader' ).unload(function() {

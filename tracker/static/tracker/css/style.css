@@ -175,6 +175,18 @@ body{
     margin-right: 10px;
     font-weight: bold;
     font-size: large;
+    display: inline-block !important;
     padding-top: 0px !important;
 }
 
+.btn-green{
+    width: auto;
+    height: 25px;
+    border-radius: 10% !important;
+    background: green !important;
+    color: white !important;
+    border: none;
+    margin-right: 10px;
+    display: inline-block !important;
+    padding-top: 0px !important;
+}
